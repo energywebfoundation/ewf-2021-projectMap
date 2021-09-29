@@ -4,16 +4,12 @@ import Card from "./Card";
 const ProjectListCard = ({ country, projects }) => (
   <Card
     title={`Country: ${country}`}
-    header={<ProjectListCardHeader projectsCount={projects.length} />}
+    subtitle={`${projects.length} Projects`}
     body={<ProjectListCardContent projects={projects} />}
   />
 );
 
 export default ProjectListCard;
-
-const ProjectListCardHeader = ({ projectsCount }) => (
-  <strong style={{ fontSize: "22px" }}>{projectsCount} Projects</strong>
-);
 
 const ProjectListCardContent = ({ projects }) => (
   <ul>

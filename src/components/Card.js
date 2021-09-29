@@ -1,6 +1,6 @@
 import React from "react";
 
-const Card = ({ title, header = <React.Fragment />, body }) => (
+const Card = ({ title, subtitle, body }) => (
   <article
     style={{
       borderRadius: "8px",
@@ -21,19 +21,23 @@ const Card = ({ title, header = <React.Fragment />, body }) => (
         borderBottom: "1px solid #C4C4C4",
       }}
     >
-      <h2
-        style={{
-          fontSize: "14px",
-        }}
-      >
-        {title}
-      </h2>
-      {header}
+      {title && (
+        <h2
+          style={{
+            fontSize: "14px",
+          }}
+        >
+          {title}
+        </h2>
+      )}
+      {subtitle && <strong style={{ fontSize: "22px" }}>{subtitle}</strong>}
     </header>
     <div
       style={{
         flexGrow: 1,
         overflow: "auto",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       {body}
