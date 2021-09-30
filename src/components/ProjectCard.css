@@ -1,0 +1,99 @@
+.dots-map__project-card__content {
+  padding: 4px 12px;
+}
+
+.dots-map__project-card__section-title {
+  text-transform: uppercase;
+  font-size: 8px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.dots-map__project-card__project-type-badge {
+  background-color: var(--light-background);
+  display: inline-block;
+  border-radius: 200px;
+  border: 1px solid #ececec;
+  border-radius: 200px;
+  color: var(--text-secondary-color);
+  text-transform: uppercase;
+  padding: 4px 14px;
+}
+
+.dots-map__project-card__project-location {
+  margin-top: 14px;
+}
+
+.dots-map__project-card__country {
+  font-size: 14px;
+  opacity: 0.5;
+  letter-spacing: 0.02em;
+}
+
+.dots-map__project-card__project-organization {
+  margin-top: 14px;
+}
+
+.dots-map__project-card__project-organization ul {
+  font-size: 14px;
+  line-height: 23px;
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+  list-style: none;
+  padding-left: 16px;
+}
+
+.dots-map__project-card__project-organization li::before {
+  content: "\2022";
+  color: var(--main-color);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.dots-map__project-card__project-organization li:not(:first-child) {
+  margin-top: 9px;
+}
+
+.dots-map__project-card__footer {
+  padding: 10px 12px 4px 12px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.dots-map__project-card__project-description p {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.dots-map__project-card__project-description p:not(:first-child) {
+  margin-top: 12px;
+}
+
+.dots-map__project-card__filler {
+  flex-grow: 1;
+}
+
+.dots-map__project-card__project-urls {
+  margin-bottom: 19px;
+}
+
+.dots-map__project-card__project-urls a {
+  display: flex;
+  border-radius: 200px;
+  background-color: var(--light-background);
+  padding: 3px 14px;
+}
+
+.dots-map__project-card__project-urls a:after {
+  color: var(--main-color);
+  content: "\2192";
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.dots-map__project-card__project-urls a span {
+  flex-grow: 1;
+}

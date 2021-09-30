@@ -1,50 +1,31 @@
 import React from "react";
+import "./Card.css";
 
-const Card = ({ title, subtitle, body }) => (
-  <article
-    style={{
-      borderRadius: "8px",
-      width: 300,
-      height: 450,
-      border: "0.5px solid #D3D3D3",
-      boxShadow: "-2px 2px 12px rgba(0, 0, 0, 0.15)",
-      display: "flex",
-      flexDirection: "column",
-      background: "white",
-    }}
-  >
-    <header
-      style={{
-        paddingTop: 25,
-        paddingBottom: 16,
-        paddingRight: 25,
-        paddingLeft: 25,
-        borderBottom: "1px solid #C4C4C4",
-        textTransform: "capitalize",
-      }}
-    >
-      {title && (
-        <h2
-          style={{
-            fontSize: "14px",
-          }}
-        >
-          {title}
-        </h2>
-      )}
-      {subtitle && <strong style={{ fontSize: "22px" }}>{subtitle}</strong>}
+const Card = ({ country, title, body, footer }) => (
+  <article className="dots-map__card">
+    <header className="dots-map__card__header">
+      {country && <Country country={country} />}
+      <h2>{title}</h2>
     </header>
-    <div
-      style={{
-        flexGrow: 1,
-        overflow: "auto",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      {body}
-    </div>
+    <div className="dots-map__card__content">{body}</div>
+    {footer && <div className="dots-map__card__footer">{footer}</div>}
   </article>
 );
 
 export default Card;
+
+const Country = ({ country }) => {
+  const countryName = useCountryName(country);
+  return <span className="dots-map__card__country">{countryName}</span>;
+};
+
+function useCountryName(country) {
+  switch (country.toLowerCase()) {
+    case "us": {
+      return "united states";
+    }
+    default: {
+      return country;
+    }
+  }
+}

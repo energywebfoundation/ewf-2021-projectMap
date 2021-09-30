@@ -5,6 +5,7 @@ import { map as rawMap } from "./data/map";
 import { getCountries } from "./services/datasetUtils";
 import ProjectCard from "./components/ProjectCard";
 import Filters from "./components/Filters";
+import "./App.css";
 
 function App() {
   const [map] = useState(prepare(rawMap));
@@ -12,16 +13,11 @@ function App() {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   return (
-    <div style={{ padding: 25 }}>
-      <div style={{ marginTop: 35, marginBottom: 35 }}>
+    <div className="dots-map">
+      <div className="dots-map__filters-container">
         <Filters />
       </div>
-      <div
-        style={{
-          width: 640,
-          height: 400,
-        }}
-      >
+      <div className="dots-map__map-container">
         <DotsMap
           map={map}
           dotRadius={1.2}
@@ -63,16 +59,11 @@ export default App;
 const Backdrop = ({ onDismiss, children }) => (
   <>
     <div
-      id="backdrop"
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-      }}
+      className="dots-map__backdrop"
       onClick={(event) => {
-        if (event.target.id !== "backdrop") {
+        const isBackdropClicked =
+          event.target.classList.contains("dots-map__backdrop");
+        if (!isBackdropClicked) {
           return;
         }
         onDismiss();

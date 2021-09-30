@@ -1,0 +1,59 @@
+.dots-map__projects-list li {
+  cursor: pointer;
+  padding: 10px 14px;
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dots-map__projects-list li:last-child {
+  border-bottom: none;
+}
+
+.dots-map__projects-list li:hover {
+  background-color: var(--light-background);
+  border-bottom-color: transparent;
+}
+
+.dots-map__project-list__project-type {
+  display: block;
+  font-size: 8px;
+  color: var(--text-secondary-color);
+  text-transform: uppercase;
+}
+
+.dots-map__project-list__project-name {
+  display: block;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.dots-map__project-list__project-organization {
+  display: block;
+  color: var(--main-color);
+  margin-top: 5px;
+}
+
+.dots-map__project-list__go-to-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ececec;
+  color: var(--main-color);
+  background: var(--light-background);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.dots-map__projects-list li:hover .dots-map__project-list__go-to-button {
+  background: white;
+}
+
+.dots-map__projects-list li > div:first-child {
+  flex-grow: 1;
+}

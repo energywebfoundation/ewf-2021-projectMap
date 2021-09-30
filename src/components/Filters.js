@@ -1,23 +1,13 @@
 import React from "react";
 import { dataset } from "../data/dataset";
 import { getCountries, getOrganizations } from "../services/datasetUtils";
+import "./Filters.css";
 
 const countries = getCountries();
 const organizations = getOrganizations();
 
 const Filters = () => (
-  <ul
-    style={{
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "left",
-      alignItems: "center",
-      columnGap: 50,
-      fontSize: 18,
-      color: "var(--main-color)",
-      fontWeight: "bold",
-    }}
-  >
+  <ul className="dots-map__filters">
     <li>
       <ProjectsFilter />
     </li>
@@ -51,13 +41,5 @@ const OrganizationsFilter = () => (
 );
 
 const Badge = ({ children }) => (
-  <sup
-    style={{
-      fontSize: 10,
-      display: "inline-block",
-      marginLeft: 5,
-    }}
-  >
-    {children}
-  </sup>
+  <sup className="dots-map__filters__badge">{children}</sup>
 );
