@@ -5,17 +5,45 @@ import { map as rawMap } from "./data/map";
 import { getCountries } from "./services/datasetUtils";
 import ProjectCard from "./components/ProjectCard";
 import Filters from "./components/Filters";
+import { getProjectCountries } from "./services/datasetUtils";
 import "./App.css";
 
 function App() {
   const [map] = useState(prepare(rawMap));
   const highlightCountries = getCountries();
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedCountry, selectCountry] = useState(null);
+  const [selectedProject, selectProject] = useState(null);
+  const [showCountryCard, setShowCountryCard] = useState(false);
+  const [showProjectCard, setShowProjectCard] = useState(false);
+  const showJustCountryCard = (country) => {
+    selectCountry(country);
+    setShowCountryCard(true);
+    selectProject(false);
+    setShowProjectCard(false);
+  };
+  const closeCard = () => {
+    selectCountry(null);
+    selectProject(null);
+    setShowCountryCard(false);
+    setShowProjectCard(false);
+  };
+  const showJustProjectCard = (project) => {
+    selectCountry(null);
+    setShowCountryCard(false);
+    selectProject(project);
+    setShowProjectCard(true);
+  };
   return (
     <div className="dots-map">
       <div className="dots-map__filters-container">
-        <Filters />
+        <Filters
+          onProjectClick={(project) => {
+            selectCountry(getProjectCountries(project));
+            setShowCountryCard(false);
+            selectProject(project);
+            setShowProjectCard(true);
+          }}
+        />
       </div>
       <div className="dots-map__map-container">
         <DotsMap
@@ -24,27 +52,16 @@ function App() {
           noise={0.5}
           noiseChance={0.2}
           highlightCountries={highlightCountries}
-          onCountrySelected={(country) => {
-            setSelectedCountry(country);
-            setSelectedProject(null);
-          }}
+          onCountrySelected={showJustCountryCard}
           selectedCountries={selectedCountry ? [selectedCountry] : []}
         />
-        {(selectedProject || selectedCountry) && (
-          <Backdrop
-            onDismiss={() => {
-              setSelectedCountry(null);
-              setSelectedProject(null);
-            }}
-          >
-            {selectedProject && <ProjectCard project={selectedProject} />}
-            {selectedCountry && (
+        {(showProjectCard || showCountryCard) && (
+          <Backdrop onDismiss={closeCard}>
+            {showProjectCard && <ProjectCard project={selectedProject} />}
+            {showCountryCard && (
               <CountryCard
                 country={selectedCountry}
-                onProjectClick={(project) => {
-                  setSelectedCountry(null);
-                  setSelectedProject(project);
-                }}
+                onProjectClick={showJustProjectCard}
               />
             )}
           </Backdrop>

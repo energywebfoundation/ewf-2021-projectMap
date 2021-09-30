@@ -1,0 +1,14 @@
+.dots-map__go-to-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ececec;
+  color: var(--main-color);
+  background: var(--light-background);
+  font-size: 12px;
+  font-weight: bold;
+}

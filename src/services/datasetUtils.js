@@ -21,3 +21,10 @@ export function getOrganizations() {
 function unique(objs) {
   return Array.from(new Set(objs));
 }
+
+export function getProjectCountries(project) {
+  return project.location
+    .split(",")
+    .map((country) => country.trim())
+    .map((country) => country.toLowerCase());
+}

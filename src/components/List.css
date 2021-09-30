@@ -1,0 +1,41 @@
+.dots-map__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dots-map__list > li {
+  cursor: pointer;
+  padding: 10px 14px;
+  border-bottom: 1px solid #e6e6e6;
+  border-top: 1px solid #e6e6e6;
+  margin-top: -1px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dots-map__list > li:first-child {
+  border-top: none;
+}
+
+.dots-map__list > li:last-child {
+  border-bottom: none;
+}
+
+.dots-map__list > li:hover {
+  background-color: var(--light-background);
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+}
+
+.dots-map__list > li:hover + li {
+  border-top-color: transparent;
+}
+
+.dots-map__list > li:hover .dots-map__go-to-button {
+  background: white;
+}
+
+.dots-map__list > li > *:first-child {
+  flex-grow: 1;
+}

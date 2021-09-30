@@ -11,7 +11,7 @@
 
 .dots-map__card__header {
   padding: 15px 22px 17px 22px;
-  border-bottom: 1px solid #ebebeb;
+  border-bottom: 1px solid var(--border-color);
   text-transform: capitalize;
   background-color: var(--light-background);
 }

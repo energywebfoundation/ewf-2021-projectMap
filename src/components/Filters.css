@@ -14,3 +14,7 @@
   display: inline-block;
   margin-left: 5px;
 }
+
+.dots-map__filters__dropdown-container {
+  margin-top: 10px;
+}

@@ -1,0 +1,19 @@
+.dots-map__projects-dropdown__project-organizations {
+  color: var(--main-color);
+  display: block;
+  line-height: 23px;
+}
+
+.dots-map__projects-dropdown__project-name {
+  display: block;
+}
+
+.dots-map__projects-dropdown__project-name {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.dots-map__projects-dropdown__country {
+  text-transform: uppercase;
+  color: var(--text-secondary-color);
+}

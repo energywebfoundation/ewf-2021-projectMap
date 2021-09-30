@@ -1,5 +1,7 @@
 import React from "react";
 import Card from "./Card";
+import { List, ListItem } from "./List";
+import GoToButton from "./GoToButton";
 import "./ProjectListCard.css";
 
 const ProjectListCard = ({ country, projects, onProjectClick }) => (
@@ -18,14 +20,16 @@ const ProjectListCard = ({ country, projects, onProjectClick }) => (
 export default ProjectListCard;
 
 const ProjectListCardContent = ({ projects, onProjectClick }) => (
-  <ul className="dots-map__projects-list">
-    {projects.map((project, index) => (
-      <li key={index} onClick={() => onProjectClick(project)}>
-        <ProjectListEntry project={project} />
-        <GoToButton />
-      </li>
-    ))}
-  </ul>
+  <div className="dots-map__project-list-card">
+    <List>
+      {projects.map((project, index) => (
+        <ListItem key={index} onClick={() => onProjectClick(project)}>
+          <ProjectListEntry project={project} />
+          <GoToButton />
+        </ListItem>
+      ))}
+    </List>
+  </div>
 );
 
 const ProjectListEntry = ({ project }) => (
@@ -33,14 +37,6 @@ const ProjectListEntry = ({ project }) => (
     <ProjectType projectType={project.projectType} />
     <ProjectName projectName={project.projectName} />
     <ProjectOrganization projectOrganization={project.organization} />
-  </div>
-);
-
-const GoToButton = () => (
-  <div>
-    <button className="dots-map__project-list__go-to-button" onClick={() => {}}>
-      <span>&rarr;</span>
-    </button>
   </div>
 );
 
