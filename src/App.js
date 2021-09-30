@@ -2,52 +2,58 @@ import { useState } from "react";
 import DotsMap from "./components/DotsMap";
 import CountryCard from "./components/CountryCard";
 import { map as rawMap } from "./data/map";
-import { dataset } from "./data/dataset";
+import { getCountries } from "./services/datasetUtils";
 import ProjectCard from "./components/ProjectCard";
+import Filters from "./components/Filters";
 
 function App() {
   const [map] = useState(prepare(rawMap));
-  const highlightCountries = getHighlightCountries();
+  const highlightCountries = getCountries();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   return (
-    <div
-      style={{
-        width: 640,
-        height: 400,
-      }}
-    >
-      <DotsMap
-        map={map}
-        dotRadius={1.2}
-        noise={0.5}
-        noiseChance={0.2}
-        highlightCountries={highlightCountries}
-        onCountrySelected={(country) => {
-          setSelectedCountry(country);
-          setSelectedProject(null);
+    <div style={{ padding: 25 }}>
+      <div style={{ marginTop: 35, marginBottom: 35 }}>
+        <Filters />
+      </div>
+      <div
+        style={{
+          width: 640,
+          height: 400,
         }}
-        selectedCountries={selectedCountry ? [selectedCountry] : []}
-      />
-      {(selectedProject || selectedCountry) && (
-        <Backdrop
-          onDismiss={() => {
-            setSelectedCountry(null);
+      >
+        <DotsMap
+          map={map}
+          dotRadius={1.2}
+          noise={0.5}
+          noiseChance={0.2}
+          highlightCountries={highlightCountries}
+          onCountrySelected={(country) => {
+            setSelectedCountry(country);
             setSelectedProject(null);
           }}
-        >
-          {selectedProject && <ProjectCard project={selectedProject} />}
-          {selectedCountry && (
-            <CountryCard
-              country={selectedCountry}
-              onProjectClick={(project) => {
-                setSelectedCountry(null);
-                setSelectedProject(project);
-              }}
-            />
-          )}
-        </Backdrop>
-      )}
+          selectedCountries={selectedCountry ? [selectedCountry] : []}
+        />
+        {(selectedProject || selectedCountry) && (
+          <Backdrop
+            onDismiss={() => {
+              setSelectedCountry(null);
+              setSelectedProject(null);
+            }}
+          >
+            {selectedProject && <ProjectCard project={selectedProject} />}
+            {selectedCountry && (
+              <CountryCard
+                country={selectedCountry}
+                onProjectClick={(project) => {
+                  setSelectedCountry(null);
+                  setSelectedProject(project);
+                }}
+              />
+            )}
+          </Backdrop>
+        )}
+      </div>
     </div>
   );
 }
@@ -90,25 +96,12 @@ function prepare(map) {
   }));
 }
 
-function getHighlightCountries() {
-  return unique(
-    dataset
-      .flatMap(({ location }) => location.split(","))
-      .map((country) => country.trim())
-      .map((country) => country.toLowerCase())
-  );
-}
-
 function isHighlighted(country) {
-  return getHighlightCountries().includes(country);
+  return getCountries().includes(country);
 }
 
 function getRandomColor() {
   const colors = ["#A566FF", "#2EB67D", "#F4B400", "#27baff"];
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
-}
-
-function unique(objs) {
-  return Array.from(new Set(objs));
 }
