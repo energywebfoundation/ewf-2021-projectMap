@@ -1,17 +1,22 @@
 import React from "react";
 import Card from "./Card";
 
-const ProjectListCard = ({ country, projects }) => (
+const ProjectListCard = ({ country, projects, onProjectClick }) => (
   <Card
     title={`Country: ${country}`}
     subtitle={`${projects.length} Projects`}
-    body={<ProjectListCardContent projects={projects} />}
+    body={
+      <ProjectListCardContent
+        projects={projects}
+        onProjectClick={onProjectClick}
+      />
+    }
   />
 );
 
 export default ProjectListCard;
 
-const ProjectListCardContent = ({ projects }) => (
+const ProjectListCardContent = ({ projects, onProjectClick }) => (
   <ul>
     {projects.map((project, index) => (
       <li
@@ -28,7 +33,7 @@ const ProjectListCardContent = ({ projects }) => (
       >
         <ProjectListEntry project={project} />
         <div style={{ marginLeft: 4 }}>
-          <GoToButton />
+          <GoToButton onClick={() => onProjectClick(project)} />
         </div>
       </li>
     ))}
@@ -49,7 +54,7 @@ const ProjectListEntry = ({ project }) => (
   </div>
 );
 
-const GoToButton = () => (
+const GoToButton = ({ onClick }) => (
   <button
     style={{
       color: "var(--main-color)",
@@ -63,6 +68,7 @@ const GoToButton = () => (
       alignItems: "center",
       justifyContent: "center",
     }}
+    onClick={onClick}
   >
     <span>&rarr;</span>
   </button>

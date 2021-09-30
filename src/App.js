@@ -3,11 +3,13 @@ import DotsMap from "./components/DotsMap";
 import CountryCard from "./components/CountryCard";
 import { map as rawMap } from "./data/map";
 import { dataset } from "./data/dataset";
+import ProjectCard from "./components/ProjectCard";
 
 function App() {
   const [map] = useState(prepare(rawMap));
   const highlightCountries = getHighlightCountries();
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
   return (
     <div
       style={{
@@ -23,15 +25,60 @@ function App() {
         highlightCountries={highlightCountries}
         onCountrySelected={(country) => {
           setSelectedCountry(country);
+          setSelectedProject(null);
         }}
         selectedCountries={selectedCountry ? [selectedCountry] : []}
       />
-      {selectedCountry && <CountryCard country={selectedCountry} />}
+      {(selectedProject || selectedCountry) && (
+        <Backdrop
+          onDismiss={() => {
+            setSelectedCountry(null);
+            setSelectedProject(null);
+          }}
+        >
+          {selectedProject && <ProjectCard project={selectedProject} />}
+          {selectedCountry && (
+            <CountryCard
+              country={selectedCountry}
+              onProjectClick={(project) => {
+                setSelectedCountry(null);
+                setSelectedProject(project);
+              }}
+            />
+          )}
+        </Backdrop>
+      )}
     </div>
   );
 }
 
 export default App;
+
+const Backdrop = ({ onDismiss, children }) => (
+  <>
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+      }}
+      onClick={onDismiss}
+    ></div>
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      {children}
+    </div>
+  </>
+);
 
 function prepare(map) {
   return map.map((country) => ({
