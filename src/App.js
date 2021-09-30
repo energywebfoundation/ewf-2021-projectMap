@@ -57,6 +57,7 @@ export default App;
 const Backdrop = ({ onDismiss, children }) => (
   <>
     <div
+      id="backdrop"
       style={{
         position: "absolute",
         top: 0,
@@ -64,15 +65,11 @@ const Backdrop = ({ onDismiss, children }) => (
         width: "100%",
         height: "100%",
       }}
-      onClick={onDismiss}
-    ></div>
-    <div
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
+      onClick={(event) => {
+        if (event.target.id !== "backdrop") {
+          return;
+        }
+        onDismiss();
       }}
     >
       {children}

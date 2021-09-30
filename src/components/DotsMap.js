@@ -10,14 +10,16 @@ const DotsMap = ({
 }) => {
   const id = useId();
   const svgElement = useRef();
-  useEffect(() => initializeDotsMap(svgElement.current, map), []);
-  useEffect(() => {
-    makeCountriesClickable(
-      svgElement.current,
-      highlightCountries,
-      onCountrySelected
-    );
-  }, []);
+  useEffect(
+    () =>
+      initializeDotsMap(
+        svgElement.current,
+        map,
+        highlightCountries,
+        onCountrySelected
+      ),
+    []
+  );
   useEffect(() => {
     resetSelectedCountries(svgElement.current);
     colorSelectedCountries(
@@ -37,7 +39,12 @@ function useId() {
   return id;
 }
 
-function initializeDotsMap(svgElement, dataset) {
+function initializeDotsMap(
+  svgElement,
+  dataset,
+  highlightCountries,
+  onCountrySelected
+) {
   // prettier-ignore
   const countries = select(svgElement)
       .attr('viewBox', [0, 0, svgElement.clientWidth, svgElement.clientHeight])
@@ -47,35 +54,35 @@ function initializeDotsMap(svgElement, dataset) {
           .append('g')
           .attr('id', (country) => `${svgElement.id}-${country.id}`)
   // prettier-ignore
-  countries
+  const dotContainers = countries
     .selectAll("g")
     .data((country) => country.dots)
     .enter()
-      .append("circle")
+  // prettier-ignore
+  dotContainers
+    .append('rect')
+      .attr('style', dot => highlightCountries.includes(dot.country.id) ? 'cursor: pointer; pointer-events: all;' : '')
+      .attr('fill', 'none')
+      .attr('width', dot => dot.radius * 6)
+      .attr('height', dot => dot.radius * 6)
+      .attr('x', dot => scale(dot.x, svgElement.clientWidth, dot.radius * 3) - dot.radius * 3)
+      .attr('y', dot => scale(dot.y, svgElement.clientHeight, dot.radius * 3) - dot.radius * 3)
+      .on('click', (_, dot) => {
+        const isHiglighted = highlightCountries.includes(dot.country.id)
+        if (!isHiglighted) {
+          return
+        }
+        onCountrySelected(dot.country.id)
+      })
+  // prettier-ignore
+  dotContainers
+    .append('circle')
       .attr("id", (dot) => `${svgElement.id}-${dot.country.id}-${dot.id}`)
+      .attr('style', 'pointer-events: none;')
       .attr("fill", dot => dot.country.color)
       .attr("r", (dot) => dot.radius)
       .attr("cx", (dot) => scale(dot.x, svgElement.clientWidth, dot.radius * 3))
       .attr("cy", (dot) => scale(dot.y, svgElement.clientHeight, dot.radius * 3));
-}
-
-function makeCountriesClickable(svgElement, countries, onClick) {
-  countries
-    .map((country) => select(`#${svgElement.id}-${country}`))
-    .forEach((country) => {
-      // prettier-ignore
-      country
-        .append('rect')
-          .attr('style', 'cursor: pointer')
-          .attr('fill', 'transparent')
-          .attr('x', getClickableCountryRectX)
-          .attr('width', getClickableCountryRectWidth)
-          .attr('y', getClickableCountryRectY)
-          .attr('height', getClickableCountryRectHeight)
-          .on('click', (_, country) => {
-            onClick(country.id)
-          })
-    });
 }
 
 function resetSelectedCountries(svgElement) {
@@ -107,38 +114,4 @@ function addParentToDots(dataset) {
       },
     })),
   }));
-}
-
-function getClickableCountryRectX(country, index, rects) {
-  const thisRect = rects[index];
-  const maxX = thisRect.closest("svg").clientWidth;
-  const margin = country.dots[0].radius * 3;
-  const minDotX = Math.min(...country.dots.map(({ x }) => scale(x, maxX, 0)));
-  return minDotX - margin;
-}
-
-function getClickableCountryRectWidth(country, index, rects) {
-  const thisRect = rects[index];
-  const maxX = thisRect.closest("svg").clientWidth;
-  const margin = country.dots[0].radius * 3;
-  const maxDotX = Math.max(...country.dots.map(({ x }) => scale(x, maxX, 0)));
-  const x = thisRect.getAttribute("x");
-  return maxDotX - x + margin;
-}
-
-function getClickableCountryRectY(country, index, rects) {
-  const thisRect = rects[index];
-  const maxY = thisRect.closest("svg").clientHeight;
-  const margin = country.dots[0].radius * 3;
-  const minDotY = Math.min(...country.dots.map(({ y }) => scale(y, maxY, 0)));
-  return minDotY - margin;
-}
-
-function getClickableCountryRectHeight(country, index, rects) {
-  const thisRect = rects[index];
-  const maxY = thisRect.closest("svg").clientHeight;
-  const margin = country.dots[0].radius * 3;
-  const maxDotY = Math.max(...country.dots.map(({ y }) => scale(y, maxY, 0)));
-  const y = thisRect.getAttribute("y");
-  return maxDotY - y + margin;
 }
