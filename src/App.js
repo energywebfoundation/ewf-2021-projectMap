@@ -85,19 +85,9 @@ function prepare(map) {
       : window.dotColor || "#C8C8CA",
     dots: country.dots.map((dot) => ({
       ...dot,
-      radius: getDotRadius(),
+      radius: window.baseRadius || 1.2,
     })),
   }));
-}
-
-function getDotRadius() {
-  const baseRadius = window.baseRadius || 1.2;
-  const noiseChance = window.noiseChance || 0.2;
-  const noise = window.noise || 0.5;
-
-  const shouldApplyNoise = Math.random() < noiseChance;
-  const scale = shouldApplyNoise ? 1 + (Math.random() * noise * 2 - noise) : 1;
-  return baseRadius * scale;
 }
 
 function getHighlightCountries() {
