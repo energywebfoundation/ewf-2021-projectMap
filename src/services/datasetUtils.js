@@ -61,3 +61,11 @@ function sortProjects(a, b) {
 export function isCountryInProjects(country) {
   return getProjectsByCountry(country).length > 0;
 }
+
+export function getOrganizationCountries(organization) {
+  getProjectsByOrganization(organization)
+    .map((project) => project.location)
+    .flatMap((location) => location.split(","))
+    .map((location) => location.trim())
+    .map((location) => location.toLowerCase());
+}

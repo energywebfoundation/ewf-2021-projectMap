@@ -9,7 +9,12 @@ import {
 } from "../services/datasetUtils";
 import "./Filters.css";
 
-const Filters = ({ onProjectClick, onCountryClick, onOrganizationClick }) => {
+const Filters = ({
+  onDropdownClick,
+  onProjectClick,
+  onCountryClick,
+  onOrganizationClick,
+}) => {
   const [dropdown, setDropdown] = useState(null);
   const projectsRef = useRef();
   const countriesRef = useRef();
@@ -28,17 +33,21 @@ const Filters = ({ onProjectClick, onCountryClick, onOrganizationClick }) => {
       setDropdown(false);
     });
   }, []);
+  const openDropdown = (dropdown) => () => {
+    onDropdownClick();
+    setDropdown(dropdown);
+  };
   return (
     <>
       <ul className="dots-map__filters">
         <li ref={projectsRef}>
-          <ProjectsFilter onClick={() => setDropdown("projects")} />
+          <ProjectsFilter onClick={openDropdown("projects")} />
         </li>
         <li ref={countriesRef}>
-          <CountriesFilter onClick={() => setDropdown("countries")} />
+          <CountriesFilter onClick={openDropdown("countries")} />
         </li>
         <li ref={organizationsRef}>
-          <OrganizationsFilter onClick={() => setDropdown("organizations")} />
+          <OrganizationsFilter onClick={openDropdown("organizations")} />
         </li>
       </ul>
       {dropdown && (

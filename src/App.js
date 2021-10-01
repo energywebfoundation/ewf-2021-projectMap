@@ -2,89 +2,82 @@ import { useState } from "react";
 import DotsMap from "./components/DotsMap";
 import CountryCard from "./components/CountryCard";
 import getMapData from "./data/map";
-import { isCountryInProjects } from "./services/datasetUtils";
+import {
+  getOrganizationCountries,
+  isCountryInProjects,
+} from "./services/datasetUtils";
 import ProjectCard from "./components/ProjectCard";
 import Filters from "./components/Filters";
 import OrganizationCard from "./components/OrganizationCard";
-import { getProjectCountries } from "./services/datasetUtils";
 import "./App.css";
+
+const initialState = {
+  cardType: null,
+  countries: null,
+  project: null,
+};
 
 function App() {
   const [map] = useState(prepare(getMapData()));
-  const [selectedCountry, selectCountry] = useState(null);
-  const [selectedProject, selectProject] = useState(null);
-  const [selectedOrganization, selectOrganization] = useState(null);
-  const [showCountryCard, setShowCountryCard] = useState(false);
-  const [showProjectCard, setShowProjectCard] = useState(false);
-  const [showOrganizationCard, setShowOrganizationCard] = useState(false);
-  const showJustCountryCard = (country) => {
-    selectCountry(country);
-    setShowCountryCard(true);
-    selectProject(null);
-    setShowProjectCard(false);
-    selectOrganization(null);
-    setShowOrganizationCard(false);
-  };
-  const closeCard = () => {
-    selectCountry(null);
-    selectProject(null);
-    selectOrganization(null);
-    setShowCountryCard(false);
-    setShowProjectCard(false);
-    setShowOrganizationCard(false);
-  };
-  const showJustProjectCard = (project) => {
-    selectCountry(null);
-    setShowCountryCard(false);
-    selectOrganization(null);
-    setShowOrganizationCard(false);
-    selectProject(project);
-    setShowProjectCard(true);
-  };
-  const showJustOrganizationCard = (organization) => {
-    selectCountry(null);
-    setShowCountryCard(false);
-    selectProject(null);
-    setShowProjectCard(false);
-    selectOrganization(organization);
-    setShowOrganizationCard(true);
+  const [state, setState] = useState(initialState);
+  const updateState = (delta) => {
+    const partialNewState = {
+      ...initialState,
+      ...delta,
+    };
+    setState({
+      ...partialNewState,
+      countries:
+        partialNewState.countries ||
+        (partialNewState.organization
+          ? getOrganizationCountries(partialNewState.organization)
+          : []),
+    });
   };
   return (
     <div className="dots-map">
       <div className="dots-map__filters-container">
         <Filters
-          onCountryClick={showJustCountryCard}
-          onProjectClick={(project) => {
-            selectCountry(getProjectCountries(project));
-            setShowCountryCard(false);
-            selectProject(project);
-            setShowProjectCard(true);
-            selectOrganization(null);
-            setShowOrganizationCard(false);
-          }}
-          onOrganizationClick={showJustOrganizationCard}
+          onDropdownClick={() => updateState({})}
+          onCountryClick={(country) =>
+            updateState({ cardType: "country", countries: [country] })
+          }
+          onProjectClick={(project) =>
+            updateState({ cardType: "project", project })
+          }
+          onOrganizationClick={(organization) =>
+            updateState({ cardType: "organization", organization })
+          }
         />
       </div>
       <div className="dots-map__map-container">
         <DotsMap
           map={map}
-          onCountrySelected={showJustCountryCard}
-          selectedCountries={selectedCountry ? [selectedCountry] : []}
+          onCountrySelected={(country) =>
+            updateState({ cardType: "country", countries: [country] })
+          }
+          selectedCountries={state.countries || []}
           selectedColor={window.dotsMapConfig.selectedColor || "#DB4437"}
         />
-        {(showProjectCard || showCountryCard || showOrganizationCard) && (
-          <Backdrop onDismiss={closeCard}>
-            {showProjectCard && <ProjectCard project={selectedProject} />}
-            {showCountryCard && (
+        {state.cardType && (
+          <Backdrop onDismiss={() => setState({})}>
+            {state.cardType === "project" && (
+              <ProjectCard project={state.project} />
+            )}
+            {state.cardType === "country" && (
               <CountryCard
-                country={selectedCountry}
-                onProjectClick={showJustProjectCard}
+                country={state.countries[0]}
+                onProjectClick={(project) =>
+                  setState({ cardType: "project", project })
+                }
               />
             )}
-            {showOrganizationCard && (
+            {state.cardType === "organization" && (
               <OrganizationCard
-                organization={selectedOrganization}
-                onProjectClick={showJustProjectCard}
+                organization={state.organization}
+                onProjectClick={(project) =>
+                  setState({ cardType: "project", project })
+                }
               />
             )}
           </Backdrop>
