@@ -1,0 +1,16 @@
+.dots-map__countries-dropdown {
+  width: 210px;
+  height: 359px;
+}
+
+.dots-map__countries-dropdown li {
+  border-top: none;
+  border-bottom: none;
+}
+
+.dots-map__countries-dropdown__country {
+  font-size: 14px;
+  text-transform: capitalize;
+  opacity: 0.5;
+  text-align: left;
+}

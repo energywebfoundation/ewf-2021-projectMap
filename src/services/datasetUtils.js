@@ -1,11 +1,16 @@
 import { dataset } from "../data/dataset";
 
+export function getProjects() {
+  return dataset.sort((a, b) => a.projectName.localeCompare(b.projectName));
+}
+
 export function getCountries() {
   return unique(
     dataset
       .flatMap(({ location }) => location.split(","))
       .map((country) => country.trim())
       .map((country) => country.toLowerCase())
+      .sort((a, b) => a.localeCompare(b))
   );
 }
 
@@ -15,6 +20,7 @@ export function getOrganizations() {
       .flatMap(({ organization }) => organization.split(","))
       .map((country) => country.trim())
       .map((country) => country.toLowerCase())
+      .sort((a, b) => a.localeCompare(b))
   );
 }
 
@@ -26,5 +32,15 @@ export function getProjectCountries(project) {
   return project.location
     .split(",")
     .map((country) => country.trim())
-    .map((country) => country.toLowerCase());
+    .map((country) => country.toLowerCase())
+    .sort((a, b) => a.localeCompare(b));
+}
+
+export function getProjectsByCountry(country) {
+  return dataset
+    .filter(
+      ({ location }) =>
+        location.toLowerCase().indexOf(country.toLowerCase()) >= 0
+    )
+    .sort((a, b) => a.projectName.localeCompare(b.projectName));
 }

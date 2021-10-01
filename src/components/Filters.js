@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ProjectsDropdown from "./ProjectsDropdown";
+import CountriesDropdown from "./CountriesDropdown";
 import { dataset } from "../data/dataset";
 import { getCountries, getOrganizations } from "../services/datasetUtils";
 import "./Filters.css";
@@ -7,8 +8,10 @@ import "./Filters.css";
 const countries = getCountries();
 const organizations = getOrganizations();
 
-const Filters = ({ onProjectClick }) => {
+const Filters = ({ onProjectClick, onCountryClick }) => {
   const [dropdown, setDropdown] = useState(null);
+  const projectsRef = useRef();
+  const countriesRef = useRef();
   const closeDropdown =
     (fn) =>
     (...args) => {
@@ -18,10 +21,10 @@ const Filters = ({ onProjectClick }) => {
   return (
     <>
       <ul className="dots-map__filters">
-        <li>
+        <li ref={projectsRef}>
           <ProjectsFilter onClick={() => setDropdown("projects")} />
         </li>
-        <li>
+        <li ref={countriesRef}>
           <CountriesFilter onClick={() => setDropdown("countries")} />
         </li>
         <li>
@@ -33,6 +36,9 @@ const Filters = ({ onProjectClick }) => {
           <DropdownSwitch
             dropdown={dropdown}
             onProjectClick={closeDropdown(onProjectClick)}
+            onCountryClick={closeDropdown(onCountryClick)}
+            projectsRef={projectsRef}
+            countriesRef={countriesRef}
           />
         </div>
       )}
@@ -64,10 +70,21 @@ const Badge = ({ children }) => (
   <sup className="dots-map__filters__badge">{children}</sup>
 );
 
-const DropdownSwitch = ({ dropdown, onProjectClick }) => {
+const DropdownSwitch = ({
+  dropdown,
+  onProjectClick,
+  onCountryClick,
+  projectsRef,
+  countriesRef,
+}) => {
   switch (dropdown) {
     case "projects": {
-      return <ProjectsDropdown onClick={onProjectClick} />;
+      return <ProjectsDropdown onClick={onProjectClick} anchor={projectsRef} />;
+    }
+    case "countries": {
+      return (
+        <CountriesDropdown onClick={onCountryClick} anchor={countriesRef} />
+      );
     }
     default: {
       return <React.Fragment />;

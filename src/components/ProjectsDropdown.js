@@ -2,11 +2,13 @@ import React from "react";
 import Dropdown from "./Dropdown";
 import GoToButton from "./GoToButton";
 import { List, ListItem } from "./List";
-import { dataset as projects } from "../data/dataset";
+import { getProjects } from "../services/datasetUtils";
 import "./ProjectsDropdown.css";
 
-const ProjectsDropdown = ({ onClick }) => (
-  <Dropdown className="dots-map__projects-dropdown">
+const projects = getProjects();
+
+const ProjectsDropdown = ({ onClick, anchor }) => (
+  <Dropdown className="dots-map__projects-dropdown" anchor={anchor}>
     <List>
       {projects.map((project, index) => (
         <ListItem key={index} onClick={() => onClick(project)}>

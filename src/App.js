@@ -37,6 +37,7 @@ function App() {
     <div className="dots-map">
       <div className="dots-map__filters-container">
         <Filters
+          onCountryClick={showJustCountryCard}
           onProjectClick={(project) => {
             selectCountry(getProjectCountries(project));
             setShowCountryCard(false);
