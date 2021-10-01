@@ -4,9 +4,15 @@ import { List, ListItem } from "./List";
 import GoToButton from "./GoToButton";
 import "./ProjectListCard.css";
 
-const ProjectListCard = ({ country, projects, onProjectClick }) => (
+const ProjectListCard = ({
+  country,
+  organization,
+  projects,
+  onProjectClick,
+}) => (
   <Card
     country={country}
+    organization={organization}
     title={`${projects.length} Projects`}
     body={
       <ProjectListCardContent

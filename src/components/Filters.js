@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ProjectsDropdown from "./ProjectsDropdown";
 import CountriesDropdown from "./CountriesDropdown";
+import OrganizationsDropdown from "./OrganizationsDropdown";
 import { dataset } from "../data/dataset";
 import { getCountries, getOrganizations } from "../services/datasetUtils";
 import "./Filters.css";
@@ -8,16 +9,25 @@ import "./Filters.css";
 const countries = getCountries();
 const organizations = getOrganizations();
 
-const Filters = ({ onProjectClick, onCountryClick }) => {
+const Filters = ({ onProjectClick, onCountryClick, onOrganizationClick }) => {
   const [dropdown, setDropdown] = useState(null);
   const projectsRef = useRef();
   const countriesRef = useRef();
+  const organizationsRef = useRef();
   const closeDropdown =
     (fn) =>
     (...args) => {
       setDropdown(false);
       fn(...args);
     };
+  useEffect(() => {
+    document.body.addEventListener("click", ({ target }) => {
+      if (document.querySelector(".dots-map__filters").contains(target)) {
+        return;
+      }
+      setDropdown(false);
+    });
+  }, []);
   return (
     <>
       <ul className="dots-map__filters">
@@ -27,7 +37,7 @@ const Filters = ({ onProjectClick, onCountryClick }) => {
         <li ref={countriesRef}>
           <CountriesFilter onClick={() => setDropdown("countries")} />
         </li>
-        <li>
+        <li ref={organizationsRef}>
           <OrganizationsFilter onClick={() => setDropdown("organizations")} />
         </li>
       </ul>
@@ -37,8 +47,10 @@ const Filters = ({ onProjectClick, onCountryClick }) => {
             dropdown={dropdown}
             onProjectClick={closeDropdown(onProjectClick)}
             onCountryClick={closeDropdown(onCountryClick)}
+            onOrganizationClick={closeDropdown(onOrganizationClick)}
             projectsRef={projectsRef}
             countriesRef={countriesRef}
+            organizationsRef={organizationsRef}
           />
         </div>
       )}
@@ -74,8 +86,10 @@ const DropdownSwitch = ({
   dropdown,
   onProjectClick,
   onCountryClick,
+  onOrganizationClick,
   projectsRef,
   countriesRef,
+  organizationsRef,
 }) => {
   switch (dropdown) {
     case "projects": {
@@ -84,6 +98,14 @@ const DropdownSwitch = ({
     case "countries": {
       return (
         <CountriesDropdown onClick={onCountryClick} anchor={countriesRef} />
+      );
+    }
+    case "organizations": {
+      return (
+        <OrganizationsDropdown
+          onClick={onOrganizationClick}
+          anchor={organizationsRef}
+        />
       );
     }
     default: {

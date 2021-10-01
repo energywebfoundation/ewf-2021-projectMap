@@ -1,10 +1,13 @@
 import React, { useMemo } from "react";
-import { getProjectsByCountry } from "../services/datasetUtils";
+import { getProjectsByOrganization } from "../services/datasetUtils";
 import ProjectCard from "./ProjectCard";
 import ProjectListCard from "./ProjectListCard";
 
-const CountryCard = ({ country, onProjectClick }) => {
-  const projects = useMemo(() => getProjectsByCountry(country), [country]);
+const OrganizationCard = ({ organization, onProjectClick }) => {
+  const projects = useMemo(
+    () => getProjectsByOrganization(organization),
+    [organization]
+  );
   if (!projects.length) {
     return <React.Fragment />;
   }
@@ -12,11 +15,11 @@ const CountryCard = ({ country, onProjectClick }) => {
     <ProjectCard project={projects[0]} />
   ) : (
     <ProjectListCard
-      country={country}
+      organization={organization}
       projects={projects}
       onProjectClick={onProjectClick}
     />
   );
 };
 
-export default CountryCard;
+export default OrganizationCard;

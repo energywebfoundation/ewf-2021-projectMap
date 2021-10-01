@@ -1,0 +1,23 @@
+.dots-map__rounded-button {
+  display: flex;
+  border-radius: 200px;
+  background-color: var(--light-background);
+  padding: 3px 14px;
+  width: 100%;
+  text-align: left;
+}
+
+li:hover .dots-map__rounded-button {
+  background-color: white;
+}
+
+.dots-map__rounded-button:after {
+  color: var(--main-color);
+  content: "\2192";
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.dots-map__rounded-button span {
+  flex-grow: 1;
+}

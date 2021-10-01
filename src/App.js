@@ -5,6 +5,7 @@ import { map as rawMap } from "./data/map";
 import { getCountries } from "./services/datasetUtils";
 import ProjectCard from "./components/ProjectCard";
 import Filters from "./components/Filters";
+import OrganizationCard from "./components/OrganizationCard";
 import { getProjectCountries } from "./services/datasetUtils";
 import "./App.css";
 
@@ -13,25 +14,41 @@ function App() {
   const highlightCountries = getCountries();
   const [selectedCountry, selectCountry] = useState(null);
   const [selectedProject, selectProject] = useState(null);
+  const [selectedOrganization, selectOrganization] = useState(null);
   const [showCountryCard, setShowCountryCard] = useState(false);
   const [showProjectCard, setShowProjectCard] = useState(false);
+  const [showOrganizationCard, setShowOrganizationCard] = useState(false);
   const showJustCountryCard = (country) => {
     selectCountry(country);
     setShowCountryCard(true);
-    selectProject(false);
+    selectProject(null);
     setShowProjectCard(false);
+    selectOrganization(null);
+    setShowOrganizationCard(false);
   };
   const closeCard = () => {
     selectCountry(null);
     selectProject(null);
+    selectOrganization(null);
     setShowCountryCard(false);
     setShowProjectCard(false);
+    setShowOrganizationCard(false);
   };
   const showJustProjectCard = (project) => {
     selectCountry(null);
     setShowCountryCard(false);
+    selectOrganization(null);
+    setShowOrganizationCard(false);
     selectProject(project);
     setShowProjectCard(true);
+  };
+  const showJustOrganizationCard = (organization) => {
+    selectCountry(null);
+    setShowCountryCard(false);
+    selectProject(null);
+    setShowProjectCard(false);
+    selectOrganization(organization);
+    setShowOrganizationCard(true);
   };
   return (
     <div className="dots-map">
@@ -43,7 +60,10 @@ function App() {
             setShowCountryCard(false);
             selectProject(project);
             setShowProjectCard(true);
+            selectOrganization(null);
+            setShowOrganizationCard(false);
           }}
+          onOrganizationClick={showJustOrganizationCard}
         />
       </div>
       <div className="dots-map__map-container">
@@ -56,12 +76,18 @@ function App() {
           onCountrySelected={showJustCountryCard}
           selectedCountries={selectedCountry ? [selectedCountry] : []}
         />
-        {(showProjectCard || showCountryCard) && (
+        {(showProjectCard || showCountryCard || showOrganizationCard) && (
           <Backdrop onDismiss={closeCard}>
             {showProjectCard && <ProjectCard project={selectedProject} />}
             {showCountryCard && (
               <CountryCard
                 country={selectedCountry}
+                onProjectClick={showJustProjectCard}
+              />
+            )}
+            {showOrganizationCard && (
+              <OrganizationCard
+                organization={selectedOrganization}
                 onProjectClick={showJustProjectCard}
               />
             )}

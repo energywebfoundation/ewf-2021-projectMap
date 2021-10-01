@@ -1,0 +1,6 @@
+.dots-map__organizations-dropdown__organization-name {
+  font-size: 14px;
+  margin-bottom: 16px;
+  display: block;
+  text-transform: capitalize;
+}

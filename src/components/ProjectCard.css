@@ -79,21 +79,3 @@
 .dots-map__project-card__project-urls {
   margin-bottom: 19px;
 }
-
-.dots-map__project-card__project-urls a {
-  display: flex;
-  border-radius: 200px;
-  background-color: var(--light-background);
-  padding: 3px 14px;
-}
-
-.dots-map__project-card__project-urls a:after {
-  color: var(--main-color);
-  content: "\2192";
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.dots-map__project-card__project-urls a span {
-  flex-grow: 1;
-}

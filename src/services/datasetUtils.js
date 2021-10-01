@@ -1,7 +1,7 @@
 import { dataset } from "../data/dataset";
 
 export function getProjects() {
-  return dataset.sort((a, b) => a.projectName.localeCompare(b.projectName));
+  return dataset.sort(sortProjects);
 }
 
 export function getCountries() {
@@ -42,5 +42,18 @@ export function getProjectsByCountry(country) {
       ({ location }) =>
         location.toLowerCase().indexOf(country.toLowerCase()) >= 0
     )
-    .sort((a, b) => a.projectName.localeCompare(b.projectName));
+    .sort(sortProjects);
+}
+
+export function getProjectsByOrganization(org) {
+  return dataset
+    .filter(
+      ({ organization }) =>
+        organization.toLowerCase().indexOf(org.toLowerCase()) >= 0
+    )
+    .sort(sortProjects);
+}
+
+function sortProjects(a, b) {
+  return a.projectName.localeCompare(b.projectName);
 }

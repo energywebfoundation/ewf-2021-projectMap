@@ -1,10 +1,11 @@
 import React from "react";
 import "./Card.css";
 
-const Card = ({ country, title, body, footer }) => (
+const Card = ({ country, organization, title, body, footer }) => (
   <article className="dots-map__card">
     <header className="dots-map__card__header">
       {country && <Country country={country} />}
+      {organization && <Organization organization={organization} />}
       <h2>{title}</h2>
     </header>
     <div className="dots-map__card__content">{body}</div>
@@ -18,6 +19,10 @@ const Country = ({ country }) => {
   const countryName = useCountryName(country);
   return <span className="dots-map__card__country">{countryName}</span>;
 };
+
+const Organization = ({ organization }) => (
+  <span className="dots-map__card__organization">{organization}</span>
+);
 
 function useCountryName(country) {
   switch (country.toLowerCase()) {

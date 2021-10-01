@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./Card";
+import { RoundedLink } from "./RoundedButton";
 import "./ProjectCard.css";
 
 const ProjectCard = ({ project }) => (
@@ -85,9 +86,9 @@ const ProjectUrls = ({ projectUrls = [] }) => (
   <ul className="dots-map__project-card__project-urls">
     {projectUrls.map(({ linkText, url }) => (
       <li key={url}>
-        <a href={url} target="_blank" rel="noreferrer">
-          <span>{linkText}</span>
-        </a>
+        <RoundedLink target="_blank" rel="noreferrer">
+          {linkText}
+        </RoundedLink>
       </li>
     ))}
   </ul>

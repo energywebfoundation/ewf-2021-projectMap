@@ -35,6 +35,14 @@
   margin-bottom: 5px;
 }
 
+.dots-map__card__organization {
+  text-transform: capitalize;
+  font-size: 8px;
+  color: var(--main-color);
+  display: block;
+  margin-bottom: 5px;
+}
+
 .dots-map__card__footer {
   flex-grow: 1;
   border-top: 1px solid #e5e5e5;
