@@ -10,6 +10,7 @@
 }
 
 .dots-map__map-container {
+  position: relative;
   height: 400px;
 }
 
