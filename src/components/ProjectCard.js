@@ -86,7 +86,7 @@ const ProjectUrls = ({ projectUrls = [] }) => (
   <ul className="dots-map__project-card__project-urls">
     {projectUrls.map(({ linkText, url }) => (
       <li key={url}>
-        <RoundedLink target="_blank" rel="noreferrer">
+        <RoundedLink target="_blank" rel="noreferrer" href={url}>
           {linkText}
         </RoundedLink>
       </li>
