@@ -79,3 +79,7 @@
 .dots-map__project-card__project-urls {
   margin-bottom: 19px;
 }
+
+.dots-map__project-card__project-urls li:not(:first-child) {
+  margin-top: 10px;
+}
