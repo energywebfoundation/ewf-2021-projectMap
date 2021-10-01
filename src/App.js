@@ -2,7 +2,7 @@ import { useState } from "react";
 import DotsMap from "./components/DotsMap";
 import CountryCard from "./components/CountryCard";
 import getMapData from "./data/map";
-import { getCountries } from "./services/datasetUtils";
+import { isCountryInProjects } from "./services/datasetUtils";
 import ProjectCard from "./components/ProjectCard";
 import Filters from "./components/Filters";
 import OrganizationCard from "./components/OrganizationCard";
@@ -11,7 +11,6 @@ import "./App.css";
 
 function App() {
   const [map] = useState(prepare(getMapData()));
-  const highlightCountries = getCountries();
   const [selectedCountry, selectCountry] = useState(null);
   const [selectedProject, selectProject] = useState(null);
   const [selectedOrganization, selectOrganization] = useState(null);
@@ -69,9 +68,9 @@ function App() {
       <div className="dots-map__map-container">
         <DotsMap
           map={map}
-          highlightCountries={highlightCountries}
           onCountrySelected={showJustCountryCard}
           selectedCountries={selectedCountry ? [selectedCountry] : []}
+          selectedColor={window.dotsMapConfig.selectedColor || "#DB4437"}
         />
         {(showProjectCard || showCountryCard || showOrganizationCard) && (
           <Backdrop onDismiss={closeCard}>
@@ -119,7 +118,7 @@ function prepare(map) {
   return map.map((country) => ({
     ...country,
     color:
-      country.color || isHighlighted(country.id)
+      country.color || isCountryInProjects(country.id)
         ? getRandomColor()
         : window.dotsMapConfig.dotColor || "#C8C8CA",
     dots: country.dots.map((dot) => ({
@@ -127,10 +126,6 @@ function prepare(map) {
       radius: window.dotsMapConfig.dotRadius || 1.2,
     })),
   }));
-}
-
-function isHighlighted(country) {
-  return getCountries().includes(country);
 }
 
 function getRandomColor() {

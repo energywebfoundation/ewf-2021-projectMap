@@ -1,0 +1,13 @@
+.dots-map__canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.dots-map__canvas__dot {
+  pointer-events: none;
+}
+
+.dots-map__canvas__clickable-overlay--clickable {
+  cursor: pointer;
+  pointer-events: all;
+}

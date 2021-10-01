@@ -57,3 +57,7 @@ export function getProjectsByOrganization(org) {
 function sortProjects(a, b) {
   return a.projectName.localeCompare(b.projectName);
 }
+
+export function isCountryInProjects(country) {
+  return getProjectsByCountry(country).length > 0;
+}
