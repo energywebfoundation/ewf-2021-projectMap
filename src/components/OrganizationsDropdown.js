@@ -5,6 +5,7 @@ import {
   getOrganizations,
   getProjectsByOrganization,
 } from "../services/datasetUtils";
+import { getOrganizationProfile } from "../services/organizationProfilesUtils";
 import "./OrganizationsDropdown.css";
 import { RoundedButton } from "./RoundedButton";
 
@@ -25,15 +26,23 @@ const OrganizationsDropdown = ({ onClick, anchor }) => (
 
 export default OrganizationsDropdown;
 
-const Organization = ({ organization, onClick }) => (
-  <article className="dots-map__organizations-dropdown__organization">
-    <OrganizationName organizationName={organization} />
-    <ViewProjects
-      onClick={onClick}
-      projectsCount={getProjectsByOrganization(organization).length}
-    />
-  </article>
-);
+const Organization = ({ organization, onClick }) => {
+  const organizationProfile = getOrganizationProfile(organization) || {};
+  return (
+    <article className="dots-map__organizations-dropdown__organization">
+      <OrganizationName
+        organizationName={organizationProfile.name || organization}
+      />
+      <OrganizationDescription
+        organizationDescription={organizationProfile.description}
+      />
+      <ViewProjects
+        onClick={onClick}
+        projectsCount={getProjectsByOrganization(organization).length}
+      />
+    </article>
+  );
+};
 
 const OrganizationName = ({ organizationName }) => (
   <span className="dots-map__organizations-dropdown__organization-name">
@@ -48,4 +57,10 @@ const ViewProjects = ({ onClick, projectsCount }) => (
   >
     View projects ({projectsCount})
   </RoundedButton>
+);
+
+const OrganizationDescription = ({ organizationDescription = "" }) => (
+  <p className="dots-map__organizations-dropdown__organization-description">
+    {organizationDescription}
+  </p>
 );

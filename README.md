@@ -38,7 +38,6 @@ window.dotsMapConfig = {
         },
         ...
     ],
-
     // An array of countries, each with a list of dots. The position of the dots
     // is in the range 0-1, and the ids of the countries must match the ones used
     // in the dataset for project locations (case insensitive).
@@ -54,6 +53,16 @@ window.dotsMapConfig = {
                 },
                 ...
             ]
+        },
+        ...
+    ],
+    // Extended information on organizations that is displayed on the clients dropdown
+    organizationProfiles: [
+        {
+            acronym: "ACME",
+            name: "Acme INC.",
+            logo: "logo.png",
+            description: "Lorem ipsum dolor sit amet",
         },
         ...
     ]
