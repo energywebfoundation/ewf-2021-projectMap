@@ -4,12 +4,10 @@ import { getCountries, getProjectsByCountry } from "../services/datasetUtils";
 import "./CountriesDropdown.css";
 import { List, ListItem } from "./List";
 
-const countries = getCountries();
-
 const CountriesDropdown = ({ anchor, onClick }) => (
   <Dropdown className="dots-map__countries-dropdown" anchor={anchor}>
     <List>
-      {countries.map((country) => (
+      {getCountries().map((country) => (
         <ListItem key={country} onClick={() => onClick(country)}>
           <Country country={country} />
         </ListItem>

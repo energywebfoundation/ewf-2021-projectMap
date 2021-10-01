@@ -2,12 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import ProjectsDropdown from "./ProjectsDropdown";
 import CountriesDropdown from "./CountriesDropdown";
 import OrganizationsDropdown from "./OrganizationsDropdown";
-import { dataset } from "../data/dataset";
-import { getCountries, getOrganizations } from "../services/datasetUtils";
+import {
+  getProjects,
+  getCountries,
+  getOrganizations,
+} from "../services/datasetUtils";
 import "./Filters.css";
-
-const countries = getCountries();
-const organizations = getOrganizations();
 
 const Filters = ({ onProjectClick, onCountryClick, onOrganizationClick }) => {
   const [dropdown, setDropdown] = useState(null);
@@ -62,19 +62,19 @@ export default Filters;
 
 const ProjectsFilter = ({ onClick }) => (
   <button onClick={onClick}>
-    Projects<Badge>{dataset.length}</Badge>
+    Projects<Badge>{getProjects().length}</Badge>
   </button>
 );
 
 const CountriesFilter = ({ onClick }) => (
   <button onClick={onClick}>
-    Countries<Badge>{countries.length}</Badge>
+    Countries<Badge>{getCountries().length}</Badge>
   </button>
 );
 
 const OrganizationsFilter = ({ onClick }) => (
   <button onClick={onClick}>
-    Clients<Badge>{organizations.length}</Badge>
+    Clients<Badge>{getOrganizations().length}</Badge>
   </button>
 );
 

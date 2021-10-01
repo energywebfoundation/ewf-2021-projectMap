@@ -1,12 +1,12 @@
-import { dataset } from "../data/dataset";
+import getDataset from "../data/dataset";
 
 export function getProjects() {
-  return dataset.sort(sortProjects);
+  return getDataset().sort(sortProjects);
 }
 
 export function getCountries() {
   return unique(
-    dataset
+    getDataset()
       .flatMap(({ location }) => location.split(","))
       .map((country) => country.trim())
       .map((country) => country.toLowerCase())
@@ -16,7 +16,7 @@ export function getCountries() {
 
 export function getOrganizations() {
   return unique(
-    dataset
+    getDataset()
       .flatMap(({ organization }) => organization.split(","))
       .map((country) => country.trim())
       .map((country) => country.toLowerCase())
@@ -37,7 +37,7 @@ export function getProjectCountries(project) {
 }
 
 export function getProjectsByCountry(country) {
-  return dataset
+  return getDataset()
     .filter(
       ({ location }) =>
         location.toLowerCase().indexOf(country.toLowerCase()) >= 0
@@ -46,7 +46,7 @@ export function getProjectsByCountry(country) {
 }
 
 export function getProjectsByOrganization(org) {
-  return dataset
+  return getDataset()
     .filter(
       ({ organization }) =>
         organization.toLowerCase().indexOf(org.toLowerCase()) >= 0

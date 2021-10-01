@@ -5,12 +5,10 @@ import { List, ListItem } from "./List";
 import { getProjects } from "../services/datasetUtils";
 import "./ProjectsDropdown.css";
 
-const projects = getProjects();
-
 const ProjectsDropdown = ({ onClick, anchor }) => (
   <Dropdown className="dots-map__projects-dropdown" anchor={anchor}>
     <List>
-      {projects.map((project, index) => (
+      {getProjects().map((project, index) => (
         <ListItem key={index} onClick={() => onClick(project)}>
           <ProjectEntry project={project} />
           <GoToButton />

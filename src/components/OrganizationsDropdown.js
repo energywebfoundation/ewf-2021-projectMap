@@ -8,12 +8,10 @@ import {
 import "./OrganizationsDropdown.css";
 import { RoundedButton } from "./RoundedButton";
 
-const organizations = getOrganizations();
-
 const OrganizationsDropdown = ({ onClick, anchor }) => (
   <Dropdown className="dots-map__organizations-dropdown" anchor={anchor}>
     <List>
-      {organizations.map((organization) => (
+      {getOrganizations().map((organization) => (
         <ListItem key={organization}>
           <Organization
             organization={organization}
