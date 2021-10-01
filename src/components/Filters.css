@@ -1,5 +1,4 @@
 .dots-map__filters {
-  color: var(--main-color);
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -7,12 +6,23 @@
   column-gap: 50px;
   font-size: 18px;
   font-weight: bold;
+  color: #bdbdbd;
+}
+
+.dots-map__filters li:hover {
+  color: var(--main-color);
 }
 
 .dots-map__filters__badge {
   font-size: 10px;
   display: inline-block;
   margin-left: 5px;
+  color: #454545;
+  font-weight: bold;
+}
+
+.dots-map__filters li:hover .dots-map__filters__badge {
+  color: var(--main-color);
 }
 
 .dots-map__filters__dropdown-container {
