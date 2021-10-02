@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import SearchBar from "./SearchBar";
 import "./Dropdown.css";
 
-const Dropdown = ({ children, className = "", anchor }) => {
+const Dropdown = ({ children, className = "", anchor, onQuery }) => {
   const [left, setLeft] = useState(undefined);
   const dropdownRef = useRef();
   useEffect(() => {
@@ -24,6 +25,9 @@ const Dropdown = ({ children, className = "", anchor }) => {
         left: `${left}px`,
       }}
     >
+      <header>
+        <SearchBar onQuery={onQuery} />
+      </header>
       <div className="dots-map__dropdown-content">{children}</div>
     </div>
   );

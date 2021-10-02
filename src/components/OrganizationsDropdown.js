@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Dropdown from "./Dropdown";
 import { List, ListItem } from "./List";
 import {
@@ -13,20 +13,30 @@ import "./OrganizationsDropdown.css";
 import { RoundedButton } from "./RoundedButton";
 import Icon from "./Icon";
 
-const OrganizationsDropdown = ({ onClick, anchor }) => (
-  <Dropdown className="dots-map__organizations-dropdown" anchor={anchor}>
-    <List>
-      {getOrganizations().map((organization) => (
-        <ListItem key={organization}>
-          <Organization
-            organization={organization}
-            onClick={() => onClick(organization)}
-          />
-        </ListItem>
-      ))}
-    </List>
-  </Dropdown>
-);
+const OrganizationsDropdown = ({ onClick, anchor }) => {
+  const [organizations, setOrganizations] = useState(getOrganizations());
+  const applyQuery = (query) =>
+    setOrganizations(getOrganizations().filter(matchesQuery(query)));
+  return (
+    <Dropdown
+      className="dots-map__organizations-dropdown"
+      anchor={anchor}
+      isSearchable={true}
+      onQuery={applyQuery}
+    >
+      <List>
+        {organizations.map((organization) => (
+          <ListItem key={organization}>
+            <Organization
+              organization={organization}
+              onClick={() => onClick(organization)}
+            />
+          </ListItem>
+        ))}
+      </List>
+    </Dropdown>
+  );
+};
 
 export default OrganizationsDropdown;
 
@@ -91,3 +101,11 @@ const OrganizationCountries = ({ countries: [country] }) => {
     </div>
   );
 };
+
+function matchesQuery(query) {
+  return (project) =>
+    JSON.stringify(project)
+      .toLowerCase()
+      .replace("_", "")
+      .indexOf(query.toLowerCase()) >= 0;
+}

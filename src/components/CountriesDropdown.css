@@ -3,6 +3,10 @@
   height: 359px;
 }
 
+.dots-map__countries-dropdown .dots-map__dropdown-content {
+  height: 280px;
+}
+
 .dots-map__countries-dropdown li {
   border-top: none;
   border-bottom: none;

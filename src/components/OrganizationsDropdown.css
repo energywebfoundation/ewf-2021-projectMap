@@ -1,3 +1,7 @@
+.dots-map__organizations-dropdown .dots-map__dropdown-content {
+  height: 475px;
+}
+
 .dots-map__organizations-dropdown__organization {
   cursor: default;
 }

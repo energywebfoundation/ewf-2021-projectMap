@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Dropdown from "./Dropdown";
 import GoToButton from "./GoToButton";
 import Icon from "./Icon";
@@ -6,18 +6,27 @@ import { List, ListItem } from "./List";
 import { getProjects } from "../services/datasetUtils";
 import "./ProjectsDropdown.css";
 
-const ProjectsDropdown = ({ onClick, anchor }) => (
-  <Dropdown className="dots-map__projects-dropdown" anchor={anchor}>
-    <List>
-      {getProjects().map((project, index) => (
-        <ListItem key={index} onClick={() => onClick(project)}>
-          <ProjectEntry project={project} />
-          <GoToButton />
-        </ListItem>
-      ))}
-    </List>
-  </Dropdown>
-);
+const ProjectsDropdown = ({ onClick, anchor }) => {
+  const [projects, setProjects] = useState(getProjects());
+  const applyQuery = (query) =>
+    setProjects(getProjects().filter(matchesQuery(query)));
+  return (
+    <Dropdown
+      className="dots-map__projects-dropdown"
+      anchor={anchor}
+      onQuery={applyQuery}
+    >
+      <List>
+        {projects.map((project, index) => (
+          <ListItem key={index} onClick={() => onClick(project)}>
+            <ProjectEntry project={project} />
+            <GoToButton />
+          </ListItem>
+        ))}
+      </List>
+    </Dropdown>
+  );
+};
 
 export default ProjectsDropdown;
 
@@ -57,3 +66,11 @@ const Country = ({ country }) => (
     <span className="">{country}</span>
   </div>
 );
+
+function matchesQuery(query) {
+  return (project) =>
+    JSON.stringify(project)
+      .toLowerCase()
+      .replace("_", "")
+      .indexOf(query.toLowerCase()) >= 0;
+}
