@@ -7,3 +7,11 @@ export function getOrganizationProfile(organization) {
       organization.toLowerCase().trim()
   );
 }
+
+export function getOrganizationCountries(organization) {
+  const { country } = getOrganizationProfile(organization) || { country: "" };
+  return country
+    .split(",")
+    .map((country) => country.trim())
+    .map((country) => country.toLowerCase());
+}

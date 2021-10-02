@@ -34,6 +34,11 @@
   color: var(--text-secondary-color);
   display: block;
   margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  margin-left: -5px;
 }
 
 .dots-map__card__organization {

@@ -26,8 +26,17 @@
 
 .dots-map__project-card__country {
   font-size: 14px;
-  opacity: 0.5;
   letter-spacing: 0.02em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+}
+
+.dots-map__project-card__country span {
+  opacity: 0.5;
+  display: block;
+  margin-left: 10px;
 }
 
 .dots-map__project-card__project-organization {

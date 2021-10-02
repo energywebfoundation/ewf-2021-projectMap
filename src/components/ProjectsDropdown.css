@@ -16,4 +16,16 @@
 .dots-map__projects-dropdown__country {
   text-transform: uppercase;
   color: var(--text-secondary-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  line-height: 23px;
+}
+
+.dots-map__projects-dropdown__country > :first-child {
+  margin-right: 5px;
+  margin-left: -3px;
+  padding: 5px 5px 5px 0;
+  height: auto;
 }

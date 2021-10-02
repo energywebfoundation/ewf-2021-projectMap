@@ -1,4 +1,5 @@
 import React from "react";
+import Icon from "./Icon";
 import "./Card.css";
 
 const Card = ({ country, organization, title, body, footer }) => (
@@ -17,7 +18,12 @@ export default Card;
 
 const Country = ({ country }) => {
   const countryName = useCountryName(country);
-  return <span className="dots-map__card__country">{countryName}</span>;
+  return (
+    <div className="dots-map__card__country">
+      <Icon name={`${country}.png`} alt={countryName} noStyle={true} />
+      <span>{countryName}</span>
+    </div>
+  );
 };
 
 const Organization = ({ organization }) => (

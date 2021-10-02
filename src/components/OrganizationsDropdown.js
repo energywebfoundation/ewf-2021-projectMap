@@ -5,9 +5,13 @@ import {
   getOrganizations,
   getProjectsByOrganization,
 } from "../services/datasetUtils";
-import { getOrganizationProfile } from "../services/organizationProfilesUtils";
+import {
+  getOrganizationProfile,
+  getOrganizationCountries,
+} from "../services/organizationProfilesUtils";
 import "./OrganizationsDropdown.css";
 import { RoundedButton } from "./RoundedButton";
+import Icon from "./Icon";
 
 const OrganizationsDropdown = ({ onClick, anchor }) => (
   <Dropdown className="dots-map__organizations-dropdown" anchor={anchor}>
@@ -30,9 +34,20 @@ const Organization = ({ organization, onClick }) => {
   const organizationProfile = getOrganizationProfile(organization) || {};
   return (
     <article className="dots-map__organizations-dropdown__organization">
-      <OrganizationName
-        organizationName={organizationProfile.name || organization}
-      />
+      <header>
+        <div>
+          <Icon
+            name={organizationProfile.logo}
+            alt={organizationProfile.name}
+          />
+        </div>
+        <OrganizationName
+          organizationName={organizationProfile.name || organization}
+        />
+        <OrganizationCountries
+          countries={getOrganizationCountries(organization)}
+        />
+      </header>
       <OrganizationDescription
         organizationDescription={organizationProfile.description}
       />
@@ -64,3 +79,15 @@ const OrganizationDescription = ({ organizationDescription = "" }) => (
     {organizationDescription}
   </p>
 );
+
+const OrganizationCountries = ({ countries: [country] }) => {
+  if (!country) {
+    return <React.Fragment />;
+  }
+  return (
+    <div className="dots-map__organizations-dropdown__organization-countries">
+      <Icon name={`${country}.png`} alt={country} noStyle={true} />
+      <span>{country}</span>
+    </div>
+  );
+};

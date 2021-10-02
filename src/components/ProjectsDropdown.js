@@ -1,6 +1,7 @@
 import React from "react";
 import Dropdown from "./Dropdown";
 import GoToButton from "./GoToButton";
+import Icon from "./Icon";
 import { List, ListItem } from "./List";
 import { getProjects } from "../services/datasetUtils";
 import "./ProjectsDropdown.css";
@@ -51,5 +52,8 @@ const ProjectLocations = ({ projectLocations }) => (
 );
 
 const Country = ({ country }) => (
-  <span className="dots-map__projects-dropdown__country">{country}</span>
+  <div className="dots-map__projects-dropdown__country">
+    <Icon name={`${country}.png`} alt={country} noStyle={true} />
+    <span className="">{country}</span>
+  </div>
 );

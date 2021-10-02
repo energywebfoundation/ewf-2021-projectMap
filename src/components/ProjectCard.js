@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./Card";
+import Icon from "./Icon";
 import { RoundedLink } from "./RoundedButton";
 import "./ProjectCard.css";
 
@@ -57,6 +58,7 @@ const ProjectLocation = ({ projectLocation }) => (
 
 const Country = ({ country }) => (
   <div className="dots-map__project-card__country">
+    <Icon name={`${country}.png`} alt={country} />
     <span>{country}</span>
   </div>
 );

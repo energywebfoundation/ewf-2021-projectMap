@@ -3,6 +3,7 @@ import Dropdown from "./Dropdown";
 import { getCountries, getProjectsByCountry } from "../services/datasetUtils";
 import "./CountriesDropdown.css";
 import { List, ListItem } from "./List";
+import Icon from "./Icon";
 
 const CountriesDropdown = ({ anchor, onClick }) => (
   <Dropdown className="dots-map__countries-dropdown" anchor={anchor}>
@@ -20,6 +21,7 @@ export default CountriesDropdown;
 
 const Country = ({ country }) => (
   <button className="dots-map__countries-dropdown__country">
-    {`${country} (${getProjectsByCountry(country).length})`}
+    <Icon name={`${country}.png`} alt={country} />
+    <span>{`${country} (${getProjectsByCountry(country).length})`}</span>
   </button>
 );
