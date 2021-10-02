@@ -2,7 +2,7 @@ import React from "react";
 import "./Card.css";
 
 const Card = ({ country, organization, title, body, footer }) => (
-  <article className="dots-map__card">
+  <article className="dots-map__card dots-map--slideIn">
     <header className="dots-map__card__header">
       {country && <Country country={country} />}
       {organization && <Organization organization={organization} />}

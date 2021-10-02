@@ -43,3 +43,20 @@ body::-webkit-scrollbar-thumb {
   background-color: #9963f7;
   border: 1px solid #9963f7;
 }
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(0, -50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+.dots-map--slideIn {
+  animation-duration: 0.2s;
+  animation-name: slideIn;
+}

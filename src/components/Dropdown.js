@@ -17,7 +17,7 @@ const Dropdown = ({ children, className = "", anchor }) => {
   }, [anchor, dropdownRef]);
   return (
     <div
-      className={`dots-map__dropdown ${className}`}
+      className={`dots-map__dropdown dots-map--slideIn ${className}`}
       ref={dropdownRef}
       style={{
         visibility: left != null ? "visible" : "hidden",
