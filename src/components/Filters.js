@@ -33,21 +33,21 @@ const Filters = ({
       setDropdown(false);
     });
   }, []);
-  const openDropdown = (dropdown) => () => {
+  const toggleDropdown = (clickedDropdown) => () => {
     onDropdownClick();
-    setDropdown(dropdown);
+    setDropdown(clickedDropdown === dropdown ? null : clickedDropdown);
   };
   return (
     <>
       <ul className="dots-map__filters">
         <li ref={projectsRef}>
-          <ProjectsFilter onClick={openDropdown("projects")} />
+          <ProjectsFilter onClick={toggleDropdown("projects")} />
         </li>
         <li ref={countriesRef}>
-          <CountriesFilter onClick={openDropdown("countries")} />
+          <CountriesFilter onClick={toggleDropdown("countries")} />
         </li>
         <li ref={organizationsRef}>
-          <OrganizationsFilter onClick={openDropdown("organizations")} />
+          <OrganizationsFilter onClick={toggleDropdown("organizations")} />
         </li>
       </ul>
       {dropdown && (
