@@ -2,12 +2,13 @@ import React from "react";
 import Icon from "./Icon";
 import "./Card.css";
 
-const Card = ({ country, organization, title, body, footer }) => (
+const Card = ({ country, organization, title, body, footer, onClose }) => (
   <article className="dots-map__card dots-map--slideIn">
     <header className="dots-map__card__header">
       {country && <Country country={country} />}
       {organization && <Organization organization={organization} />}
       <h2>{title}</h2>
+      <CloseCard onClose={onClose} />
     </header>
     <div className="dots-map__card__content">{body}</div>
     {footer && <div className="dots-map__card__footer">{footer}</div>}
@@ -28,6 +29,12 @@ const Country = ({ country }) => {
 
 const Organization = ({ organization }) => (
   <span className="dots-map__card__organization">{organization}</span>
+);
+
+const CloseCard = ({ onClose }) => (
+  <button className="dots-map__card__close-button" onClick={onClose}>
+    <Icon name="../close.png" alt="close" />
+  </button>
 );
 
 function useCountryName(country) {

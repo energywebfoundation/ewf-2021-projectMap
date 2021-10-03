@@ -34,11 +34,12 @@ function App() {
           : []),
     });
   };
+  const closeEverything = () => updateState({});
   return (
     <div className="dots-map">
       <div className="dots-map__filters-container">
         <Filters
-          onDropdownClick={() => updateState({})}
+          onDropdownClick={closeEverything}
           onCountryClick={(country) =>
             updateState({ cardType: "country", countries: [country] })
           }
@@ -62,7 +63,7 @@ function App() {
         {state.cardType && (
           <Backdrop onDismiss={() => setState({})}>
             {state.cardType === "project" && (
-              <ProjectCard project={state.project} />
+              <ProjectCard project={state.project} onClose={closeEverything} />
             )}
             {state.cardType === "country" && (
               <CountryCard
@@ -70,6 +71,7 @@ function App() {
                 onProjectClick={(project) =>
                   setState({ cardType: "project", project })
                 }
+                onClose={closeEverything}
               />
             )}
             {state.cardType === "organization" && (
@@ -78,6 +80,7 @@ function App() {
                 onProjectClick={(project) =>
                   setState({ cardType: "project", project })
                 }
+                onClose={closeEverything}
               />
             )}
           </Backdrop>

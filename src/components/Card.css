@@ -10,8 +10,9 @@
 }
 
 .dots-map__card__header {
+  position: relative;
   border-radius: 8px 8px 0 0;
-  padding: 15px 22px 17px 22px;
+  padding: 15px 52px 17px 22px;
   border-bottom: 1px solid var(--border-color);
   text-transform: capitalize;
 }
@@ -54,4 +55,10 @@
   padding: 8px;
   display: flex;
   flex-direction: column;
+}
+
+.dots-map__card__close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }

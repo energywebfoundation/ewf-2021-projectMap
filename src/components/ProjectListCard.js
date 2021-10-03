@@ -9,6 +9,7 @@ const ProjectListCard = ({
   organization,
   projects,
   onProjectClick,
+  onClose,
 }) => (
   <Card
     country={country}
@@ -20,6 +21,7 @@ const ProjectListCard = ({
         onProjectClick={onProjectClick}
       />
     }
+    onClose={onClose}
   />
 );
 

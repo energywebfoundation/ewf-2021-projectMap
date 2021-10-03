@@ -3,7 +3,7 @@ import { getProjectsByOrganization } from "../services/datasetUtils";
 import ProjectCard from "./ProjectCard";
 import ProjectListCard from "./ProjectListCard";
 
-const OrganizationCard = ({ organization, onProjectClick }) => {
+const OrganizationCard = ({ organization, onProjectClick, onClose }) => {
   const projects = useMemo(
     () => getProjectsByOrganization(organization),
     [organization]
@@ -12,12 +12,13 @@ const OrganizationCard = ({ organization, onProjectClick }) => {
     return <React.Fragment />;
   }
   return projects.length === 1 ? (
-    <ProjectCard project={projects[0]} />
+    <ProjectCard project={projects[0]} onClose={onClose} />
   ) : (
     <ProjectListCard
       organization={organization}
       projects={projects}
       onProjectClick={onProjectClick}
+      onClose={onClose}
     />
   );
 };
