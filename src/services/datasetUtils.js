@@ -69,3 +69,7 @@ export function getOrganizationCountries(organization) {
     .map((location) => location.trim())
     .map((location) => location.toLowerCase());
 }
+
+export function getProjectByName(name) {
+  return getProjects().find(({ projectName }) => projectName === name);
+}

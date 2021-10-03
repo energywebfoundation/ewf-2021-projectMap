@@ -2,6 +2,65 @@
 
 An interactive map made out of dots where we plot project information of the [EWF](https://www.energyweb.org/).
 
+## Build
+
+This application has been created with [create-react-app](https://create-react-app.dev/). To build it, simply run:
+
+```bash
+npm run build
+```
+
+The resulting JS + HTML + CSS will be generated in the `build` folder.
+
+## API
+
+This app exposes a simple API via `window.dotsMapApi`.
+
+### Select countries
+
+Highlights the countries in the map. Optionally, opens the card for the first one.
+
+```js
+/**
+ * @param {Array<string>} countries - list of country names
+ * @param {boolean} openCard - set to true to open the card for the first country in the array
+ */
+window.dotsMapApi.selectCountries(countries, openCard);
+
+// Example
+window.dotsMapApi.selectCountries(["spain", "portugal"], true);
+```
+
+### Select organization
+
+Highlights the countries of the organization in the map. Optionally, opens the card for the organization. If the organization has multiple projects, a list of those projects will be open in the card. If the organization has a single project, a card for the project is open.
+
+```js
+/**
+ * @param {string} organization - organization name
+ * @param {boolean} openCard - set to true to open the card for the organization
+ */
+window.dotsMapApi.selectOrganization(organization, openCard);
+
+// Example
+window.dotsMapApi.selectOrganization("Mercados Eléctricos", false);
+```
+
+### Select project
+
+Highlights the countries of the project in the map. Optionally, opens the card for the project.
+
+```js
+/**
+ * @param {string} project - project name
+ * @param {boolean} openCard - set to true to open the card for the project
+ */
+window.dotsMapApi.selectProject(organization, openCard);
+
+// Example
+window.dotsMapApi.selectProject("Energy Matching", true);
+```
+
 ## Configuration
 
 The app is externally configurable via a `dotsMapConfig` object on `windows` that must exist before the application starts.

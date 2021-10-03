@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DotsMap from "./components/DotsMap";
 import CountryCard from "./components/CountryCard";
 import getMapData from "./data/map";
 import {
   getOrganizationCountries,
+  getProjectByName,
   getProjectCountries,
   isCountryInProjects,
 } from "./services/datasetUtils";
@@ -27,16 +28,23 @@ function App() {
       ...initialState,
       ...delta,
     };
+    const organizationCountries = partialNewState.organization
+      ? getOrganizationCountries(partialNewState.organization)
+      : null;
+    const projectCountries = partialNewState.project
+      ? getProjectCountries(partialNewState.project)
+      : null;
+    const countries =
+      partialNewState.countries || organizationCountries || projectCountries;
     setState({
       ...partialNewState,
-      countries:
-        partialNewState.countries ||
-        (partialNewState.organization
-          ? getOrganizationCountries(partialNewState.organization)
-          : []),
+      countries,
     });
   };
   const closeEverything = () => updateState({});
+  useEffect(() => {
+    exposeApi(updateState);
+  }, []);
   return (
     <div className="dots-map">
       <div className="dots-map__filters-container">
@@ -174,4 +182,18 @@ function getOrganizationCardClassName(organization) {
 
 function getCardHemisphereClassName(hemisphere) {
   return `dots-map__card--${hemisphere}`;
+}
+
+function exposeApi(updateState) {
+  window.dotsMapApi = {
+    selectCountries: (countries, openCard) =>
+      updateState({ countries, cardType: openCard ? "country" : null }),
+    selectOrganization: (organization, openCard) =>
+      updateState({ organization, cardType: openCard ? "organization" : null }),
+    selectProject: (project, openCard) =>
+      updateState({
+        project: getProjectByName(project),
+        cardType: openCard ? "project" : null,
+      }),
+  };
 }
