@@ -1,8 +1,13 @@
 .dots-map {
-  padding: 25px;
-  max-width: 800px;
+  padding: 50px;
   position: relative;
   margin: auto;
+}
+
+@media (max-width: 1000px) {
+  .dots-map {
+    padding: 25px;
+  }
 }
 
 .dots-map__filters-container {

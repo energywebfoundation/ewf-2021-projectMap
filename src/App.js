@@ -116,7 +116,7 @@ function prepare(map) {
         : window.dotsMapConfig.dotColor || "#C8C8CA",
     dots: country.dots.map((dot) => ({
       ...dot,
-      radius: window.dotsMapConfig.dotRadius || 1.2,
+      radius: window.dotsMapConfig.dotRadius || getDotRadius(),
     })),
   }));
 }
@@ -130,4 +130,17 @@ function getRandomColor() {
   ];
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
+}
+
+function getDotRadius() {
+  const isSmallScreen = () => document.documentElement.clientWidth < 600;
+  const isMediumScreen = () => document.documentElement.clientWidth < 1000;
+
+  if (isSmallScreen()) {
+    return 0.8;
+  } else if (isMediumScreen()) {
+    return 1.2;
+  } else {
+    return 3;
+  }
 }
