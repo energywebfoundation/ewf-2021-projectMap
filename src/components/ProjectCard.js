@@ -4,8 +4,9 @@ import Icon from "./Icon";
 import { RoundedLink } from "./RoundedButton";
 import "./ProjectCard.css";
 
-const ProjectCard = ({ project, onClose }) => (
+const ProjectCard = ({ project, onClose, className }) => (
   <Card
+    className={className}
     title={project.projectName}
     body={<ProjectCardContent project={project} />}
     footer={<ProjectCardFooter project={project} />}

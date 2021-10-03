@@ -29,3 +29,13 @@
   width: 100%;
   height: 100%;
 }
+
+.dots-map__card--west {
+  margin: auto;
+  margin-right: 0;
+}
+
+.dots-map__card--east {
+  margin: auto;
+  margin-left: 0;
+}

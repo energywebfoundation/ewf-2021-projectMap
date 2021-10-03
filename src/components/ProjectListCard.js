@@ -10,8 +10,10 @@ const ProjectListCard = ({
   projects,
   onProjectClick,
   onClose,
+  className,
 }) => (
   <Card
+    className={className}
     country={country}
     organization={organization}
     title={`${projects.length} Projects`}

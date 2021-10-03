@@ -4,12 +4,14 @@ import CountryCard from "./components/CountryCard";
 import getMapData from "./data/map";
 import {
   getOrganizationCountries,
+  getProjectCountries,
   isCountryInProjects,
 } from "./services/datasetUtils";
 import ProjectCard from "./components/ProjectCard";
 import Filters from "./components/Filters";
 import OrganizationCard from "./components/OrganizationCard";
 import "./App.css";
+import { getHemisphere } from "./services/mapUtils";
 
 const initialState = {
   cardType: null,
@@ -63,7 +65,11 @@ function App() {
         {state.cardType && (
           <Backdrop onDismiss={() => setState({})}>
             {state.cardType === "project" && (
-              <ProjectCard project={state.project} onClose={closeEverything} />
+              <ProjectCard
+                project={state.project}
+                onClose={closeEverything}
+                className={getProjectCardClassName(state.project)}
+              />
             )}
             {state.cardType === "country" && (
               <CountryCard
@@ -72,6 +78,7 @@ function App() {
                   setState({ cardType: "project", project })
                 }
                 onClose={closeEverything}
+                className={getCountryCardClassName(state.countries[0])}
               />
             )}
             {state.cardType === "organization" && (
@@ -81,6 +88,7 @@ function App() {
                   setState({ cardType: "project", project })
                 }
                 onClose={closeEverything}
+                className={getOrganizationCardClassName(state.organization)}
               />
             )}
           </Backdrop>
@@ -146,4 +154,24 @@ function getDotRadius() {
   } else {
     return 3;
   }
+}
+
+function getProjectCardClassName(project) {
+  return getCardHemisphereClassName(
+    getHemisphere(getProjectCountries(project)[0])
+  );
+}
+
+function getCountryCardClassName(country) {
+  return getCardHemisphereClassName(getHemisphere(country));
+}
+
+function getOrganizationCardClassName(organization) {
+  return getCardHemisphereClassName(
+    getHemisphere(getOrganizationCountries(organization)[0])
+  );
+}
+
+function getCardHemisphereClassName(hemisphere) {
+  return `dots-map__card--${hemisphere}`;
 }

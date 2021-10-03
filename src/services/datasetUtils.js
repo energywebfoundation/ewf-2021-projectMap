@@ -63,7 +63,7 @@ export function isCountryInProjects(country) {
 }
 
 export function getOrganizationCountries(organization) {
-  getProjectsByOrganization(organization)
+  return getProjectsByOrganization(organization)
     .map((project) => project.location)
     .flatMap((location) => location.split(","))
     .map((location) => location.trim())

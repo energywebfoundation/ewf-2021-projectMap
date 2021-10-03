@@ -43,7 +43,7 @@ const Country = ({ country, onCountrySelected, isSelected, selectedColor }) => (
         key={dot.id}
         dot={{
           ...dot,
-          color: isSelected ? selectedColor : dot.color,
+          color: isSelected ? selectedColor : dot.color || country.color,
         }}
         country={country}
         onCountrySelected={onCountrySelected}
@@ -80,7 +80,7 @@ const Dot = ({ dot, country, onCountrySelected }) => {
       />
       <circle
         className="dots-map__canvas__dot"
-        fill={country.color}
+        fill={dot.color}
         r={dot.radius}
         cx={scale(dot.x, svgElement.clientWidth, dot.radius * 3)}
         cy={scale(dot.y, svgElement.clientHeight, dot.radius * 3)}
