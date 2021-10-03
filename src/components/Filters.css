@@ -9,7 +9,7 @@
   color: #bdbdbd;
 }
 
-.dots-map__filters li:hover {
+.dots-map__filter--highlighted {
   color: var(--main-color);
 }
 
@@ -21,7 +21,7 @@
   font-weight: bold;
 }
 
-.dots-map__filters li:hover .dots-map__filters__badge {
+.dots-map__filter--highlighted .dots-map__filters__badge {
   color: var(--main-color);
 }
 

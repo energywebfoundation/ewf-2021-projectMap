@@ -12,6 +12,8 @@
 
 .dots-map__filters-container {
   margin: 35px 0;
+  display: flex;
+  justify-content: center;
 }
 
 .dots-map__map-container {

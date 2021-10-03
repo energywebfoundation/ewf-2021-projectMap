@@ -21,6 +21,7 @@ const OrganizationsDropdown = ({ onClick, anchor }) => {
     <Dropdown
       className="dots-map__organizations-dropdown"
       anchor={anchor}
+      anchorTo="right"
       isSearchable={true}
       onQuery={applyQuery}
     >

@@ -40,14 +40,47 @@ const Filters = ({
   return (
     <>
       <ul className="dots-map__filters">
-        <li ref={projectsRef}>
-          <ProjectsFilter onClick={toggleDropdown("projects")} />
+        <li
+          ref={projectsRef}
+          className={
+            dropdown === "projects" ? "dots-map__filter--highlighted" : ""
+          }
+        >
+          <ProjectsFilter
+            onMouseEnter={() => {
+              onDropdownClick();
+              setDropdown("projects");
+            }}
+            onClick={toggleDropdown("projects")}
+          />
         </li>
-        <li ref={countriesRef}>
-          <CountriesFilter onClick={toggleDropdown("countries")} />
+        <li
+          ref={countriesRef}
+          className={
+            dropdown === "countries" ? "dots-map__filter--highlighted" : ""
+          }
+        >
+          <CountriesFilter
+            onMouseEnter={() => {
+              onDropdownClick();
+              setDropdown("countries");
+            }}
+            onClick={toggleDropdown("countries")}
+          />
         </li>
-        <li ref={organizationsRef}>
-          <OrganizationsFilter onClick={toggleDropdown("organizations")} />
+        <li
+          ref={organizationsRef}
+          className={
+            dropdown === "organizations" ? "dots-map__filter--highlighted" : ""
+          }
+        >
+          <OrganizationsFilter
+            onMouseEnter={() => {
+              onDropdownClick();
+              setDropdown("organizations");
+            }}
+            onClick={toggleDropdown("organizations")}
+          />
         </li>
       </ul>
       {dropdown && (
@@ -69,20 +102,20 @@ const Filters = ({
 
 export default Filters;
 
-const ProjectsFilter = ({ onClick }) => (
-  <button onClick={onClick}>
+const ProjectsFilter = ({ ...props }) => (
+  <button {...props}>
     Projects<Badge>{getProjects().length}</Badge>
   </button>
 );
 
-const CountriesFilter = ({ onClick }) => (
-  <button onClick={onClick}>
+const CountriesFilter = ({ ...props }) => (
+  <button {...props}>
     Countries<Badge>{getCountries().length}</Badge>
   </button>
 );
 
-const OrganizationsFilter = ({ onClick }) => (
-  <button onClick={onClick}>
+const OrganizationsFilter = ({ ...props }) => (
+  <button {...props}>
     Clients<Badge>{getOrganizations().length}</Badge>
   </button>
 );

@@ -34,3 +34,7 @@
   background: white;
   z-index: 1;
 }
+
+.dots-map__dropdown--right:before {
+  left: 300px;
+}
