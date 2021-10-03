@@ -15,10 +15,11 @@ const DotsMap = ({
   }, []);
   return (
     <svg
-      className="dots-map__canvas"
+      className={`dots-map__canvas ${
+        ref.current ? "dots-map__canvas--ready" : ""
+      }`}
       ref={ref}
       viewBox={viewBox}
-      style={{ visibility: ref.current ? "visible" : "hidden" }}
     >
       {map.map((country) => (
         <Country
