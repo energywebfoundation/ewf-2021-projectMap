@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import isMobile from "ismobilejs";
 import ProjectsDropdown from "./ProjectsDropdown";
 import CountriesDropdown from "./CountriesDropdown";
 import OrganizationsDropdown from "./OrganizationsDropdown";
@@ -33,10 +34,15 @@ const Filters = ({
       setDropdown(false);
     });
   }, []);
+  const openDropdown = (dropdown) => () => {
+    onDropdownClick();
+    setDropdown(dropdown);
+  };
   const toggleDropdown = (clickedDropdown) => () => {
     onDropdownClick();
     setDropdown(clickedDropdown === dropdown ? null : clickedDropdown);
   };
+  const noop = () => {};
   return (
     <>
       <ul className="dots-map__filters">
@@ -47,11 +53,12 @@ const Filters = ({
           }
         >
           <ProjectsFilter
-            onMouseEnter={() => {
-              onDropdownClick();
-              setDropdown("projects");
-            }}
-            onClick={toggleDropdown("projects")}
+            onMouseEnter={isMobile().any ? noop : openDropdown("projects")}
+            onClick={
+              isMobile().any
+                ? toggleDropdown("projects")
+                : () => setDropdown(null)
+            }
           />
         </li>
         <li
@@ -61,11 +68,12 @@ const Filters = ({
           }
         >
           <CountriesFilter
-            onMouseEnter={() => {
-              onDropdownClick();
-              setDropdown("countries");
-            }}
-            onClick={toggleDropdown("countries")}
+            onMouseEnter={isMobile().any ? noop : openDropdown("countries")}
+            onClick={
+              isMobile().any
+                ? toggleDropdown("countries")
+                : () => setDropdown(null)
+            }
           />
         </li>
         <li
@@ -75,11 +83,12 @@ const Filters = ({
           }
         >
           <OrganizationsFilter
-            onMouseEnter={() => {
-              onDropdownClick();
-              setDropdown("organizations");
-            }}
-            onClick={toggleDropdown("organizations")}
+            onMouseEnter={isMobile().any ? noop : openDropdown("organizations")}
+            onClick={
+              isMobile().any
+                ? toggleDropdown("organizations")
+                : () => setDropdown(null)
+            }
           />
         </li>
       </ul>
