@@ -141,12 +141,7 @@ function prepare(map) {
 }
 
 function getRandomColor() {
-  const colors = window.dotsMapConfig.randomColorSet || [
-    "#A566FF",
-    "#2EB67D",
-    "#F4B400",
-    "#27baff",
-  ];
+  const colors = window.dotsMapConfig.randomColorSet || ["#9963f7"];
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
 }
