@@ -5,6 +5,7 @@
   position: absolute;
   border-radius: 8px;
   padding: 10px;
+  cursor: pointer;
 }
 
 .dots-map__tooltip:before {
@@ -32,8 +33,10 @@
   margin-bottom: 5px;
 }
 
-.dots-map__tooltip img {
+.dots-map__tooltip .dots-map__icon {
   margin-right: 5px;
+  width: auto;
+  height: auto;
 }
 
 .dots-map__tooltip__country-name {

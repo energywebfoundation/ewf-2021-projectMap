@@ -30,7 +30,12 @@ const DotsMap = ({
         }`}
         ref={ref}
         viewBox={viewBox}
-        onMouseLeave={() => setTooltip(null)}
+        onMouseLeave={(event) => {
+          if (event.relatedTarget.classList.contains("dots-map__tooltip")) {
+            return;
+          }
+          setTooltip(null);
+        }}
       >
         {map.map((country) => (
           <Country
@@ -43,7 +48,15 @@ const DotsMap = ({
           />
         ))}
       </svg>
-      {tooltip && <Tooltip {...tooltip} />}
+      {tooltip && (
+        <Tooltip
+          {...tooltip}
+          onClick={() => {
+            onCountrySelected(tooltip.country);
+            setTooltip(null);
+          }}
+        />
+      )}
     </>
   );
 };
