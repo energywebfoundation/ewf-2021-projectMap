@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import DragIndicator from "./components/DragIndicator";
 import DotsMap from "./components/DotsMap";
 import CountryCard from "./components/CountryCard";
 import getMapData from "./data/map";
@@ -13,6 +14,7 @@ import Filters from "./components/Filters";
 import OrganizationCard from "./components/OrganizationCard";
 import "./App.css";
 import { getHemisphere } from "./services/mapUtils";
+import useMediumScreen from "./hooks/useMediumScreen";
 
 const initialState = {
   cardType: null,
@@ -21,6 +23,8 @@ const initialState = {
 };
 
 function App() {
+  const mapContainerRef = useRef();
+  const isMediumScreen = useMediumScreen();
   const [map] = useState(prepare(getMapData()));
   const [state, setState] = useState(initialState);
   const updateState = (delta) => {
@@ -45,6 +49,12 @@ function App() {
   useEffect(() => {
     exposeApi(updateState);
   }, []);
+  useEffect(() => {
+    if (!isMediumScreen || !mapContainerRef.current) {
+      return;
+    }
+    scrollToMiddle(mapContainerRef.current);
+  }, [isMediumScreen, mapContainerRef]);
   return (
     <div className="dots-map">
       <div className="dots-map__filters-container">
@@ -61,15 +71,18 @@ function App() {
           }
         />
       </div>
-      <div className="dots-map__map-container">
-        <DotsMap
-          map={map}
-          onCountrySelected={(country) =>
-            updateState({ cardType: "country", countries: [country] })
-          }
-          selectedCountries={state.countries || []}
-          selectedColor={window.dotsMapConfig.selectedColor || "#DB4437"}
-        />
+      <div className="dots-map__main">
+        <div className="dots-map__map-container" ref={mapContainerRef}>
+          <DotsMap
+            map={map}
+            onCountrySelected={(country) =>
+              updateState({ cardType: "country", countries: [country] })
+            }
+            selectedCountries={state.countries || []}
+            selectedColor={window.dotsMapConfig.selectedColor || "#DB4437"}
+          />
+        </div>
+        {isMediumScreen && <DragIndicator />}
         {state.cardType && (
           <Backdrop onDismiss={() => setState({})}>
             {state.cardType === "project" && (
@@ -147,16 +160,7 @@ function getRandomColor() {
 }
 
 function getDotRadius() {
-  const isSmallScreen = () => document.documentElement.clientWidth < 600;
-  const isMediumScreen = () => document.documentElement.clientWidth < 1000;
-
-  if (isSmallScreen()) {
-    return 0.8;
-  } else if (isMediumScreen()) {
-    return 1.2;
-  } else {
-    return 3;
-  }
+  return 2.5;
 }
 
 function getProjectCardClassName(project) {
@@ -191,4 +195,12 @@ function exposeApi(updateState) {
         cardType: openCard ? "project" : null,
       }),
   };
+}
+
+async function scrollToMiddle(element) {
+  // XXX: Possibly the least elegant solution to the problem, I know
+  const interval = setInterval(() => {
+    element.scrollTo(element.clientWidth / 2, 0);
+  }, 25);
+  setTimeout(() => clearInterval(interval), 1500);
 }

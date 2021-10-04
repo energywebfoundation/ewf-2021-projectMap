@@ -16,10 +16,15 @@
   justify-content: center;
 }
 
+.dots-map__main {
+  position: relative;
+}
+
 .dots-map__map-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  overflow-x: auto;
+  transform: perspective(0);
 }
 
 .dots-map__backdrop {
@@ -44,5 +49,33 @@
   .dots-map__card--west,
   .dots-map__card--east {
     margin: auto;
+  }
+}
+
+@media (max-width: 800px) {
+  .dots-map__map-container::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .dots-map__map-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .dots-map__map-container::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  /* Works on Chrome, Edge, and Safari */
+  .dots-map__map-container::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .dots-map__map-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .dots-map__map-container::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border: 1px solid transparent;
   }
 }

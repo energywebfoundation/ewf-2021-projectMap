@@ -31,7 +31,7 @@ const DotsMap = ({
         ref={ref}
         viewBox={viewBox}
         onMouseLeave={(event) => {
-          if (event.relatedTarget.classList.contains("dots-map__tooltip")) {
+          if (event.relatedTarget?.classList.contains("dots-map__tooltip")) {
             return;
           }
           setTooltip(null);
