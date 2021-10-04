@@ -43,6 +43,11 @@ const Filters = ({
     setDropdown(clickedDropdown === dropdown ? null : clickedDropdown);
   };
   const noop = () => {};
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setDropdown(false);
+    });
+  }, []);
   return (
     <>
       <ul className="dots-map__filters">

@@ -8,13 +8,20 @@ const DotsMap = ({
   onCountrySelected,
   selectedColor,
 }) => {
+  const [key, setKey] = useState(1);
   const [viewBox, setViewBox] = useState([0, 0, 100, 100]);
   const ref = useRef();
   useEffect(() => {
     setViewBox([0, 0, ref.current.clientWidth, ref.current.clientHeight]);
-  }, []);
+    const updateKey = () => {
+      setKey(key + 1);
+      window.removeEventListener("resize", updateKey);
+    };
+    window.addEventListener("resize", updateKey);
+  }, [key]);
   return (
     <svg
+      key={key}
       className={`dots-map__canvas ${
         ref.current ? "dots-map__canvas--ready" : ""
       }`}
