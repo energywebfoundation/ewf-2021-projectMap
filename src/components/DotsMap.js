@@ -2,6 +2,7 @@ import React, { useMemo, useRef, useEffect, useState } from "react";
 import { isCountryInProjects } from "../services/datasetUtils";
 import "./DotsMap.css";
 import Tooltip from "./Tooltip";
+import isMobile from "ismobilejs";
 
 const DotsMap = ({
   map,
@@ -31,7 +32,7 @@ const DotsMap = ({
         ref={ref}
         viewBox={viewBox}
         onMouseLeave={(event) => {
-          if (event.relatedTarget?.classList.contains("dots-map__tooltip")) {
+          if (event.relatedTarget?.classList?.contains("dots-map__tooltip")) {
             return;
           }
           setTooltip(null);
@@ -121,7 +122,7 @@ const Dot = ({ dot, country, onCountrySelected, onHover }) => {
           scale(dot.y, svgElement.clientHeight, dot.radius * 3) - dot.radius * 3
         }
         onClick={isHighlighted ? () => onCountrySelected(country.id) : () => {}}
-        onMouseEnter={isHighlighted ? onHover : () => {}}
+        onMouseEnter={isHighlighted && !isMobile().any ? onHover : () => {}}
       />
       <circle
         className="dots-map__canvas__dot"

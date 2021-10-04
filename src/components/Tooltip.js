@@ -17,6 +17,7 @@ const Tooltip = ({ country, x, y, onClick }) => {
   }, [ref]);
   return (
     <div
+      key={country}
       className="dots-map__tooltip"
       style={{
         left: x - margin.x,

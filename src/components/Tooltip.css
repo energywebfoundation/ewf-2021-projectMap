@@ -37,6 +37,8 @@
   margin-right: 5px;
   width: auto;
   height: auto;
+  min-width: 22px;
+  min-height: 12px;
 }
 
 .dots-map__tooltip__country-name {
