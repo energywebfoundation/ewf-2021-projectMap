@@ -1,7 +1,7 @@
 .dots-map__card {
   border-radius: 8px;
   width: 281px;
-  height: 518px;
+  max-height: 518px;
   background: white;
   border: 0.5px solid #d3d3d3;
   box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.04);
@@ -21,11 +21,17 @@
   font-size: 18px;
 }
 
-.dots-map__card__content {
+.dots-map__card__scrollable {
+  margin: 8px;
+  padding-right: 8px;
+  max-height: 425px;
   overflow: auto;
+}
+
+.dots-map__card__content {
   display: flex;
   flex-direction: column;
-  padding: 8px;
+  padding-bottom: 8px;
 }
 
 .dots-map__card__country {

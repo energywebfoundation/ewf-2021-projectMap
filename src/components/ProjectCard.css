@@ -75,6 +75,7 @@
 .dots-map__project-card__project-description p {
   font-size: 12px;
   opacity: 0.6;
+  margin-bottom: 25px;
 }
 
 .dots-map__project-card__project-description p:not(:first-child) {

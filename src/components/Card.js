@@ -18,8 +18,10 @@ const Card = ({
       <h2>{title}</h2>
       <CloseCard onClose={onClose} />
     </header>
-    <div className="dots-map__card__content">{body}</div>
-    {footer && <div className="dots-map__card__footer">{footer}</div>}
+    <div className="dots-map__card__scrollable">
+      <div className="dots-map__card__content">{body}</div>
+      {footer && <div className="dots-map__card__footer">{footer}</div>}
+    </div>
   </article>
 );
 
