@@ -23,6 +23,7 @@ const initialState = {
 };
 
 function App() {
+  const [isProcessingResize, setProcessingResize] = useState(false);
   const mapContainerRef = useRef();
   const isMediumScreen = useMediumScreen();
   const [map] = useState(prepare(getMapData()));
@@ -48,6 +49,10 @@ function App() {
   const closeEverything = () => updateState({});
   useEffect(() => {
     exposeApi(updateState);
+    window.addEventListener("resize", () => {
+      setProcessingResize(true);
+      setTimeout(() => setProcessingResize(false), 500);
+    });
   }, []);
   useEffect(() => {
     if (!isMediumScreen || !mapContainerRef.current) {
@@ -56,7 +61,7 @@ function App() {
     scrollToMiddle(mapContainerRef.current);
   }, [isMediumScreen, mapContainerRef]);
   return (
-    <div className="dots-map">
+    <div className={`dots-map ${isProcessingResize ? "dots-map--hidden" : ""}`}>
       <div className="dots-map__filters-container">
         <Filters
           onDropdownClick={closeEverything}

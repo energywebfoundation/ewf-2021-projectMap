@@ -12,6 +12,10 @@
   animation-name: scaleIn;
 }
 
+.dots-map--hidden .dots-map__canvas--ready {
+  visibility: hidden;
+}
+
 .dots-map__canvas__dot {
   pointer-events: none;
 }

@@ -4,6 +4,10 @@
   margin: auto;
 }
 
+.dots-map.dots-map--hidden {
+  visibility: hidden;
+}
+
 @media (max-width: 1000px) {
   .dots-map {
     padding: 25px;
@@ -24,7 +28,6 @@
   position: relative;
   width: 100%;
   overflow-x: auto;
-  transform: perspective(0);
 }
 
 .dots-map__backdrop {
