@@ -53,7 +53,11 @@ const Organization = ({ organization, onClick }) => {
           />
         </div>
         <OrganizationName
-          organizationName={organizationProfile.name || organization}
+          organizationName={
+            organizationProfile.acronym
+              ? `(${organizationProfile.acronym}) ${organizationProfile.name}`
+              : organizationProfile.name || organization
+          }
         />
         <OrganizationCountries
           countries={getOrganizationCountries(organization)}
