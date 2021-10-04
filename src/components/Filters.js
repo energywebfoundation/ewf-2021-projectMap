@@ -130,7 +130,7 @@ const CountriesFilter = ({ ...props }) => (
 
 const OrganizationsFilter = ({ ...props }) => (
   <button {...props}>
-    Clients<Badge>{getOrganizations().length}</Badge>
+    Partners<Badge>{getOrganizations().length}</Badge>
   </button>
 );
 
