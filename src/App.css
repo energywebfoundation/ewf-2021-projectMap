@@ -39,3 +39,10 @@
   margin: auto;
   margin-left: 0;
 }
+
+@media (max-width: 600px) {
+  .dots-map__card--west,
+  .dots-map__card--east {
+    margin: auto;
+  }
+}
