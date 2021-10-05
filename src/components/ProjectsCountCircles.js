@@ -99,6 +99,12 @@ function useProjectsCountCircles() {
       projectsCount: getProjectsByRegion("europe").length,
       ...getEuropeCoordinates(width, height),
     });
+    projectsCountCircles.push({
+      region: "global",
+      projectsCount: getProjectsByRegion("global").length,
+      x: scale(0.35, width, 0),
+      y: scale(0.5, height, 0),
+    });
     const maxProjects = projectsCountCircles.reduce(getMax, 0);
     setProjectsCountCircles(
       projectsCountCircles.map((projectCountsCircle) => ({
