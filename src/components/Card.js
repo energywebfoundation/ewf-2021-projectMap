@@ -7,8 +7,7 @@ const Card = ({
   country,
   organization,
   title,
-  body,
-  footer,
+  sections,
   onClose,
 }) => (
   <article className={`dots-map__card dots-map--slideIn ${className}`}>
@@ -19,8 +18,11 @@ const Card = ({
       <CloseCard onClose={onClose} />
     </header>
     <div className="dots-map__card__scrollable">
-      <div className="dots-map__card__content">{body}</div>
-      {footer && <div className="dots-map__card__footer">{footer}</div>}
+      {sections.map((section, index) => (
+        <div key={index} className="dots-map__card__section">
+          {section}
+        </div>
+      ))}
     </div>
   </article>
 );

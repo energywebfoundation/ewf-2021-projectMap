@@ -8,8 +8,10 @@ const ProjectCard = ({ project, onClose, className }) => (
   <Card
     className={className}
     title={project.projectName}
-    body={<ProjectCardContent project={project} />}
-    footer={<ProjectCardFooter project={project} />}
+    sections={[
+      <ProjectCardContent project={project} />,
+      <ProjectCardFooter project={project} />,
+    ]}
     onClose={onClose}
   />
 );

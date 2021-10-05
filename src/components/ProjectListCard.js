@@ -17,12 +17,12 @@ const ProjectListCard = ({
     country={country}
     organization={organization}
     title={`${projects.length} Projects`}
-    body={
+    sections={[
       <ProjectListCardContent
         projects={projects}
         onProjectClick={onProjectClick}
-      />
-    }
+      />,
+    ]}
     onClose={onClose}
   />
 );

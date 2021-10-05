@@ -1,6 +1,6 @@
 .dots-map__card {
   border-radius: 8px;
-  width: 281px;
+  width: 358px;
   max-height: 518px;
   background: white;
   border: 0.5px solid #d3d3d3;
@@ -28,10 +28,14 @@
   overflow: auto;
 }
 
-.dots-map__card__content {
+.dots-map__card__section {
   display: flex;
   flex-direction: column;
-  padding-bottom: 8px;
+  padding: 8px;
+}
+
+.dots-map__card__section:not(:first-child) {
+  border-top: 1px solid #e5e5e5;
 }
 
 .dots-map__card__country {
@@ -53,14 +57,6 @@
   color: var(--main-color);
   display: block;
   margin-bottom: 5px;
-}
-
-.dots-map__card__footer {
-  flex-grow: 1;
-  border-top: 1px solid #e5e5e5;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
 }
 
 .dots-map__card__close-button {
