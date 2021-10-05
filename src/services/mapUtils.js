@@ -5,9 +5,10 @@ export function getHemisphere(country) {
 }
 
 function getDots(country) {
-  return getMap().find(
+  const mapCountry = getMap().find(
     ({ id }) => id.toLowerCase().trim() === country.toLowerCase().trim()
-  ).dots;
+  );
+  return mapCountry ? mapCountry.dots : [];
 }
 
 function averageX(currentAverage, dot, _, allDots) {
