@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   getCountries,
   getProjectsByCountry,
@@ -7,16 +7,12 @@ import {
 import { getCountriesByRegion, getMapEntry } from "../services/mapUtils";
 import scale from "../services/scale";
 import "./ProjectsCountCircles.css";
-import useCoolDimensions from "react-cool-dimensions";
 
-const ProjectsCountCircles = ({ onClick, width, height }) => {
-  const [ref, projectsCountCircles] = useProjectsCountCircles();
+const ProjectsCountCircles = ({ onClick }) => {
+  const ref = useRef();
+  const projectsCountCircles = useProjectsCountCircles(ref);
   return (
-    <div
-      className="dots-map__projects-count-circles__container"
-      ref={ref}
-      style={{ width, height }}
-    >
+    <g ref={ref}>
       {projectsCountCircles
         .filter(({ x, y }) => !!x && !!y)
         .map((projectsCountCircle, index) => (
@@ -28,7 +24,7 @@ const ProjectsCountCircles = ({ onClick, width, height }) => {
             }
           />
         ))}
-    </div>
+    </g>
   );
 };
 
@@ -41,31 +37,32 @@ const ProjectsCountCircle = ({
   y,
   onClick,
 }) => {
-  const { width, height } = useDimensions(relativePosition);
+  const radius = useRadius(relativePosition);
   const color = useColor(relativePosition);
   return (
-    <div
-      className="dots-map__projects-count-circle"
-      style={{
-        left: x - width / 2,
-        top: y - height / 2,
-        backgroundColor: color,
-        width,
-        height,
-      }}
-      onClick={onClick}
-    >
-      {projectsCount}
-    </div>
+    <g className="dots-map__projects-count-circle" onClick={onClick}>
+      <circle cx={x} cy={y} r={radius} fill={color}>
+        {projectsCount}
+      </circle>
+      <text
+        x={x}
+        y={y}
+        textAnchor="middle"
+        alignmentBaseline="middle"
+        fontSize="10px"
+      >
+        {projectsCount}
+      </text>
+    </g>
   );
 };
 
-function useDimensions(relativePosition) {
+function useRadius(relativePosition) {
   const min = 18;
   const max = 40;
   const range = max - min;
-  const dimension = Math.floor(range * relativePosition + min);
-  return { width: dimension, height: dimension };
+  const radius = Math.floor(range * relativePosition + min);
+  return radius;
 }
 
 function useColor(relativePosition) {
@@ -74,10 +71,13 @@ function useColor(relativePosition) {
   return colors[index];
 }
 
-function useProjectsCountCircles() {
+function useProjectsCountCircles(ref) {
   const [projectsCountCircles, setProjectsCountCircles] = useState([]);
-  const { observe, unobserve, width, height } = useCoolDimensions();
   useEffect(() => {
+    if (!ref.current) {
+      return;
+    }
+
     const isEuropean = (country) => country.region === "europe";
     const isDefined = (x) => !!x;
     const not =
@@ -87,8 +87,9 @@ function useProjectsCountCircles() {
     const getMax = (max, entry) =>
       entry.projectsCount > max ? entry.projectsCount : max;
 
-    unobserve();
-    setTimeout(observe, 1000);
+    const { width, height } = ref.current
+      .closest("svg")
+      .getBoundingClientRect();
     const projectsCountCircles = getCountries()
       .map(getMapEntry)
       .filter(isDefined)
@@ -116,8 +117,8 @@ function useProjectsCountCircles() {
         relativePosition: projectCountsCircle.projectsCount / maxProjects,
       }))
     );
-  }, [width, height, observe, unobserve]);
-  return [observe, projectsCountCircles];
+  }, [ref]);
+  return projectsCountCircles;
 }
 
 function getCenterCoordinates(width, height, allDots) {

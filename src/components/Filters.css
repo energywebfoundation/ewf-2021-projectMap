@@ -1,12 +1,7 @@
 .dots-map__filters {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-items: center;
-  column-gap: 50px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #bdbdbd;
+  position: relative;
+  padding: 13px 18px;
+  border-bottom: 1px solid #ececec;
 }
 
 .dots-map__filter--highlighted {

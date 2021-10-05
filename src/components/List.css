@@ -6,12 +6,12 @@
 .dots-map__list > li {
   cursor: pointer;
   padding: 10px 14px;
-  border-bottom: 1px solid #e6e6e6;
-  border-top: 1px solid #e6e6e6;
-  margin-top: -1px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
+  margin-top: -1px;
 }
 
 .dots-map__list > li:first-child {

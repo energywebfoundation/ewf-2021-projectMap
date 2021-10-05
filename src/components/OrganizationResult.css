@@ -1,12 +1,4 @@
-.dots-map__organizations-dropdown .dots-map__dropdown-content {
-  height: 425px;
-}
-
-.dots-map__organizations-dropdown__organization {
-  cursor: default;
-}
-
-.dots-map__organizations-dropdown__organization header {
+.dots-map__organization-result header {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -14,24 +6,24 @@
   margin-bottom: 15px;
 }
 
-.dots-map__organizations-dropdown__organization header .dots-map__icon {
+.dots-map__organization-result header .dots-map__icon {
   margin-right: 8px;
 }
 
-.dots-map__organizations-dropdown__organization-name {
+.dots-map__organization-resultname {
   font-size: 14px;
   display: block;
   text-transform: capitalize;
   margin-right: 8px;
 }
 
-.dots-map__organizations-dropdown__organization-description {
+.dots-map__organization-resultdescription {
   font-size: 12px;
   opacity: 0.6;
   margin-bottom: 15px;
 }
 
-.dots-map__organizations-dropdown__organization-countries {
+.dots-map__organization-resultcountries {
   display: flex;
   border-radius: 200px;
   background-color: var(--light-background);
@@ -43,15 +35,13 @@
   font-size: 8px;
 }
 
-.dots-map__organizations-dropdown__organization-countries
+.dots-map__organization-resultcountries
   .dots-map__icon.dots-map__icon--no-style {
   margin-right: 0;
   padding: 5px;
   height: auto;
 }
 
-.dots-map__list
-  > li:hover
-  .dots-map__organizations-dropdown__organization-countries {
+.dots-map__list > li:hover .dots-map__organization-resultcountries {
   background: white;
 }

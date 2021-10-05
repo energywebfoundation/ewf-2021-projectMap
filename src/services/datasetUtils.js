@@ -1,4 +1,5 @@
 import getDataset from "../data/dataset";
+import unique from "./unique";
 import { getCountriesByRegion } from "./mapUtils";
 
 export function getProjects() {
@@ -23,10 +24,6 @@ export function getOrganizations() {
       .map((country) => country.toLowerCase())
       .sort((a, b) => a.localeCompare(b))
   );
-}
-
-function unique(objs) {
-  return Array.from(new Set(objs));
 }
 
 export function getProjectCountries(project) {

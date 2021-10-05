@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { getProjectTypes } from "../services/datasetUtils";
 import "./ProjectTypeFilter.css";
 
-const ProjectTypeFilter = ({ onFilter }) => {
+const ProjectTypeFilter = ({
+  projectTypeSelection,
+  toggleProjectTypeSelection,
+}) => {
   const [projectTypes] = useState(getProjectTypes());
-  const [selection, isSelected, toggleSelection] = useSelection(projectTypes);
   const [open, setOpen] = useState(false);
   const toggleOpen = () => setOpen(!open);
-  useEffect(() => {
-    saveSelectionToStorage(selection);
-    onFilter(selection);
-  }, [selection, onFilter]);
   return (
     <div className="dots-map__project-type-filter">
       <button onClick={toggleOpen}>Project types</button>
@@ -20,8 +18,8 @@ const ProjectTypeFilter = ({ onFilter }) => {
             <li key={projectType}>
               <ProjectTypeCheckbox
                 projectType={projectType}
-                isSelected={isSelected(projectType)}
-                onToggle={() => toggleSelection(projectType)}
+                isSelected={projectTypeSelection[projectType]}
+                onToggle={() => toggleProjectTypeSelection(projectType)}
               />
             </li>
           ))}
@@ -55,41 +53,3 @@ const FakeCheckbox = ({ checked }) => (
     </div>
   </div>
 );
-
-function useSelection(projectTypes) {
-  const [selection, setSelection] = useState(
-    readSelectionFromStorage() || createInitialSelection(projectTypes)
-  );
-  const isSelected = (projectType) => selection[projectType];
-  const toggle = (projectType) => {
-    setSelection({
-      ...selection,
-      [projectType]: !isSelected(projectType),
-    });
-  };
-  return [selection, isSelected, toggle];
-}
-
-function readSelectionFromStorage() {
-  const storedSelection = sessionStorage.getItem(
-    "dotsMap-projectTypeFilterSelection"
-  );
-  return storedSelection ? JSON.parse(storedSelection) : null;
-}
-
-function saveSelectionToStorage(selection) {
-  sessionStorage.setItem(
-    "dotsMap-projectTypeFilterSelection",
-    JSON.stringify(selection)
-  );
-}
-
-function createInitialSelection(projectTypes) {
-  return projectTypes.reduce(
-    (selection, projectType) => ({
-      ...selection,
-      [projectType]: true,
-    }),
-    {}
-  );
-}

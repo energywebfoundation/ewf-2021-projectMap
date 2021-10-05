@@ -1,0 +1,13 @@
+.dots-map__project-country {
+  font-size: 14px;
+  text-transform: capitalize;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+}
+
+.dots-map__project-country span {
+  opacity: 0.5;
+}

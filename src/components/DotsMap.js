@@ -12,10 +12,8 @@ const DotsMap = ({
   selectedColor,
 }) => {
   const [key, setKey] = useState(1);
-  const [viewBox, setViewBox] = useState([0, 0, 100, 100]);
   const ref = useRef();
   useEffect(() => {
-    setViewBox([0, 0, ref.current.clientWidth, ref.current.clientHeight]);
     const updateKey = () => {
       setKey(key + 1);
       window.removeEventListener("resize", updateKey);
@@ -30,7 +28,6 @@ const DotsMap = ({
           ref.current ? "dots-map__canvas--ready" : ""
         }`}
         ref={ref}
-        viewBox={viewBox}
       >
         {map.map((country) => (
           <Country
@@ -41,12 +38,8 @@ const DotsMap = ({
             selectedColor={selectedColor}
           />
         ))}
+        <ProjectsCountCircles onClick={onCountrySelected} />
       </svg>
-      <ProjectsCountCircles
-        onClick={onCountrySelected}
-        width={ref.current?.clientWidth}
-        height={ref.current?.clientHeight}
-      />
     </>
   );
 };

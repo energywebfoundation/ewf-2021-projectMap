@@ -1,26 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SearchBar.css";
 
-const SearchBar = ({ onQuery }) => {
-  const [query, setInternalQuery] = useState("");
-  const setQuery = (q) => {
-    setInternalQuery(q);
-    onQuery(q);
-  };
-  return (
-    <div
-      className="dots-map__searchbar"
-      onClick={(event) => event.stopPropagation()}
-    >
-      <img src={`${process.env.PUBLIC_URL}/search.png`} alt="search" />
-      <input
-        type="text"
-        onChange={(event) => setQuery(event.target.value.toUpperCase())}
-        value={query}
-        placeholder="SEARCH"
-      />
+const SearchBar = ({
+  query,
+  setQuery,
+  onEnter,
+  enableBackButton,
+  onBackClick,
+}) => (
+  <div className="dots-map__searchbar">
+    <div className="dots-map__searchbar__adornment">
+      {!enableBackButton && (
+        <img src={`${process.env.PUBLIC_URL}/search.png`} alt="search" />
+      )}
+      {enableBackButton && (
+        <button
+          className="dots-map__searchbar__back"
+          onClick={() => onBackClick()}
+        >
+          <img src={`${process.env.PUBLIC_URL}/left-arrow.png`} alt="back" />
+        </button>
+      )}
     </div>
-  );
-};
+    <input
+      type="text"
+      onChange={(event) => setQuery(event.target.value.toUpperCase())}
+      value={query}
+      placeholder="SEARCH"
+      onKeyPress={(event) => {
+        if (event.key !== "Enter") {
+          return;
+        }
+        event.preventDefault();
+        onEnter();
+      }}
+    />
+  </div>
+);
 
 export default SearchBar;

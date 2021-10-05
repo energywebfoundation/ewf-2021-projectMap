@@ -1,9 +1,9 @@
 .dots-map__canvas {
-  width: 100%;
-  height: 100%;
   visibility: hidden;
-  min-width: 800px;
-  aspect-ratio: 16 / 9;
+  background-color: transparent;
+  box-sizing: content-box;
+  width: 100%;
+  aspect-ratio: 2;
 }
 
 .dots-map__canvas--ready {
@@ -23,4 +23,12 @@
 .dots-map__canvas__clickable-overlay--clickable {
   cursor: pointer;
   pointer-events: all;
+}
+
+@media (max-width: 800px) {
+  .dots-map__canvas {
+    min-width: 1000px;
+    height: auto;
+    width: auto;
+  }
 }

@@ -127,3 +127,11 @@ window.dotsMapConfig = {
     ]
 }
 ```
+
+TODO
+
+- Reposition color balls on resize.
+- What about cards on desktop?
+- What about searching without type in desktop?
+- Result list for mobile.
+- Cards for mobile.

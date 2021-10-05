@@ -1,0 +1,16 @@
+.dots-map__sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.dots-map__sidebar__main-area {
+  position: relative;
+  height: calc(100vh - 118px);
+  background: white;
+}
+
+@media (max-width: 800px) {
+  .dots-map__sidebar__main-area {
+    z-index: 10;
+  }
+}

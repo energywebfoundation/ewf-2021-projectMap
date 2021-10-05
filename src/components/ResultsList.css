@@ -1,0 +1,11 @@
+.dots-map__results-list {
+  max-height: calc(100vh - 155px);
+  overflow: auto;
+  margin: 19px;
+  padding-right: 19px;
+}
+
+.dots-map__results-list__no-results {
+  font-size: 14px;
+  font-weight: bold;
+}

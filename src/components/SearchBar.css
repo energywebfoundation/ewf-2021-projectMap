@@ -1,21 +1,31 @@
 .dots-map__searchbar {
-  border: 1px solid #ececec;
+  border-bottom: 1px solid #ececec;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.04);
-  border-radius: 4px;
+  border-radius: 8px;
+  position: relative;
+  border: 1px solid #ececec;
 }
 
-.dots-map__searchbar img {
+.dots-map__searchbar__adornment {
   width: 11px;
   height: 11px;
   position: absolute;
-  top: 22px;
-  left: 20px;
+  top: 12px;
+  left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dots-map__searchbar__adornment img {
+  width: 100%;
 }
 
 .dots-map__searchbar input {
   width: 100%;
   padding: 10px 10px 10px 30px;
   font-size: 8px;
+  border-radius: 8px;
 }
 
 .dots-map__searchbar input:focus-visible {

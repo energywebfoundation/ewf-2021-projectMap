@@ -9,7 +9,8 @@
 }
 
 li:hover .dots-map__rounded-button {
-  background-color: white;
+  background-color: var(--main-color);
+  color: white;
 }
 
 .dots-map__rounded-button:after {
@@ -17,6 +18,10 @@ li:hover .dots-map__rounded-button {
   content: "\2192";
   font-size: 12px;
   font-weight: bold;
+}
+
+li:hover .dots-map__rounded-button:after {
+  color: white;
 }
 
 .dots-map__rounded-button span {

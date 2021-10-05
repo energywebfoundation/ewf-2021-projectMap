@@ -1,0 +1,27 @@
+.dots-map__categories {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+  margin-top: 16px;
+}
+
+.dots-map__categories button {
+  background-color: #f9f9f9;
+  border-radius: 200px;
+  border: 1px solid #ececec;
+  font-size: 8px;
+  line-height: 23px;
+  padding: 8px 0;
+  opacity: 0.68;
+  text-transform: uppercase;
+  width: 100%;
+  font-weight: bold;
+}
+
+button.dots-map__categories--selected {
+  border: none;
+  background-color: var(--main-color);
+  color: white;
+}

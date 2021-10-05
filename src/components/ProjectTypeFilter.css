@@ -33,6 +33,8 @@
   left: 15px;
   border: 0.5px solid #d3d3d3;
   box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.04);
+  background-color: white;
+  z-index: 10;
 }
 
 .dots-map__project-type-filter__dropdown:before {

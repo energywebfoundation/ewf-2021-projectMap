@@ -37,6 +37,7 @@ body::-webkit-scrollbar-thumb {
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   width: 2px;
+  height: 4px;
 }
 
 *::-webkit-scrollbar-track {

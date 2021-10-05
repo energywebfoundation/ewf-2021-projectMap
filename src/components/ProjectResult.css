@@ -1,14 +1,8 @@
-.dots-map__projects-dropdown__project-organizations {
-  color: var(--main-color);
-  display: block;
-  line-height: 23px;
-}
-
-.dots-map__projects-dropdown__project-name {
+.dots-map__project-result__name {
   display: block;
 }
 
-.dots-map__projects-dropdown__project-name {
+.dots-map__project-result__name {
   font-size: 14px;
   margin-bottom: 5px;
 }

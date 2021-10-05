@@ -1,0 +1,22 @@
+.dots-map__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: black;
+  opacity: 0.3;
+  animation-name: backdrop-fadeIn;
+  animation-duration: 0.8s;
+}
+
+@keyframes backdrop-fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.3;
+  }
+}
