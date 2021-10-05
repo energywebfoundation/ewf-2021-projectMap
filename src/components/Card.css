@@ -69,6 +69,7 @@
 .dots-map__card__close-button .dots-map__icon {
   border: none;
   background: #f9f9f9;
+  opacity: 0.8;
 }
 
 .dots-map__card__close-button img {
