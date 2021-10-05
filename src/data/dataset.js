@@ -269,7 +269,7 @@ const getDataset = () =>
     {
       organization: "Mercados Eléctricos",
       projectName: "I-REC Marketplace",
-      location: "El_Salvador",
+      location: "El Salvador",
       "": "",
       projectType: "Traceability",
       description:

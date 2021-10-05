@@ -11,7 +11,7 @@ const Icon = ({ name, alt, noStyle }) => {
       className={`dots-map__icon ${noStyle ? "dots-map__icon--no-style" : ""}`}
     >
       <img
-        src={`${process.env.PUBLIC_URL}/icons/${name}`}
+        src={`${process.env.PUBLIC_URL}/icons/${sanitize(name)}`}
         alt={alt}
         onError={() => setError(true)}
       />
@@ -20,3 +20,7 @@ const Icon = ({ name, alt, noStyle }) => {
 };
 
 export default Icon;
+
+function sanitize(name) {
+  return name.toLowerCase().replace(/ /g, "_");
+}
