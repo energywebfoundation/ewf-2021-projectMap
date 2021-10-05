@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
 import GoToButton from "./GoToButton";
 import Icon from "./Icon";
@@ -6,7 +6,6 @@ import { List, ListItem } from "./List";
 import ProjectTypeFilter from "./ProjectTypeFilter";
 import { getProjects } from "../services/datasetUtils";
 import "./ProjectsDropdown.css";
-import { useEffect } from "react/cjs/react.development";
 
 const ProjectsDropdown = ({ onClick, anchor }) => {
   const [projects, setProjects] = useState(getProjects());
