@@ -61,7 +61,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .dots-map--slideIn {
-  animation-duration: 0.2s;
+  animation-duration: 0.5s;
   animation-name: slideIn;
 }
 

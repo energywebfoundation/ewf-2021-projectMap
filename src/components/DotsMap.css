@@ -8,7 +8,7 @@
 
 .dots-map__canvas--ready {
   visibility: visible;
-  animation-duration: 0.5s;
+  animation-duration: 0.8s;
   animation-name: scaleIn;
 }
 
