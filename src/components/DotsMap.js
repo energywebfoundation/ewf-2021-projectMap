@@ -1,7 +1,6 @@
 import React, { useMemo, useRef, useEffect, useState } from "react";
 import { isCountryInProjects } from "../services/datasetUtils";
 import "./DotsMap.css";
-import Tooltip from "./Tooltip";
 import isMobile from "ismobilejs";
 
 const DotsMap = ({
@@ -10,7 +9,6 @@ const DotsMap = ({
   onCountrySelected,
   selectedColor,
 }) => {
-  const [tooltip, setTooltip] = useState(null);
   const [key, setKey] = useState(1);
   const [viewBox, setViewBox] = useState([0, 0, 100, 100]);
   const ref = useRef();
@@ -31,12 +29,6 @@ const DotsMap = ({
         }`}
         ref={ref}
         viewBox={viewBox}
-        onMouseLeave={(event) => {
-          if (event.relatedTarget?.classList?.contains("dots-map__tooltip")) {
-            return;
-          }
-          setTooltip(null);
-        }}
       >
         {map.map((country) => (
           <Country
@@ -45,57 +37,30 @@ const DotsMap = ({
             onCountrySelected={onCountrySelected}
             isSelected={selectedCountries.includes(country.id)}
             selectedColor={selectedColor}
-            onShowTooltip={setTooltip}
           />
         ))}
       </svg>
-      {tooltip && (
-        <Tooltip
-          {...tooltip}
-          onClick={() => {
-            onCountrySelected(tooltip.country);
-            setTooltip(null);
-          }}
-        />
-      )}
     </>
   );
 };
 
 export default DotsMap;
 
-const Country = ({
-  country,
-  onCountrySelected,
-  isSelected,
-  selectedColor,
-  onShowTooltip,
-}) => {
-  const ref = useRef();
-  const middlePoint = useMiddlePoint(ref, country);
-  return (
-    <g ref={ref}>
-      {country.dots.map((dot) => (
-        <Dot
-          key={dot.id}
-          dot={{
-            ...dot,
-            color: isSelected ? selectedColor : dot.color || country.color,
-          }}
-          country={country}
-          onCountrySelected={onCountrySelected}
-          onHover={() =>
-            onShowTooltip({
-              country: country.id,
-              x: middlePoint.x,
-              y: middlePoint.y,
-            })
-          }
-        />
-      ))}
-    </g>
-  );
-};
+const Country = ({ country, onCountrySelected, isSelected, selectedColor }) => (
+  <g>
+    {country.dots.map((dot) => (
+      <Dot
+        key={dot.id}
+        dot={{
+          ...dot,
+          color: isSelected ? selectedColor : dot.color || country.color,
+        }}
+        country={country}
+        onCountrySelected={onCountrySelected}
+      />
+    ))}
+  </g>
+);
 
 const Dot = ({ dot, country, onCountrySelected, onHover }) => {
   const ref = useRef();
@@ -137,28 +102,4 @@ const Dot = ({ dot, country, onCountrySelected, onHover }) => {
 
 function scale(value, max, margin) {
   return value * (max - margin * 2) + margin;
-}
-
-function useMiddlePoint(element, country) {
-  const [middlePoint, setMiddlePoint] = useState({ x: 0, y: 0 });
-  useEffect(() => {
-    if (!element.current) {
-      return;
-    }
-    const svgElement = element.current.closest("svg");
-    const averagePosition = (currentAverage, { x, y }, _, allDots) => ({
-      x: currentAverage.x + x / allDots.length,
-      y: currentAverage.y + y / allDots.length,
-    });
-
-    const relativeMiddlePoint = country.dots.reduce(averagePosition, {
-      x: 0,
-      y: 0,
-    });
-    setMiddlePoint({
-      x: scale(relativeMiddlePoint.x, svgElement.clientWidth, 0),
-      y: scale(relativeMiddlePoint.y, svgElement.clientHeight, 0),
-    });
-  }, [element, country]);
-  return middlePoint;
 }
