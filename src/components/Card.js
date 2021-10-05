@@ -8,6 +8,7 @@ const Card = ({
   organization,
   title,
   sections,
+  footer,
   onClose,
 }) => (
   <article className={`dots-map__card dots-map--slideIn ${className}`}>
@@ -24,6 +25,7 @@ const Card = ({
         </div>
       ))}
     </div>
+    {footer && <div className="dots-map__card__footer">{footer}</div>}
   </article>
 );
 

@@ -93,3 +93,27 @@
 .dots-map__project-card__project-urls li:not(:first-child) {
   margin-top: 10px;
 }
+
+.dots-map__project-card__case-study {
+  background: #f9f9f9;
+  position: relative;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.dots-map__project-card__case-study img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.dots-map__project-card__case-study span {
+  text-transform: capitalize;
+  display: block;
+  padding: 36px 22px;
+  position: relative;
+  font-size: 23px;
+}

@@ -6,12 +6,17 @@ import "./ProjectCard.css";
 
 const ProjectCard = ({ project, onClose, className }) => (
   <Card
-    className={className}
+    className={`dots-map__project-card ${className}`}
     title={project.projectName}
     sections={[
       <ProjectCardContent project={project} />,
       <ProjectCardFooter project={project} />,
-    ]}
+    ].filter((x) => !!x)}
+    footer={
+      project.caseStudy && (
+        <ProjectCaseStudy projectCaseStudy={project.caseStudy} />
+      )
+    }
     onClose={onClose}
   />
 );
@@ -98,4 +103,14 @@ const ProjectUrls = ({ projectUrls = [] }) => (
       </li>
     ))}
   </ul>
+);
+
+const ProjectCaseStudy = ({ projectCaseStudy }) => (
+  <div
+    className="dots-map__project-card__case-study"
+    onClick={() => window.open(projectCaseStudy, "_blank")}
+  >
+    <img src={`${process.env.PUBLIC_URL}/case-study.png`} alt="case study" />
+    <span>Read case study→</span>
+  </div>
 );

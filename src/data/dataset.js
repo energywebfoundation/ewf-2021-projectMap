@@ -135,6 +135,8 @@ const getDataset = () =>
           url: "https://medium.com/energy-web-insights/elia-group-and-energy-web-launch-multi-year-strategic-partnership-be2c5d87395f",
         },
       ],
+      caseStudy:
+        "https://medium.com/energy-web-insights/elia-group-and-energy-web-launch-multi-year-strategic-partnership-be2c5d87395f",
     },
     {
       organization: "Energy Peace Partners",
