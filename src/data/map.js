@@ -459,6 +459,7 @@ const getMap = () =>
     },
     {
       id: "australia",
+      region: "australia",
       dots: [
         {
           id: "72",
