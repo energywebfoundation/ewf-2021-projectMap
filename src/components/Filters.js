@@ -28,7 +28,11 @@ const Filters = ({
     };
   useEffect(() => {
     document.body.addEventListener("click", ({ target }) => {
-      if (document.querySelector(".dots-map__filters").contains(target)) {
+      if (
+        document
+          .querySelector(".dots-map__filters")
+          .parentElement.contains(target)
+      ) {
         return;
       }
       setDropdown(false);

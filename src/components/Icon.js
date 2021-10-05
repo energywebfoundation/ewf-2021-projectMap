@@ -3,7 +3,7 @@ import "./Icon.css";
 
 const Icon = ({ name, alt, noStyle }) => {
   const [error, setError] = useState(false);
-  if (error) {
+  if (error || !name) {
     return <React.Fragment />;
   }
   return (

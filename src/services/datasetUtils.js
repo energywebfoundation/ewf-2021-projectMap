@@ -73,3 +73,11 @@ export function getOrganizationCountries(organization) {
 export function getProjectByName(name) {
   return getProjects().find(({ projectName }) => projectName === name);
 }
+
+export function getProjectTypes() {
+  return unique(
+    getProjects().map(({ projectType = "" }) =>
+      projectType.toLowerCase().trim()
+    )
+  ).filter((x) => !!x);
+}

@@ -8,6 +8,7 @@ const Dropdown = ({
   anchor,
   anchorTo = "left",
   onQuery,
+  extraContent = <React.Fragment />,
 }) => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const dropdownRef = useRef();
@@ -40,6 +41,7 @@ const Dropdown = ({
     >
       <header>
         <SearchBar onQuery={onQuery} />
+        {extraContent}
       </header>
       <div className="dots-map__dropdown-content">{children}</div>
     </div>

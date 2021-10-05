@@ -3,18 +3,28 @@ import Dropdown from "./Dropdown";
 import GoToButton from "./GoToButton";
 import Icon from "./Icon";
 import { List, ListItem } from "./List";
+import ProjectTypeFilter from "./ProjectTypeFilter";
 import { getProjects } from "../services/datasetUtils";
 import "./ProjectsDropdown.css";
+import { useEffect } from "react/cjs/react.development";
 
 const ProjectsDropdown = ({ onClick, anchor }) => {
   const [projects, setProjects] = useState(getProjects());
-  const applyQuery = (query) =>
-    setProjects(getProjects().filter(matchesQuery(query)));
+  const [projectTypeFilter, setProjectTypeFilter] = useState(null);
+  const [query, setQuery] = useState("");
+  useEffect(() => {
+    setProjects(
+      getProjects()
+        .filter(matchesQuery(query))
+        .filter(matchesProjectTypeFilter(projectTypeFilter))
+    );
+  }, [query, projectTypeFilter]);
   return (
     <Dropdown
       className="dots-map__projects-dropdown"
       anchor={anchor}
-      onQuery={applyQuery}
+      onQuery={setQuery}
+      extraContent={<ProjectTypeFilter onFilter={setProjectTypeFilter} />}
     >
       <List>
         {projects.map((project, index) => (
@@ -73,4 +83,11 @@ function matchesQuery(query) {
       .toLowerCase()
       .replace("_", "")
       .indexOf(query.toLowerCase()) >= 0;
+}
+
+function matchesProjectTypeFilter(projectTypeFilter) {
+  return projectTypeFilter
+    ? ({ projectType = "" }) =>
+        projectTypeFilter[projectType.toLowerCase().trim()]
+    : () => true;
 }
