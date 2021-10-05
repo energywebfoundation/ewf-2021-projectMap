@@ -1,4 +1,5 @@
 import getDataset from "../data/dataset";
+import { getCountriesByRegion } from "./mapUtils";
 
 export function getProjects() {
   return getDataset().sort(sortProjects);
@@ -80,4 +81,16 @@ export function getProjectTypes() {
       projectType.toLowerCase().trim()
     )
   ).filter((x) => !!x);
+}
+
+export function getProjectsByRegion(region) {
+  return [
+    ...getCountriesByRegion(region).flatMap(getProjectsByCountry),
+    ...getProjects().filter(({ location }) =>
+      location
+        .split(",")
+        .map((location) => location.toLowerCase().trim())
+        .includes(region)
+    ),
+  ];
 }

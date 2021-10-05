@@ -13,13 +13,19 @@ import ProjectCard from "./components/ProjectCard";
 import Filters from "./components/Filters";
 import OrganizationCard from "./components/OrganizationCard";
 import "./App.css";
-import { getHemisphere } from "./services/mapUtils";
+import {
+  getHemisphere,
+  getMapEntry,
+  getCountriesByRegion,
+} from "./services/mapUtils";
 import useMediumScreen from "./hooks/useMediumScreen";
+import RegionCard from "./components/RegionCard";
 
 const initialState = {
   cardType: null,
   countries: null,
   project: null,
+  region: null,
 };
 
 function App() {
@@ -60,6 +66,21 @@ function App() {
     }
     scrollToMiddle(mapContainerRef.current);
   }, [isMediumScreen, mapContainerRef]);
+  const onCountrySelected = (country) => {
+    if (isEuropean(country)) {
+      updateState({
+        cardType: "region",
+        countries: getEuropeanCountries(),
+        region: "europe",
+      });
+    } else {
+      updateState({
+        cardType: "country",
+        countries: [country],
+      });
+    }
+  };
+  console.log(state);
   return (
     <div className={`dots-map ${isProcessingResize ? "dots-map--hidden" : ""}`}>
       <div className="dots-map__filters-container">
@@ -80,9 +101,7 @@ function App() {
         <div className="dots-map__map-container" ref={mapContainerRef}>
           <DotsMap
             map={map}
-            onCountrySelected={(country) =>
-              updateState({ cardType: "country", countries: [country] })
-            }
+            onCountrySelected={onCountrySelected}
             selectedCountries={state.countries || []}
             selectedColor={window.dotsMapConfig.selectedColor || "#DB4437"}
           />
@@ -100,6 +119,16 @@ function App() {
             {state.cardType === "country" && (
               <CountryCard
                 country={state.countries[0]}
+                onProjectClick={(project) =>
+                  setState({ cardType: "project", project })
+                }
+                onClose={closeEverything}
+                className={getCountryCardClassName(state.countries[0])}
+              />
+            )}
+            {state.cardType === "region" && (
+              <RegionCard
+                region={state.region}
                 onProjectClick={(project) =>
                   setState({ cardType: "project", project })
                 }
@@ -208,4 +237,12 @@ async function scrollToMiddle(element) {
     element.scrollTo(element.clientWidth / 2, 0);
   }, 25);
   setTimeout(() => clearInterval(interval), 1500);
+}
+
+function isEuropean(country) {
+  return (getMapEntry(country) || {}).region === "europe";
+}
+
+function getEuropeanCountries() {
+  return getCountriesByRegion("europe").filter(isCountryInProjects);
 }

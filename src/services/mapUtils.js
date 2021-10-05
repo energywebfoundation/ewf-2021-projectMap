@@ -15,4 +15,14 @@ function averageX(currentAverage, dot, _, allDots) {
   return currentAverage + dot.x / allDots.length;
 }
 
+export function getMapEntry(country) {
+  return getMap().find(({ id }) => id === country);
+}
+
+export function getCountriesByRegion(region) {
+  return getMap()
+    .filter((country) => country.region === region)
+    .map(({ id }) => id);
+}
+
 window.getHemisphere = getHemisphere;

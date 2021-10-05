@@ -39,6 +39,7 @@ const getMap = () =>
           y: 0.4576315202142314,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "albania",
@@ -49,6 +50,7 @@ const getMap = () =>
           y: 0.4067785066712962,
         },
       ],
+      region: "europe",
     },
     {
       id: "algeria",
@@ -159,6 +161,7 @@ const getMap = () =>
           y: 0.5084715047079709,
         },
       ],
+      region: "africa",
     },
     {
       id: "angola",
@@ -239,6 +242,7 @@ const getMap = () =>
           y: 0.7457674626062059,
         },
       ],
+      region: "africa",
     },
     {
       id: "argentina",
@@ -429,6 +433,7 @@ const getMap = () =>
           y: 1,
         },
       ],
+      region: "south_america",
     },
     {
       id: "armenia",
@@ -439,6 +444,7 @@ const getMap = () =>
           y: 0.4067785066712962,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "aruba",
@@ -449,6 +455,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "south_america",
     },
     {
       id: "australia",
@@ -944,6 +951,7 @@ const getMap = () =>
           y: 0.35592980794335444,
         },
       ],
+      region: "europe",
     },
     {
       id: "azerbaijan",
@@ -954,6 +962,7 @@ const getMap = () =>
           y: 0.4067785066712962,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "bahrain",
@@ -964,6 +973,7 @@ const getMap = () =>
           y: 0.4915284529899215,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "bangladesh",
@@ -984,6 +994,7 @@ const getMap = () =>
           y: 0.5254297851848204,
         },
       ],
+      region: "asia",
     },
     {
       id: "barbados",
@@ -994,6 +1005,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "south_america",
     },
     {
       id: "belarus",
@@ -1019,6 +1031,7 @@ const getMap = () =>
           y: 0.32203291746977214,
         },
       ],
+      region: "europe",
     },
     {
       id: "belgium",
@@ -1029,6 +1042,7 @@ const getMap = () =>
           y: 0.3389845988178084,
         },
       ],
+      region: "europe",
     },
     {
       id: "belize",
@@ -1054,6 +1068,7 @@ const getMap = () =>
           y: 0.5932258081436972,
         },
       ],
+      region: "africa",
     },
     {
       id: "bhutan",
@@ -1064,6 +1079,7 @@ const getMap = () =>
           y: 0.4915284529899215,
         },
       ],
+      region: "asia",
     },
     {
       id: "bolivia",
@@ -1119,6 +1135,7 @@ const getMap = () =>
           y: 0.7627126717317518,
         },
       ],
+      region: "south_america",
     },
     {
       id: "bosnia",
@@ -1129,6 +1146,7 @@ const getMap = () =>
           y: 0.38983109783614567,
         },
       ],
+      region: "europe",
     },
     {
       id: "botswana",
@@ -1169,6 +1187,7 @@ const getMap = () =>
           y: 0.7796665950915004,
         },
       ],
+      region: "africa",
     },
     {
       id: "brazil",
@@ -1624,6 +1643,7 @@ const getMap = () =>
           y: 0.6271270557343807,
         },
       ],
+      region: "south_america",
     },
     {
       id: "brunei",
@@ -1634,6 +1654,7 @@ const getMap = () =>
           y: 0.6271270557343807,
         },
       ],
+      region: "asia",
     },
     {
       id: "bulgaria",
@@ -1644,6 +1665,7 @@ const getMap = () =>
           y: 0.38983109783614567,
         },
       ],
+      region: "europe",
     },
     {
       id: "burkina_faso",
@@ -1659,6 +1681,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "africa",
     },
     {
       id: "burma",
@@ -1694,6 +1717,7 @@ const getMap = () =>
           y: 0.4915284529899215,
         },
       ],
+      region: "asia",
     },
     {
       id: "burundi",
@@ -1704,6 +1728,7 @@ const getMap = () =>
           y: 0.6779692822398323,
         },
       ],
+      region: "africa",
     },
     {
       id: "cambodia",
@@ -1719,6 +1744,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "asia",
     },
     {
       id: "cameroon",
@@ -1754,6 +1780,7 @@ const getMap = () =>
           y: 0.5932258081436972,
         },
       ],
+      region: "africa",
     },
     {
       id: "canada",
@@ -3444,6 +3471,7 @@ const getMap = () =>
           y: 0.3389845988178084,
         },
       ],
+      region: "north_america",
     },
     {
       id: "cape_verde",
@@ -3454,6 +3482,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "africa",
     },
     {
       id: "central_african_republic",
@@ -3494,6 +3523,7 @@ const getMap = () =>
           y: 0.6101688175596388,
         },
       ],
+      region: "africa",
     },
     {
       id: "chad",
@@ -3554,6 +3584,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "africa",
     },
     {
       id: "chile",
@@ -3639,6 +3670,7 @@ const getMap = () =>
           y: 0.8305110213065564,
         },
       ],
+      region: "south_america",
     },
     {
       id: "china",
@@ -4329,6 +4361,7 @@ const getMap = () =>
           y: 0.4406819962736919,
         },
       ],
+      region: "asia",
     },
     {
       id: "colombia",
@@ -4389,6 +4422,7 @@ const getMap = () =>
           y: 0.6101688175596388,
         },
       ],
+      region: "south_america",
     },
     {
       id: "comoros",
@@ -4399,6 +4433,7 @@ const getMap = () =>
           y: 0.7288136238506728,
         },
       ],
+      region: "africa",
     },
     {
       id: "congo",
@@ -4424,6 +4459,7 @@ const getMap = () =>
           y: 0.6271270557343807,
         },
       ],
+      region: "africa",
     },
     {
       id: "costa_rica",
@@ -4439,6 +4475,7 @@ const getMap = () =>
           y: 0.5932258081436972,
         },
       ],
+      region: "south_america",
     },
     {
       id: "ivory_coast",
@@ -4474,6 +4511,7 @@ const getMap = () =>
           y: 0.37287941648810946,
         },
       ],
+      region: "europe",
     },
     {
       id: "cuba",
@@ -4494,6 +4532,7 @@ const getMap = () =>
           y: 0.5254297851848204,
         },
       ],
+      region: "south_america",
     },
     {
       id: "cyprus",
@@ -4504,6 +4543,7 @@ const getMap = () =>
           y: 0.4406819962736919,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "czech_republic",
@@ -4514,6 +4554,7 @@ const getMap = () =>
           y: 0.3389845988178084,
         },
       ],
+      region: "europe",
     },
     {
       id: "democratic_republic_of_congo",
@@ -4619,6 +4660,7 @@ const getMap = () =>
           y: 0.6779692822398323,
         },
       ],
+      region: "africa",
     },
     {
       id: "denmark",
@@ -4634,6 +4676,7 @@ const getMap = () =>
           y: 0.28813378498447767,
         },
       ],
+      region: "europe",
     },
     {
       id: "djibouti",
@@ -4644,6 +4687,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "africa",
     },
     {
       id: "dominican_republic",
@@ -4654,6 +4698,7 @@ const getMap = () =>
           y: 0.5423706371932654,
         },
       ],
+      region: "south_america",
     },
     {
       id: "ecuador",
@@ -4679,6 +4724,7 @@ const getMap = () =>
           y: 0.661013243774695,
         },
       ],
+      region: "south_america",
     },
     {
       id: "egypt",
@@ -4724,6 +4770,7 @@ const getMap = () =>
           y: 0.4915284529899215,
         },
       ],
+      region: "africa",
     },
     {
       id: "el_salvador",
@@ -4734,6 +4781,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "south_america",
     },
     {
       id: "equatorial_guinea",
@@ -4744,6 +4792,7 @@ const getMap = () =>
           y: 0.6440722648599267,
         },
       ],
+      region: "africa",
     },
     {
       id: "eritrea",
@@ -4759,6 +4808,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "africa",
     },
     {
       id: "estonia",
@@ -4774,6 +4824,7 @@ const getMap = () =>
           y: 0.2711863761493271,
         },
       ],
+      region: "europe",
     },
     {
       id: "ethiopia",
@@ -4824,6 +4875,7 @@ const getMap = () =>
           y: 0.5932258081436972,
         },
       ],
+      region: "africa",
     },
     {
       id: "faroe_islands",
@@ -4834,6 +4886,7 @@ const getMap = () =>
           y: 0.2372851074075898,
         },
       ],
+      region: "europe",
     },
     {
       id: "fiji",
@@ -4844,6 +4897,7 @@ const getMap = () =>
           y: 0.7627126717317518,
         },
       ],
+      region: "australia",
     },
     {
       id: "finland",
@@ -4904,6 +4958,7 @@ const getMap = () =>
           y: 0.22033556231599638,
         },
       ],
+      region: "europe",
     },
     {
       id: "france",
@@ -4959,6 +5014,7 @@ const getMap = () =>
           y: 0.35592980794335444,
         },
       ],
+      region: "europe",
     },
     {
       id: "french_guiana",
@@ -4969,6 +5025,7 @@ const getMap = () =>
           y: 0.6271270557343807,
         },
       ],
+      region: "south_america",
     },
     {
       id: "gabon",
@@ -4994,6 +5051,7 @@ const getMap = () =>
           y: 0.661013243774695,
         },
       ],
+      region: "africa",
     },
     {
       id: "gambia",
@@ -5004,6 +5062,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "africa",
     },
     {
       id: "georgia",
@@ -5019,6 +5078,7 @@ const getMap = () =>
           y: 0.38983109783614567,
         },
       ],
+      region: "europe",
     },
     {
       id: "germany",
@@ -5054,6 +5114,7 @@ const getMap = () =>
           y: 0.32203291746977214,
         },
       ],
+      region: "europe",
     },
     {
       id: "ghana",
@@ -5074,6 +5135,7 @@ const getMap = () =>
           y: 0.5932258081436972,
         },
       ],
+      region: "africa",
     },
     {
       id: "greece",
@@ -5089,6 +5151,7 @@ const getMap = () =>
           y: 0.42372811521605125,
         },
       ],
+      region: "europe",
     },
     {
       id: "greenland",
@@ -5979,6 +6042,7 @@ const getMap = () =>
           y: 0.03389693277569003,
         },
       ],
+      region: "north_america",
     },
     {
       id: "guatemala",
@@ -5989,6 +6053,7 @@ const getMap = () =>
           y: 0.5593288753680071,
         },
       ],
+      region: "south_america",
     },
     {
       id: "guinea_bissau",
@@ -5999,6 +6064,7 @@ const getMap = () =>
           y: 0.5932258081436972,
         },
       ],
+      region: "africa",
     },
     {
       id: "guyana",
@@ -6014,6 +6080,7 @@ const getMap = () =>
           y: 0.6271270557343807,
         },
       ],
+      region: "south_america",
     },
     {
       id: "haiti",
@@ -6024,6 +6091,7 @@ const getMap = () =>
           y: 0.5423706371932654,
         },
       ],
+      region: "south_america",
     },
     {
       id: "honduras",
@@ -6039,6 +6107,7 @@ const getMap = () =>
           y: 0.5593288753680071,
         },
       ],
+      region: "south_america",
     },
     {
       id: "hungary",
@@ -6054,6 +6123,7 @@ const getMap = () =>
           y: 0.35592980794335444,
         },
       ],
+      region: "europe",
     },
     {
       id: "iceland",
@@ -6084,6 +6154,7 @@ const getMap = () =>
           y: 0.22033556231599638,
         },
       ],
+      region: "europe",
     },
     {
       id: "india",
@@ -6279,6 +6350,7 @@ const getMap = () =>
           y: 0.4915284529899215,
         },
       ],
+      region: "asia",
     },
     {
       id: "indonesia",
@@ -6509,6 +6581,7 @@ const getMap = () =>
           y: 0.661013243774695,
         },
       ],
+      region: "asia",
     },
     {
       id: "iran",
@@ -6624,6 +6697,7 @@ const getMap = () =>
           y: 0.4406819962736919,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "iraq",
@@ -6654,6 +6728,7 @@ const getMap = () =>
           y: 0.4576315202142314,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "ireland",
@@ -6669,6 +6744,7 @@ const getMap = () =>
           y: 0.30508550863462164,
         },
       ],
+      region: "europe",
     },
     {
       id: "israel",
@@ -6679,6 +6755,7 @@ const getMap = () =>
           y: 0.4745745719322808,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "italy",
@@ -6724,6 +6801,7 @@ const getMap = () =>
           y: 0.37287941648810946,
         },
       ],
+      region: "europe",
     },
     {
       id: "jamaica",
@@ -6734,6 +6812,7 @@ const getMap = () =>
           y: 0.5423706371932654,
         },
       ],
+      region: "south_america",
     },
     {
       id: "japan",
@@ -6804,6 +6883,7 @@ const getMap = () =>
           y: 0.38983109783614567,
         },
       ],
+      region: "asia",
     },
     {
       id: "jordan",
@@ -6819,6 +6899,7 @@ const getMap = () =>
           y: 0.4576315202142314,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "kazakhstan",
@@ -7124,6 +7205,7 @@ const getMap = () =>
           y: 0.35592980794335444,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "kenya",
@@ -7164,6 +7246,7 @@ const getMap = () =>
           y: 0.6440722648599267,
         },
       ],
+      region: "africa",
     },
     {
       id: "kosovo",
@@ -7174,6 +7257,7 @@ const getMap = () =>
           y: 0.38983109783614567,
         },
       ],
+      region: "europe",
     },
     {
       id: "kuwait",
@@ -7184,6 +7268,7 @@ const getMap = () =>
           y: 0.4745745719322808,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "kyrgyzstan",
@@ -7204,6 +7289,7 @@ const getMap = () =>
           y: 0.38983109783614567,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "laos",
@@ -7224,6 +7310,7 @@ const getMap = () =>
           y: 0.5593288753680071,
         },
       ],
+      region: "asia",
     },
     {
       id: "latvia",
@@ -7239,6 +7326,7 @@ const getMap = () =>
           y: 0.28813378498447767,
         },
       ],
+      region: "europe",
     },
     {
       id: "lebanon",
@@ -7249,6 +7337,7 @@ const getMap = () =>
           y: 0.4576315202142314,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "lesotho",
@@ -7259,6 +7348,7 @@ const getMap = () =>
           y: 0.8305110213065564,
         },
       ],
+      region: "africa",
     },
     {
       id: "liberia",
@@ -7269,6 +7359,7 @@ const getMap = () =>
           y: 0.6271270557343807,
         },
       ],
+      region: "africa",
     },
     {
       id: "libya",
@@ -7364,6 +7455,7 @@ const getMap = () =>
           y: 0.4915284529899215,
         },
       ],
+      region: "africa",
     },
     {
       id: "lithuania",
@@ -7379,6 +7471,7 @@ const getMap = () =>
           y: 0.30508550863462164,
         },
       ],
+      region: "europe",
     },
     {
       id: "luxembourg",
@@ -7389,6 +7482,7 @@ const getMap = () =>
           y: 0.3389845988178084,
         },
       ],
+      region: "europe",
     },
     {
       id: "macau",
@@ -7399,6 +7493,7 @@ const getMap = () =>
           y: 0.5423706371932654,
         },
       ],
+      region: "asia",
     },
     {
       id: "macedonia",
@@ -7459,6 +7554,7 @@ const getMap = () =>
           y: 0.7966118042170462,
         },
       ],
+      region: "africa",
     },
     {
       id: "malawi",
@@ -7474,6 +7570,7 @@ const getMap = () =>
           y: 0.7288136238506728,
         },
       ],
+      region: "africa",
     },
     {
       id: "malaysia",
@@ -7504,6 +7601,7 @@ const getMap = () =>
           y: 0.6271270557343807,
         },
       ],
+      region: "asia",
     },
     {
       id: "mali",
@@ -7574,6 +7672,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "africa",
     },
     {
       id: "mauritania",
@@ -7634,6 +7733,7 @@ const getMap = () =>
           y: 0.5084715047079709,
         },
       ],
+      region: "africa",
     },
     {
       id: "mauritius",
@@ -7644,6 +7744,7 @@ const getMap = () =>
           y: 0.7621277181853885,
         },
       ],
+      region: "africa",
     },
     {
       id: "mexico",
@@ -7789,6 +7890,7 @@ const getMap = () =>
           y: 0.5254297851848204,
         },
       ],
+      region: "south_america",
     },
     {
       id: "moldova",
@@ -7799,6 +7901,7 @@ const getMap = () =>
           y: 0.35592980794335444,
         },
       ],
+      region: "europe",
     },
     {
       id: "monaco",
@@ -7809,6 +7912,7 @@ const getMap = () =>
           y: 0.38983109783614567,
         },
       ],
+      region: "europe",
     },
     {
       id: "mongolia",
@@ -7959,6 +8063,7 @@ const getMap = () =>
           y: 0.35592980794335444,
         },
       ],
+      region: "asia",
     },
     {
       id: "morocco",
@@ -8004,6 +8109,7 @@ const getMap = () =>
           y: 0.4576315202142314,
         },
       ],
+      region: "africa",
     },
     {
       id: "mozambique",
@@ -8049,6 +8155,7 @@ const getMap = () =>
           y: 0.7796665950915004,
         },
       ],
+      region: "africa",
     },
     {
       id: "namibia",
@@ -8089,6 +8196,7 @@ const getMap = () =>
           y: 0.7796665950915004,
         },
       ],
+      region: "africa",
     },
     {
       id: "nepal",
@@ -8109,6 +8217,7 @@ const getMap = () =>
           y: 0.4915284529899215,
         },
       ],
+      region: "asia",
     },
     {
       id: "netherlands",
@@ -8119,6 +8228,7 @@ const getMap = () =>
           y: 0.32203291746977214,
         },
       ],
+      region: "europe",
     },
     {
       id: "new_caledonia",
@@ -8129,6 +8239,7 @@ const getMap = () =>
           y: 0.7796665950915004,
         },
       ],
+      region: "australia",
     },
     {
       id: "new_zealand",
@@ -8199,6 +8310,7 @@ const getMap = () =>
           y: 0.8644099845834199,
         },
       ],
+      region: "australia",
     },
     {
       id: "nicaragua",
@@ -8214,6 +8326,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "south_america",
     },
     {
       id: "niger",
@@ -8274,6 +8387,7 @@ const getMap = () =>
           y: 0.5254297851848204,
         },
       ],
+      region: "africa",
     },
     {
       id: "nigeria",
@@ -8324,6 +8438,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "africa",
     },
     {
       id: "north_korea",
@@ -8344,6 +8459,7 @@ const getMap = () =>
           y: 0.38983109783614567,
         },
       ],
+      region: "asia",
     },
     {
       id: "norway",
@@ -8424,6 +8540,7 @@ const getMap = () =>
           y: 0.25423465249918314,
         },
       ],
+      region: "europe",
     },
     {
       id: "oman",
@@ -8439,6 +8556,7 @@ const getMap = () =>
           y: 0.5423706371932654,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "pakistan",
@@ -8494,6 +8612,7 @@ const getMap = () =>
           y: 0.4915284529899215,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "panama",
@@ -8514,6 +8633,7 @@ const getMap = () =>
           y: 0.5932258081436972,
         },
       ],
+      region: "south_america",
     },
     {
       id: "papua_new_guinea",
@@ -8564,6 +8684,7 @@ const getMap = () =>
           y: 0.6949144913653784,
         },
       ],
+      region: "australia",
     },
     {
       id: "paraguay",
@@ -8599,6 +8720,7 @@ const getMap = () =>
           y: 0.7966118042170462,
         },
       ],
+      region: "south_america",
     },
     {
       id: "peru",
@@ -8664,6 +8786,7 @@ const getMap = () =>
           y: 0.661013243774695,
         },
       ],
+      region: "south_america",
     },
     {
       id: "philippines",
@@ -8724,6 +8847,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "asia",
     },
     {
       id: "poland",
@@ -8764,6 +8888,7 @@ const getMap = () =>
           y: 0.32203291746977214,
         },
       ],
+      region: "europe",
     },
     {
       id: "portugal",
@@ -8779,6 +8904,7 @@ const getMap = () =>
           y: 0.4067785066712962,
         },
       ],
+      region: "europe",
     },
     {
       id: "puerto_rico",
@@ -8789,6 +8915,7 @@ const getMap = () =>
           y: 0.5423706371932654,
         },
       ],
+      region: "south_america",
     },
     {
       id: "qatar",
@@ -8799,6 +8926,7 @@ const getMap = () =>
           y: 0.5084715047079709,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "republic_of_guinea",
@@ -8819,6 +8947,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "africa",
     },
     {
       id: "romania",
@@ -8839,6 +8968,7 @@ const getMap = () =>
           y: 0.35592980794335444,
         },
       ],
+      region: "europe",
     },
     {
       id: "russia",
@@ -11684,6 +11814,7 @@ const getMap = () =>
           y: 0.11864256427932182,
         },
       ],
+      region: "asia",
     },
     {
       id: "rwanda",
@@ -11694,6 +11825,7 @@ const getMap = () =>
           y: 0.661013243774695,
         },
       ],
+      region: "africa",
     },
     {
       id: "samoa",
@@ -11704,6 +11836,7 @@ const getMap = () =>
           y: 0.7627126717317518,
         },
       ],
+      region: "australia",
     },
     {
       id: "sao_tome_and_principe",
@@ -11714,6 +11847,7 @@ const getMap = () =>
           y: 0.661013243774695,
         },
       ],
+      region: "africa",
     },
     {
       id: "saudi_arabia",
@@ -11804,6 +11938,7 @@ const getMap = () =>
           y: 0.5084715047079709,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "senegal",
@@ -11824,6 +11959,7 @@ const getMap = () =>
           y: 0.5593288753680071,
         },
       ],
+      region: "africa",
     },
     {
       id: "serbia",
@@ -11834,6 +11970,7 @@ const getMap = () =>
           y: 0.37287941648810946,
         },
       ],
+      region: "europe",
     },
     {
       id: "sierra_leone",
@@ -11844,6 +11981,7 @@ const getMap = () =>
           y: 0.6101688175596388,
         },
       ],
+      region: "africa",
     },
     {
       id: "singapore",
@@ -11854,6 +11992,7 @@ const getMap = () =>
           y: 0.6440722648599267,
         },
       ],
+      region: "asia",
     },
     {
       id: "slovakia",
@@ -11864,6 +12003,7 @@ const getMap = () =>
           y: 0.3389845988178084,
         },
       ],
+      region: "europe",
     },
     {
       id: "slovenia",
@@ -11874,6 +12014,7 @@ const getMap = () =>
           y: 0.37287941648810946,
         },
       ],
+      region: "europe",
     },
     {
       id: "solomon_islands",
@@ -11884,6 +12025,7 @@ const getMap = () =>
           y: 0.7118684147251269,
         },
       ],
+      region: "australia",
     },
     {
       id: "somalia",
@@ -11919,6 +12061,7 @@ const getMap = () =>
           y: 0.6271270557343807,
         },
       ],
+      region: "africa",
     },
     {
       id: "south_africa",
@@ -11989,6 +12132,7 @@ const getMap = () =>
           y: 0.8305110213065564,
         },
       ],
+      region: "africa",
     },
     {
       id: "south_korea",
@@ -12004,6 +12148,7 @@ const getMap = () =>
           y: 0.42372811521605125,
         },
       ],
+      region: "asia",
     },
     {
       id: "south_sudan",
@@ -12034,6 +12179,7 @@ const getMap = () =>
           y: 0.5932258081436972,
         },
       ],
+      region: "africa",
     },
     {
       id: "spain",
@@ -12080,6 +12226,7 @@ const getMap = () =>
           scale: 1.5,
         },
       ],
+      region: "europe",
     },
     {
       id: "sri_lanka",
@@ -12090,6 +12237,7 @@ const getMap = () =>
           y: 0.6101688175596388,
         },
       ],
+      region: "asia",
     },
     {
       id: "st_lucia",
@@ -12100,6 +12248,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "south_america",
     },
     {
       id: "sudan",
@@ -12190,6 +12339,7 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
+      region: "africa",
     },
     {
       id: "surinam",
@@ -12200,6 +12350,7 @@ const getMap = () =>
           y: 0.6271270557343807,
         },
       ],
+      region: "south_america",
     },
     {
       id: "swaziland",
@@ -12210,6 +12361,7 @@ const getMap = () =>
           y: 0.8135592130521969,
         },
       ],
+      region: "africa",
     },
     {
       id: "sweden",
@@ -12275,6 +12427,7 @@ const getMap = () =>
           y: 0.28813378498447767,
         },
       ],
+      region: "europe",
     },
     {
       id: "switzerland",
@@ -12290,6 +12443,7 @@ const getMap = () =>
           y: 0.35592980794335444,
         },
       ],
+      region: "europe",
     },
     {
       id: "syria",
@@ -12305,6 +12459,7 @@ const getMap = () =>
           y: 0.4406819962736919,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "taiwan",
@@ -12315,6 +12470,7 @@ const getMap = () =>
           y: 0.5084715047079709,
         },
       ],
+      region: "asia",
     },
     {
       id: "tajikistan",
@@ -12335,6 +12491,7 @@ const getMap = () =>
           y: 0.4067785066712962,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "tanzania",
@@ -12385,6 +12542,7 @@ const getMap = () =>
           y: 0.6779692822398323,
         },
       ],
+      region: "africa",
     },
     {
       id: "thailand",
@@ -12420,6 +12578,7 @@ const getMap = () =>
           y: 0.5593288753680071,
         },
       ],
+      region: "asia",
     },
     {
       id: "timor_leste",
@@ -12430,6 +12589,7 @@ const getMap = () =>
           y: 0.7118684147251269,
         },
       ],
+      region: "asia",
     },
     {
       id: "togo",
@@ -12440,6 +12600,7 @@ const getMap = () =>
           y: 0.6101688175596388,
         },
       ],
+      region: "africa",
     },
     {
       id: "tonga",
@@ -12450,6 +12611,7 @@ const getMap = () =>
           y: 0.7796665950915004,
         },
       ],
+      region: "australia",
     },
     {
       id: "tunisia",
@@ -12470,6 +12632,7 @@ const getMap = () =>
           y: 0.4576315202142314,
         },
       ],
+      region: "africa",
     },
     {
       id: "turkey",
@@ -12535,6 +12698,7 @@ const getMap = () =>
           y: 0.4067785066712962,
         },
       ],
+      region: "europe",
     },
     {
       id: "turkmenistan",
@@ -12575,6 +12739,7 @@ const getMap = () =>
           y: 0.4067785066712962,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "turks_and_caicos",
@@ -12585,6 +12750,7 @@ const getMap = () =>
           y: 0.5254297851848204,
         },
       ],
+      region: "south_america",
     },
     {
       id: "uganda",
@@ -12605,6 +12771,7 @@ const getMap = () =>
           y: 0.6271270557343807,
         },
       ],
+      region: "africa",
     },
     {
       id: "ukraine",
@@ -12685,6 +12852,7 @@ const getMap = () =>
           y: 0.37287941648810946,
         },
       ],
+      region: "europe",
     },
     {
       id: "united_arab_emirates",
@@ -12695,6 +12863,7 @@ const getMap = () =>
           y: 0.5254297851848204,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "united_kingdom",
@@ -12760,6 +12929,7 @@ const getMap = () =>
           y: 0.30508550863462164,
         },
       ],
+      region: "europe",
     },
     {
       id: "us",
@@ -13765,6 +13935,7 @@ const getMap = () =>
           y: 0.847460545247096,
         },
       ],
+      region: "south_america",
     },
     {
       id: "uzbekistan",
@@ -13805,6 +13976,7 @@ const getMap = () =>
           y: 0.37287941648810946,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "vanuatu",
@@ -13815,6 +13987,7 @@ const getMap = () =>
           y: 0.7622712915391893,
         },
       ],
+      region: "australia",
     },
     {
       id: "venezuela",
@@ -13860,6 +14033,7 @@ const getMap = () =>
           y: 0.6101688175596388,
         },
       ],
+      region: "south_america",
     },
     {
       id: "vietnam",
@@ -13890,6 +14064,7 @@ const getMap = () =>
           y: 0.5254297851848204,
         },
       ],
+      region: "asia",
     },
     {
       id: "virgin_islands",
@@ -13900,6 +14075,7 @@ const getMap = () =>
           y: 0.5423706371932654,
         },
       ],
+      region: "south_america",
     },
     {
       id: "western_sahara",
@@ -13925,6 +14101,7 @@ const getMap = () =>
           y: 0.4915284529899215,
         },
       ],
+      region: "africa",
     },
     {
       id: "yemen",
@@ -13955,6 +14132,7 @@ const getMap = () =>
           y: 0.5593288753680071,
         },
       ],
+      region: "middle_east",
     },
     {
       id: "yugoslavia",
@@ -13970,6 +14148,7 @@ const getMap = () =>
           y: 0.38983109783614567,
         },
       ],
+      region: "europe",
     },
     {
       id: "zambia",
@@ -14010,6 +14189,7 @@ const getMap = () =>
           y: 0.7288136238506728,
         },
       ],
+      region: "africa",
     },
     {
       id: "zimbabwe",
@@ -14050,6 +14230,7 @@ const getMap = () =>
           y: 0.7627126717317518,
         },
       ],
+      region: "africa",
     },
   ];
 
