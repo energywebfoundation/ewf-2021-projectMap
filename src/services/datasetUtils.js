@@ -41,7 +41,9 @@ export function getProjectsByCountry(country) {
   return getDataset()
     .filter(
       ({ location }) =>
-        location.toLowerCase().indexOf(country.toLowerCase()) >= 0
+        location
+          .toLowerCase()
+          .indexOf(country.toLowerCase().trim().replace(/_/g, " ")) >= 0
     )
     .sort(sortProjects);
 }

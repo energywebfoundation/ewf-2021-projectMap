@@ -20,6 +20,7 @@ import {
 } from "./services/mapUtils";
 import useMediumScreen from "./hooks/useMediumScreen";
 import RegionCard from "./components/RegionCard";
+import ProjectsCountCircles from "./components/ProjectsCountCircles";
 
 const initialState = {
   cardType: null,
@@ -67,7 +68,7 @@ function App() {
     scrollToMiddle(mapContainerRef.current);
   }, [isMediumScreen, mapContainerRef]);
   const onCountrySelected = (country) => {
-    if (isEuropean(country)) {
+    if (country === "europe" || isEuropean(country)) {
       updateState({
         cardType: "region",
         countries: getEuropeanCountries(),
@@ -80,7 +81,6 @@ function App() {
       });
     }
   };
-  console.log(state);
   return (
     <div className={`dots-map ${isProcessingResize ? "dots-map--hidden" : ""}`}>
       <div className="dots-map__filters-container">
@@ -105,6 +105,7 @@ function App() {
             selectedCountries={state.countries || []}
             selectedColor={window.dotsMapConfig.selectedColor || "#DB4437"}
           />
+          <ProjectsCountCircles onClick={onCountrySelected} />
         </div>
         {isMediumScreen && <DragIndicator />}
         {state.cardType && (

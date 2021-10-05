@@ -2,6 +2,7 @@ import React, { useMemo, useRef, useEffect, useState } from "react";
 import { isCountryInProjects } from "../services/datasetUtils";
 import "./DotsMap.css";
 import isMobile from "ismobilejs";
+import scale from "../services/scale";
 
 const DotsMap = ({
   map,
@@ -99,7 +100,3 @@ const Dot = ({ dot, country, onCountrySelected, onHover }) => {
     </g>
   );
 };
-
-function scale(value, max, margin) {
-  return value * (max - margin * 2) + margin;
-}

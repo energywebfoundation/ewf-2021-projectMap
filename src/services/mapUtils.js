@@ -16,7 +16,7 @@ function averageX(currentAverage, dot, _, allDots) {
 }
 
 export function getMapEntry(country) {
-  return getMap().find(({ id }) => id === country);
+  return getMap().find(({ id }) => id === country.replace(/ /g, "_"));
 }
 
 export function getCountriesByRegion(region) {
