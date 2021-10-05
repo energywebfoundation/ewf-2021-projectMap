@@ -3,6 +3,7 @@ import { isCountryInProjects } from "../services/datasetUtils";
 import "./DotsMap.css";
 import isMobile from "ismobilejs";
 import scale from "../services/scale";
+import ProjectsCountCircles from "./ProjectsCountCircles";
 
 const DotsMap = ({
   map,
@@ -41,6 +42,11 @@ const DotsMap = ({
           />
         ))}
       </svg>
+      <ProjectsCountCircles
+        onClick={onCountrySelected}
+        width={ref.current?.clientWidth}
+        height={ref.current?.clientHeight}
+      />
     </>
   );
 };

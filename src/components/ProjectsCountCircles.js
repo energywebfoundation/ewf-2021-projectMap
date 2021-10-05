@@ -9,10 +9,14 @@ import scale from "../services/scale";
 import "./ProjectsCountCircles.css";
 import useCoolDimensions from "react-cool-dimensions";
 
-const ProjectsCountCircles = ({ onClick }) => {
+const ProjectsCountCircles = ({ onClick, width, height }) => {
   const [ref, projectsCountCircles] = useProjectsCountCircles();
   return (
-    <div className="dots-map__projects-count-circles__container" ref={ref}>
+    <div
+      className="dots-map__projects-count-circles__container"
+      ref={ref}
+      style={{ width, height }}
+    >
       {projectsCountCircles
         .filter(({ x, y }) => !!x && !!y)
         .map((projectsCountCircle, index) => (
@@ -43,8 +47,8 @@ const ProjectsCountCircle = ({
     <div
       className="dots-map__projects-count-circle"
       style={{
-        left: x,
-        top: y,
+        left: x - width / 2,
+        top: y - height / 2,
         backgroundColor: color,
         width,
         height,

@@ -20,7 +20,6 @@ import {
 } from "./services/mapUtils";
 import useMediumScreen from "./hooks/useMediumScreen";
 import RegionCard from "./components/RegionCard";
-import ProjectsCountCircles from "./components/ProjectsCountCircles";
 
 const initialState = {
   cardType: null,
@@ -105,7 +104,6 @@ function App() {
             selectedCountries={state.countries || []}
             selectedColor={window.dotsMapConfig.selectedColor || "#DB4437"}
           />
-          <ProjectsCountCircles onClick={onCountrySelected} />
         </div>
         {isMediumScreen && <DragIndicator />}
         {state.cardType && (
