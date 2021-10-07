@@ -21,7 +21,7 @@
 }
 
 button.dots-map__categories--selected {
-  border: none;
+  border: 1px solid var(--main-color);
   background-color: var(--main-color);
   color: white;
 }
