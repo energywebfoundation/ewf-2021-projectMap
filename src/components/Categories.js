@@ -6,7 +6,7 @@ import {
 } from "../services/datasetUtils";
 import "./Categories.css";
 
-const Categories = ({ selectedCategory, onSelectCategory }) => {
+const Categories = ({ selectedCategories, onToggleCategory }) => {
   const [projects] = useState(getProjects().length);
   const [countries] = useState(getCountries().length);
   const [partners] = useState(getOrganizations().length);
@@ -14,27 +14,31 @@ const Categories = ({ selectedCategory, onSelectCategory }) => {
     <div className="dots-map__categories">
       <button
         className={
-          selectedCategory === "project" ? "dots-map__categories--selected" : ""
+          selectedCategories.includes("project")
+            ? "dots-map__categories--selected"
+            : ""
         }
-        onClick={() => onSelectCategory("project")}
+        onClick={() => onToggleCategory("project")}
       >
         Projects ({projects})
       </button>
       <button
         className={
-          selectedCategory === "country" ? "dots-map__categories--selected" : ""
+          selectedCategories.includes("country")
+            ? "dots-map__categories--selected"
+            : ""
         }
-        onClick={() => onSelectCategory("country")}
+        onClick={() => onToggleCategory("country")}
       >
         Countries ({countries})
       </button>
       <button
         className={
-          selectedCategory === "organization"
+          selectedCategories.includes("organization")
             ? "dots-map__categories--selected"
             : ""
         }
-        onClick={() => onSelectCategory("organization")}
+        onClick={() => onToggleCategory("organization")}
       >
         Partners ({partners})
       </button>
