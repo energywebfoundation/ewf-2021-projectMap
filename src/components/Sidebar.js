@@ -172,6 +172,7 @@ function getProjectTypeInitialSelection() {
 
 function isProjectTypeSelection(projectTypeSelection) {
   const isProjectTypeSelected = (result) =>
+    !result.value.projectType ||
     projectTypeSelection[(result.value.projectType || "").toLowerCase().trim()];
   return (result) =>
     !isCategory("project")(result) || isProjectTypeSelected(result);
