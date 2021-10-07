@@ -20,7 +20,9 @@ const Sidebar = ({ result, openResult, closeResult }) => {
   const [projectTypeSelection, setProjectTypeSelection] = useState(
     getProjectTypeInitialSelection()
   );
-  const [selectedCategories, setSelectedCategory] = useState([]);
+  const [selectedCategories, setSelectedCategory] = useState(
+    isMobile() ? [] : ["project"]
+  );
   const [query, setQuery] = useState("");
   const results = useResults(selectedCategories, query, projectTypeSelection);
   const toggleCategory = (category) => {
@@ -54,7 +56,11 @@ const Sidebar = ({ result, openResult, closeResult }) => {
       {(showResults || result) && (
         <div className="dots-map__sidebar__main-area">
           {showResults && (
-            <ResultsList results={results} onClick={openResult} />
+            <ResultsList
+              results={results}
+              onClick={openResult}
+              showCategoryTitles={isMobile() || !!query}
+            />
           )}
           {!!result && <Backdrop onClick={closeResult} />}
           {!!result && (

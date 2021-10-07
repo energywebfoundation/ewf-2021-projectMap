@@ -6,7 +6,7 @@ import ProjectResult from "./ProjectResult";
 import isMobile from "ismobilejs";
 import "./ResultsList.css";
 
-const ResultsList = ({ results, onClick }) => {
+const ResultsList = ({ results, showCategoryTitles, onClick }) => {
   const resultsByCategory = useResultsByCategory(results);
   return (
     <div
@@ -18,7 +18,7 @@ const ResultsList = ({ results, onClick }) => {
         <CategoryResults
           key={categoryResults.category}
           categoryResults={categoryResults}
-          isMultiCategory={resultsByCategory.length > 1}
+          isMultiCategory={showCategoryTitles || resultsByCategory.length > 1}
           onClick={onClick}
         />
       ))}
