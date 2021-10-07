@@ -76,3 +76,15 @@
 .dots-map__card__close-button img {
   width: 10px;
 }
+
+@media (min-width: 800px) {
+  .dots-map__card {
+    max-height: 100%;
+    border: none;
+    box-shadow: none;
+  }
+
+  .dots-map__card__header {
+    background-color: white;
+  }
+}

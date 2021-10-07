@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  background: white;
 }
 
 @media (max-width: 800px) {
@@ -26,5 +27,6 @@
 
   .dots-map__sidebar__card-container {
     justify-content: flex-end;
+    background: none;
   }
 }

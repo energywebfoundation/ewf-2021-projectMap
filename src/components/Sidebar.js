@@ -44,6 +44,7 @@ const Sidebar = ({ result, openResult, closeResult }) => {
         setQuery={(query) => {
           setQuery(query);
           setShowResults(!isMobile());
+          closeResult();
         }}
         selectedCategories={selectedCategories}
         onToggleCategory={toggleCategory}
