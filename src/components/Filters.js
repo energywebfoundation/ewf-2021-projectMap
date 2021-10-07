@@ -27,16 +27,16 @@ const Filters = ({
       selectedCategories={selectedCategories}
       onToggleCategory={onToggleCategory}
     />
-    {/* <div
+    <div
       style={{
-        visibility: selectedCategory === "project" ? "visible" : "hidden",
+        display: "none",
       }}
     >
       <ProjectTypeFilter
         projectTypeSelection={projectTypeSelection}
         toggleProjectTypeSelection={toggleProjectTypeSelection}
       />
-    </div> */}
+    </div>
   </div>
 );
 
