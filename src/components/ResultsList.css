@@ -5,7 +5,16 @@
   padding-right: 19px;
 }
 
+.dots-map__results-list__category-results:not(:first-child) {
+  margin-top: 35px;
+}
+
+.dots-map__results-list__results-count {
+  font-size: 18px;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 12px;
+}
+
 .dots-map__results-list__no-results {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 18px;
 }
