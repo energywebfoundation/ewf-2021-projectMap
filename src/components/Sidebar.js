@@ -51,22 +51,22 @@ const Sidebar = ({ result, openResult, closeResult }) => {
         enableBackButton={showResults && isMobile()}
         onBackClick={() => setShowResults(false)}
       />
-      {showResults && (
-        <div
-          className={`dots-map__sidebar__main-area ${
-            isMobile() ? "dots-map--slideIn" : ""
-          }`}
-        >
-          <ResultsList results={results} onClick={openResult} />
+      {(showResults || result) && (
+        <div className="dots-map__sidebar__main-area">
+          {showResults && (
+            <ResultsList results={results} onClick={openResult} />
+          )}
           {!!result && <Backdrop onClick={closeResult} />}
           {!!result && (
-            <OpenResult
-              result={result}
-              onClose={closeResult}
-              onProjectClick={(project) =>
-                openResult({ category: "project", value: project })
-              }
-            />
+            <div className="dots-map__sidebar__card-container dots-map--slideInFromBottom">
+              <OpenResult
+                result={result}
+                onClose={closeResult}
+                onProjectClick={(project) =>
+                  openResult({ category: "project", value: project })
+                }
+              />
+            </div>
           )}
         </div>
       )}

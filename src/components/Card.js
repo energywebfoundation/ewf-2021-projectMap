@@ -11,7 +11,7 @@ const Card = ({
   footer,
   onClose,
 }) => (
-  <article className={`dots-map__card dots-map--slideIn ${className}`}>
+  <article className={`dots-map__card ${className}`}>
     <header className="dots-map__card__header">
       {country && <Country country={country} />}
       {organization && <Organization organization={organization} />}

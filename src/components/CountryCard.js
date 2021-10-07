@@ -3,7 +3,7 @@ import { getProjectsByCountry } from "../services/datasetUtils";
 import ProjectCard from "./ProjectCard";
 import ProjectListCard from "./ProjectListCard";
 
-const CountryCard = ({ country, onProjectClick, onClose, className }) => {
+const CountryCard = ({ country, onProjectClick, onClose, className = "" }) => {
   const projects = useMemo(() => getProjectsByCountry(country), [country]);
   if (!projects.length) {
     return <React.Fragment />;

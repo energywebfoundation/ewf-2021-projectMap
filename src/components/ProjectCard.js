@@ -4,7 +4,7 @@ import Icon from "./Icon";
 import { RoundedLink } from "./RoundedButton";
 import "./ProjectCard.css";
 
-const ProjectCard = ({ project, onClose, className }) => (
+const ProjectCard = ({ project, onClose, className = "" }) => (
   <Card
     className={`dots-map__project-card ${className}`}
     title={project.projectName}

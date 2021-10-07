@@ -3,14 +3,20 @@ import CountryResult from "./CountryResult";
 import { List, ListItem } from "./List";
 import OrganizationResult from "./OrganizationResult";
 import ProjectResult from "./ProjectResult";
+import isMobile from "ismobilejs";
 import "./ResultsList.css";
 
 const ResultsList = ({ results, onClick }) => {
   const resultsByCategory = useResultsByCategory(results);
   return (
-    <div className="dots-map__results-list">
+    <div
+      className={`dots-map__results-list ${
+        isMobile().any ? "dots-map--slideIn" : ""
+      }`}
+    >
       {resultsByCategory.map((categoryResults) => (
         <CategoryResults
+          key={categoryResults.category}
           categoryResults={categoryResults}
           isMultiCategory={resultsByCategory.length > 1}
           onClick={onClick}

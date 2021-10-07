@@ -5,8 +5,8 @@
   width: 100%;
   height: 100%;
   cursor: pointer;
-  background: black;
-  opacity: 0.3;
+  background: #150925;
+  opacity: 0.54;
   animation-name: backdrop-fadeIn;
   animation-duration: 0.8s;
 }
@@ -17,6 +17,13 @@
   }
 
   to {
-    opacity: 0.3;
+    opacity: 0.54;
+  }
+}
+
+@media (max-width: 800px) {
+  .dots-map__backdrop {
+    top: -118px;
+    height: calc(100% + 118px);
   }
 }

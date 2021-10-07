@@ -1,8 +1,9 @@
 .dots-map__results-list {
-  max-height: calc(100vh - 155px);
   overflow: auto;
   margin: 19px;
   padding-right: 19px;
+  height: calc(100vh - 155px);
+  background: white;
 }
 
 .dots-map__results-list__category-results:not(:first-child) {
@@ -17,4 +18,21 @@
 
 .dots-map__results-list__no-results {
   font-size: 18px;
+}
+
+@media (max-width: 800px) {
+  .dots-map__results-list {
+    margin: 0;
+    padding: 19px;
+    height: calc(100vh - 118px);
+  }
+
+  .dots-map__results-list {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .dots-map__results-list::-webkit-scrollbar {
+    display: none;
+  }
 }

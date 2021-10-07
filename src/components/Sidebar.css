@@ -6,11 +6,25 @@
 .dots-map__sidebar__main-area {
   position: relative;
   height: calc(100vh - 118px);
-  background: white;
+}
+
+.dots-map__sidebar__card-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 @media (max-width: 800px) {
   .dots-map__sidebar__main-area {
     z-index: 10;
+  }
+
+  .dots-map__sidebar__card-container {
+    justify-content: flex-end;
   }
 }

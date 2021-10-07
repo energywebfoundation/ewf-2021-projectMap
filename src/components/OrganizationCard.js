@@ -7,7 +7,7 @@ const OrganizationCard = ({
   organization,
   onProjectClick,
   onClose,
-  className,
+  className = "",
 }) => {
   const projects = useMemo(
     () => getProjectsByOrganization(organization),
