@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import {
   getCountries,
   getProjectsByCountry,
@@ -9,38 +9,36 @@ import scale from "../services/scale";
 import "./ProjectsCountCircles.css";
 
 const ProjectsCountCircles = ({ onClick }) => {
-  const ref = useRef();
-  const projectsCountCircles = useProjectsCountCircles(ref);
+  const [projectsCountCircles] = useState(getProjectsCountCircles());
   return (
-    <g ref={ref}>
-      {projectsCountCircles
-        .filter(({ x, y }) => !!x && !!y)
-        .map((projectsCountCircle, index) => (
-          <ProjectsCountCircle
-            key={index}
-            {...projectsCountCircle}
-            onClick={() =>
-              onClick(projectsCountCircle.region || projectsCountCircle.country)
-            }
-          />
-        ))}
-    </g>
+    <>
+      {projectsCountCircles.map((projectsCountCircle, index) => (
+        <ProjectsCountCircle
+          key={index}
+          {...projectsCountCircle}
+          onClick={() =>
+            onClick(projectsCountCircle.region || projectsCountCircle.country)
+          }
+        />
+      ))}
+    </>
   );
 };
 
 export default ProjectsCountCircles;
 
 const ProjectsCountCircle = ({
+  region,
   projectsCount,
   relativePosition,
-  x,
-  y,
   onClick,
 }) => {
+  const ref = useRef();
   const radius = useRadius(relativePosition);
   const color = useColor(relativePosition);
+  const { x, y } = getCoordinates(ref.current, region);
   return (
-    <g className="dots-map__projects-count-circle" onClick={onClick}>
+    <g className="dots-map__projects-count-circle" onClick={onClick} ref={ref}>
       <circle cx={x} cy={y} r={radius} fill={color}>
         {projectsCount}
       </circle>
@@ -71,66 +69,75 @@ function useColor(relativePosition) {
   return colors[index];
 }
 
-function useProjectsCountCircles(ref) {
-  const [projectsCountCircles, setProjectsCountCircles] = useState([]);
-  const [{ width, height }, setDimension] = useState({ width: 0, height: 0 });
-  const updateDimensions = (svgElement) => () => {
-    const { width, height } = svgElement.getBoundingClientRect();
-    setDimension({ width, height });
+function getProjectsCountCircles() {
+  const isEuropean = (country) => country.region === "europe";
+  const isDefined = (x) => !!x;
+  const not =
+    (fn) =>
+    (...args) =>
+      !fn(...args);
+  const getMax = (max, entry) =>
+    entry.projectsCount > max ? entry.projectsCount : max;
+
+  const projectsCountCircles = getCountries()
+    .map(getMapEntry)
+    .filter(isDefined)
+    .filter(not(isEuropean))
+    .map((country) => ({
+      region: country.id,
+      projectsCount: getProjectsByCountry(country.id).length,
+    }));
+  projectsCountCircles.push({
+    region: "europe",
+    projectsCount: getProjectsByRegion("europe").length,
+  });
+  projectsCountCircles.push({
+    region: "global",
+    projectsCount: getProjectsByRegion("global").length,
+  });
+  const maxProjects = projectsCountCircles.reduce(getMax, 0);
+  return projectsCountCircles.map((projectCountsCircle) => ({
+    ...projectCountsCircle,
+    relativePosition: projectCountsCircle.projectsCount / maxProjects,
+  }));
+}
+
+function getCoordinates(element, region) {
+  if (!element) {
+    return { x: -100, y: -100 };
+  }
+  const svg = element.closest("svg");
+  switch (region) {
+    case "global": {
+      return getGlobalCoordinates(svg);
+    }
+    case "europe": {
+      return getEuropeCoordinates(svg);
+    }
+    default: {
+      return getRegionCoordinates(svg, region);
+    }
+  }
+}
+
+function getGlobalCoordinates(svg) {
+  return {
+    x: scale(0.35, svg.clientWidth, 0),
+    y: scale(0.5, svg.clientHeight, 0),
   };
-  useEffect(() => {
-    if (!ref.current) {
-      return;
-    }
-    const svgElement = ref.current.closest("svg");
-    updateDimensions(svgElement)();
-    const resizeObserver = new ResizeObserver(updateDimensions(svgElement));
-    resizeObserver.observe(svgElement);
-    return () => resizeObserver.disconnect();
-  }, [ref]);
-  useEffect(() => {
-    if (!width || !height) {
-      return;
-    }
+}
 
-    const isEuropean = (country) => country.region === "europe";
-    const isDefined = (x) => !!x;
-    const not =
-      (fn) =>
-      (...args) =>
-        !fn(...args);
-    const getMax = (max, entry) =>
-      entry.projectsCount > max ? entry.projectsCount : max;
+function getEuropeCoordinates(svg) {
+  const collectDots = (allDots, country) => [...allDots, ...country.dots];
+  const europeDots = getCountriesByRegion("europe")
+    .map(getMapEntry)
+    .reduce(collectDots, []);
+  return getCenterCoordinates(svg.clientWidth, svg.clientHeight, europeDots);
+}
 
-    const projectsCountCircles = getCountries()
-      .map(getMapEntry)
-      .filter(isDefined)
-      .filter(not(isEuropean))
-      .map((country) => ({
-        country: country.id,
-        projectsCount: getProjectsByCountry(country.id).length,
-        ...getCenterCoordinates(width, height, country.dots),
-      }));
-    projectsCountCircles.push({
-      region: "europe",
-      projectsCount: getProjectsByRegion("europe").length,
-      ...getEuropeCoordinates(width, height),
-    });
-    projectsCountCircles.push({
-      region: "global",
-      projectsCount: getProjectsByRegion("global").length,
-      x: scale(0.35, width, 0),
-      y: scale(0.5, height, 0),
-    });
-    const maxProjects = projectsCountCircles.reduce(getMax, 0);
-    setProjectsCountCircles(
-      projectsCountCircles.map((projectCountsCircle) => ({
-        ...projectCountsCircle,
-        relativePosition: projectCountsCircle.projectsCount / maxProjects,
-      }))
-    );
-  }, [width, height]);
-  return projectsCountCircles;
+function getRegionCoordinates(svg, region) {
+  const mapEntry = getMapEntry(region);
+  return getCenterCoordinates(svg.clientWidth, svg.clientHeight, mapEntry.dots);
 }
 
 function getCenterCoordinates(width, height, allDots) {
@@ -146,12 +153,4 @@ function getCenterCoordinates(width, height, allDots) {
     x: scale(relativeMiddlePoint.x, width, 0),
     y: scale(relativeMiddlePoint.y, height, 0),
   };
-}
-
-function getEuropeCoordinates(width, height) {
-  const collectDots = (allDots, country) => [...allDots, ...country.dots];
-  const europeDots = getCountriesByRegion("europe")
-    .map(getMapEntry)
-    .reduce(collectDots, []);
-  return getCenterCoordinates(width, height, europeDots);
 }
