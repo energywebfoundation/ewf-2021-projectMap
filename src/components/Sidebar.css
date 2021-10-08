@@ -6,6 +6,7 @@
 .dots-map__sidebar__main-area {
   position: relative;
   height: calc(100vh - 118px);
+  overflow: hidden;
 }
 
 .dots-map__sidebar__card-container {
