@@ -7,18 +7,18 @@
 }
 
 .dots-map__searchbar__adornment {
-  width: 11px;
-  height: 11px;
+  width: 32px;
+  height: 32px;
   position: absolute;
-  top: 12px;
-  left: 10px;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .dots-map__searchbar__adornment img {
-  width: 100%;
+  width: 11px;
 }
 
 .dots-map__searchbar input {
