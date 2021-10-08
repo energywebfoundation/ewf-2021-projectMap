@@ -11,6 +11,7 @@ import useMediumScreen from "./hooks/useMediumScreen";
 import Sidebar from "./components/Sidebar";
 import { getCountriesByRegion } from "./services/mapUtils";
 import unique from "./services/unique";
+import isMobile from "ismobilejs";
 
 function App() {
   const [isProcessingResize, setProcessingResize] = useState(false);
@@ -20,6 +21,9 @@ function App() {
   const selectedCountries = useSelectedCountries(result);
   const mapContainerRef = useRef();
   useEffect(() => {
+    if (isMobile().any) {
+      return;
+    }
     window.addEventListener("resize", () => {
       setProcessingResize(true);
       setTimeout(() => setProcessingResize(false), 500);

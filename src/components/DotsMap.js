@@ -14,6 +14,9 @@ const DotsMap = ({
   const [key, setKey] = useState(1);
   const ref = useRef();
   useEffect(() => {
+    if (isMobile().any) {
+      return;
+    }
     const updateKey = () => {
       setKey(key + 1);
       window.removeEventListener("resize", updateKey);
