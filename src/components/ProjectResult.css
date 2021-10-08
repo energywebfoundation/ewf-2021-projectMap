@@ -1,25 +1,41 @@
 .dots-map__project-result__name {
   display: block;
+  font-size: 18px;
+  margin-bottom: 11px;
 }
 
-.dots-map__project-result__name {
-  font-size: 14px;
+.dots-map__project-result__organizations {
+  display: block;
   margin-bottom: 5px;
-}
-
-.dots-map__projects-dropdown__country {
-  text-transform: uppercase;
-  color: var(--text-secondary-color);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: left;
+  color: var(--main-color);
   line-height: 23px;
 }
 
-.dots-map__projects-dropdown__country > :first-child {
-  margin-right: 5px;
-  margin-left: -3px;
-  padding: 5px 5px 5px 0;
-  height: auto;
+.dots-map__project-result__project-types {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 9px;
+}
+
+.dots-map__project-result__project-types li {
+  font-size: 8px;
+  text-transform: uppercase;
+  color: #9b9b9b;
+  display: flex;
+  align-items: center;
+  line-height: 23px;
+}
+
+.dots-map__project-result__project-types li:not(:last-child) {
+  margin-right: 7px;
+}
+
+.dots-map__project-result__project-types li:not(:last-child):after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #9b9b9b;
+  border-radius: 100%;
+  margin-left: 7px;
 }

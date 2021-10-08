@@ -73,8 +73,23 @@ function useColor(relativePosition) {
 
 function useProjectsCountCircles(ref) {
   const [projectsCountCircles, setProjectsCountCircles] = useState([]);
+  const [{ width, height }, setDimension] = useState({ width: 0, height: 0 });
+  const updateDimensions = (svgElement) => () => {
+    const { width, height } = svgElement.getBoundingClientRect();
+    setDimension({ width, height });
+  };
   useEffect(() => {
     if (!ref.current) {
+      return;
+    }
+    const svgElement = ref.current.closest("svg");
+    updateDimensions(svgElement)();
+    const resizeObserver = new ResizeObserver(updateDimensions(svgElement));
+    resizeObserver.observe(svgElement);
+    return () => resizeObserver.disconnect();
+  }, [ref]);
+  useEffect(() => {
+    if (!width || !height) {
       return;
     }
 
@@ -87,9 +102,6 @@ function useProjectsCountCircles(ref) {
     const getMax = (max, entry) =>
       entry.projectsCount > max ? entry.projectsCount : max;
 
-    const { width, height } = ref.current
-      .closest("svg")
-      .getBoundingClientRect();
     const projectsCountCircles = getCountries()
       .map(getMapEntry)
       .filter(isDefined)
@@ -117,7 +129,7 @@ function useProjectsCountCircles(ref) {
         relativePosition: projectCountsCircle.projectsCount / maxProjects,
       }))
     );
-  }, [ref]);
+  }, [width, height]);
   return projectsCountCircles;
 }
 

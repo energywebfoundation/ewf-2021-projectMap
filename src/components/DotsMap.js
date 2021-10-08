@@ -38,7 +38,7 @@ const DotsMap = ({
             selectedColor={selectedColor}
           />
         ))}
-        <ProjectsCountCircles onClick={onCountrySelected} />
+        <ProjectsCountCircles key={key} onClick={onCountrySelected} />
       </svg>
     </>
   );

@@ -6,8 +6,17 @@
   flex-direction: row;
   align-items: center;
   justify-content: left;
+  margin: 11px 0 14px 0;
 }
 
 .dots-map__project-country span {
   opacity: 0.5;
+}
+
+.dots-map__project-country .dots-map__icon {
+  margin-right: 7px;
+}
+
+.dots-map__project-country img {
+  width: 11px;
 }

@@ -1,3 +1,7 @@
+.dots-map__organization-result {
+  cursor: default;
+}
+
 .dots-map__organization-result header {
   display: flex;
   flex-direction: row;

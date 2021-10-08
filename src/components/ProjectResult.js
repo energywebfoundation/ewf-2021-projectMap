@@ -1,12 +1,15 @@
 import React from "react";
-import Icon from "./Icon";
 import "./ProjectResult.css";
 
 const ProjectResult = ({ project, onClick }) => (
   <div className="dots-map__result dots-map__project-result" onClick={onClick}>
-    <ProjectOrganizations projectOrganizations={project.organization} />
+    <ProjectTypes
+      projectTypes={(project.projectType || "")
+        .split(",")
+        .map((projectType) => projectType.toLowerCase().trim())}
+    />
     <ProjectName projectName={project.projectName} />
-    <ProjectLocations projectLocations={project.location} />
+    <ProjectOrganizations projectOrganizations={project.organization} />
   </div>
 );
 
@@ -22,19 +25,10 @@ const ProjectName = ({ projectName }) => (
   <span className="dots-map__project-result__name">{projectName}</span>
 );
 
-const ProjectLocations = ({ projectLocations }) => (
-  <ul className="dots-map__project-result__locations">
-    {projectLocations.split(",").map((country) => (
-      <li key={country}>
-        <Country country={country.trim()} />
-      </li>
+const ProjectTypes = ({ projectTypes }) => (
+  <ul className="dots-map__project-result__project-types">
+    {projectTypes.map((projectType) => (
+      <li key={projectType}>{projectType}</li>
     ))}
   </ul>
-);
-
-const Country = ({ country }) => (
-  <div className="dots-map__projects-dropdown__country">
-    <Icon name={`${country}.png`} alt={country} noStyle={true} />
-    <span className="">{country}</span>
-  </div>
 );
