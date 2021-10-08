@@ -33,7 +33,7 @@ function App() {
     if (!isMediumScreen || !mapContainerRef.current) {
       return;
     }
-    scrollToMiddle(mapContainerRef.current);
+    scrollToMiddle(mapContainerRef.current.querySelector("svg"));
   }, [isMediumScreen, mapContainerRef]);
   return (
     <div className={`dots-map ${isProcessingResize ? "dots-map--hidden" : ""}`}>
@@ -148,7 +148,11 @@ function isEuropean(country) {
 async function scrollToMiddle(element) {
   // XXX: Possibly the least elegant solution to the problem, I know
   const interval = setInterval(() => {
-    element.scrollTo(element.clientWidth / 2, 0);
+    element.parentElement.scrollTo({
+      left: (element.clientWidth - window.innerWidth) / 2,
+      top: 0,
+      behavior: "instant",
+    });
   }, 25);
   setTimeout(() => clearInterval(interval), 1500);
 }
