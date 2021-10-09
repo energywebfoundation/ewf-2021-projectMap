@@ -16,6 +16,7 @@ import "./Sidebar.css";
 const isMobile = () => originalIsMobile().any;
 
 const Sidebar = ({ result, openResult, closeResult }) => {
+  const [displayedResult, setDisplayedResult] = useState(undefined);
   const [showResults, setShowResults] = useState(!isMobile());
   const [projectTypeSelection, setProjectTypeSelection] = useState(
     getProjectTypeInitialSelection()
@@ -28,6 +29,21 @@ const Sidebar = ({ result, openResult, closeResult }) => {
       ...projectTypeSelection,
       [projectType]: !projectTypeSelection[projectType],
     });
+  useEffect(() => {
+    setDisplayedResult((prevDisplayedResult) => {
+      if (prevDisplayedResult) {
+        setDisplayedResult({
+          ...prevDisplayedResult,
+          leave: true,
+        });
+        setTimeout(() => setDisplayedResult(result), 500);
+      } else {
+        setDisplayedResult(result);
+      }
+    });
+  }, [result]);
+  const cardContainerClassName = useCardContainerClassName(displayedResult);
+  const backdropClassName = useBackdropClassName(displayedResult);
   return (
     <div className="dots-map__sidebar">
       <Filters
@@ -45,7 +61,7 @@ const Sidebar = ({ result, openResult, closeResult }) => {
         enableBackButton={showResults && isMobile()}
         onBackClick={() => setShowResults(false)}
       />
-      {(showResults || result) && (
+      {(showResults || displayedResult) && (
         <div className="dots-map__sidebar__main-area">
           {showResults && (
             <ResultsList
@@ -54,21 +70,19 @@ const Sidebar = ({ result, openResult, closeResult }) => {
               showCategoryTitles={isMobile() || !!query}
             />
           )}
-          {!!result && <Backdrop onClick={closeResult} />}
-          {!!result && (
-            <div
-              className={`dots-map__sidebar__card-container ${
-                isMobile() ? "dots-map--slideIn" : "dots-map--slideInFromBottom"
-              }`}
-            >
-              <OpenResult
-                result={result}
-                onClose={closeResult}
-                onProjectClick={(project) =>
-                  openResult({ category: "project", value: project })
-                }
-              />
-            </div>
+          {!!displayedResult && (
+            <>
+              <Backdrop onClick={closeResult} className={backdropClassName} />
+              <div className={cardContainerClassName}>
+                <OpenResult
+                  result={displayedResult}
+                  onClose={closeResult}
+                  onProjectClick={(project) =>
+                    openResult({ category: "project", value: project })
+                  }
+                />
+              </div>
+            </>
           )}
         </div>
       )}
@@ -77,6 +91,30 @@ const Sidebar = ({ result, openResult, closeResult }) => {
 };
 
 export default Sidebar;
+
+function useCardContainerClassName(displayedResult) {
+  let className = "dots-map__sidebar__card-container ";
+  if (!displayedResult) {
+    return className;
+  }
+  if (displayedResult.leave) {
+    className += isMobile()
+      ? "dots-map--slideOut"
+      : "dots-map--slideOutToBottom";
+  } else {
+    className += isMobile()
+      ? "dots-map--slideIn"
+      : "dots-map--slideInFromBottom";
+  }
+  return className;
+}
+
+function useBackdropClassName(displayedResult) {
+  if (!displayedResult) {
+    return "";
+  }
+  return displayedResult.leave ? "dots-map--fadeOut" : "dots-map--fadeIn";
+}
 
 function useResults(category, query, projectTypeSelection) {
   const [allPossibleResults] = useState(getAllPossibleResults());

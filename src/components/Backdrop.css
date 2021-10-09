@@ -7,18 +7,6 @@
   cursor: pointer;
   background: #150925;
   opacity: 0.54;
-  animation-name: backdrop-fadeIn;
-  animation-duration: 0.8s;
-}
-
-@keyframes backdrop-fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 0.54;
-  }
 }
 
 @media (max-width: 800px) {

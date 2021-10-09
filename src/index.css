@@ -94,3 +94,35 @@ body::-webkit-scrollbar-thumb {
     transform: translate(0, 0);
   }
 }
+
+.dots-map--slideOut {
+  transition: opacity 0.5s, transform 0.5s;
+  opacity: 0 !important;
+  transform: translate(0, -50%) !important;
+}
+
+.dots-map--slideOutToBottom {
+  transition: opacity 0.5s, transform 0.5s;
+  opacity: 0 !important;
+  transform: translate(0, 50%) !important;
+}
+
+.dots-map--fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.54;
+  }
+}
+
+.dots-map--fadeOut {
+  transition: opacity 0.5s;
+  opacity: 0 !important;
+}
