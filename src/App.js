@@ -81,7 +81,7 @@ function prepare(map) {
         : window.dotsMapConfig.dotColor || "#C8C8CA",
     dots: country.dots.map((dot) => ({
       ...dot,
-      radius: window.dotsMapConfig.dotRadius || getDotRadius(),
+      radius: dot.radius || window.dotsMapConfig.dotRadius || getDotRadius(),
     })),
   }));
 }
@@ -93,7 +93,7 @@ function getRandomColor() {
 }
 
 function getDotRadius() {
-  return 2.5;
+  return 2;
 }
 
 function useSelectedCountries(result) {

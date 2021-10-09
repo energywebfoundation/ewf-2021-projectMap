@@ -36,7 +36,7 @@ export function getProjectCountries(project) {
     .sort((a, b) => a.localeCompare(b));
 }
 
-export function getProjectsByCountry(country) {
+export const getProjectsByCountry = buildMemo((country) => {
   return getDataset()
     .filter(
       ({ location }) =>
@@ -45,7 +45,7 @@ export function getProjectsByCountry(country) {
           .indexOf(country.toLowerCase().trim().replace(/_/g, " ")) >= 0
     )
     .sort(sortProjects);
-}
+});
 
 export function getProjectsByOrganization(org) {
   return getDataset()

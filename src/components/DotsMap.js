@@ -79,6 +79,8 @@ const Country = ({
             ? "var(--selected-country-color)"
             : isHover
             ? "var(--hovered-country-color)"
+            : isCountryInProjects(country.id)
+            ? country.color
             : dot.color || country.color,
         }}
         country={country}
@@ -100,20 +102,16 @@ const Dot = ({ dot, country, onClick, onMouseEnter, onMouseLeave }) => {
     [country]
   );
   return (
-    <g ref={ref}>
+    <g ref={ref} id={`dots-map__${country.id}__${dot.id}`}>
       <rect
         className={`dots-map__canvas__clickable-overlay${
           isHighlighted ? "--clickable" : ""
         }`}
         fill="none"
-        width={dot.radius * 6}
-        height={dot.radius * 6}
-        x={
-          scale(dot.x, svgElement.clientWidth, dot.radius * 3) - dot.radius * 3
-        }
-        y={
-          scale(dot.y, svgElement.clientHeight, dot.radius * 3) - dot.radius * 3
-        }
+        width={15}
+        height={15}
+        x={scale(dot.x, svgElement.clientWidth, 6) - 6}
+        y={scale(dot.y, svgElement.clientHeight, 6) - 6}
         onClick={isHighlighted ? () => onClick(country.id) : () => {}}
         onMouseEnter={
           isHighlighted && !isMobile().any ? onMouseEnter : () => {}
