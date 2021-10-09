@@ -28,8 +28,6 @@ window.dotsMapConfig = {
         "#A566FF",
         ...
     ],
-    // Color for the dots of the countries currently selected
-    selectedColor: "#DB4437",
     // The data we plot in the map
     dataset: [
         {

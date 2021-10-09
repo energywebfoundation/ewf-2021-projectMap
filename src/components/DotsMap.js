@@ -5,12 +5,7 @@ import isMobile from "ismobilejs";
 import scale from "../services/scale";
 import ProjectsCountCircles from "./ProjectsCountCircles";
 
-const DotsMap = ({
-  map,
-  selectedCountries = [],
-  onCountrySelected,
-  selectedColor,
-}) => {
+const DotsMap = ({ map, selectedCountries = [], onCountrySelected }) => {
   const [key, setKey] = useState(1);
   const [hoveredCountry, setHoveredCountry] = useState(null);
   const ref = useRef();
@@ -39,7 +34,6 @@ const DotsMap = ({
             country={country}
             onCountrySelected={onCountrySelected}
             isSelected={selectedCountries.includes(country.id)}
-            selectedColor={selectedColor}
           />
         ))}
         <ProjectsCountCircles
@@ -56,14 +50,16 @@ const DotsMap = ({
 
 export default DotsMap;
 
-const Country = ({ country, onCountrySelected, isSelected, selectedColor }) => (
+const Country = ({ country, onCountrySelected, isSelected }) => (
   <g>
     {country.dots.map((dot) => (
       <Dot
         key={dot.id}
         dot={{
           ...dot,
-          color: isSelected ? selectedColor : dot.color || country.color,
+          color: isSelected
+            ? "var(--selected-country-color)"
+            : dot.color || country.color,
         }}
         country={country}
         onCountrySelected={onCountrySelected}

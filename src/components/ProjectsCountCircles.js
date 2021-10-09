@@ -53,7 +53,7 @@ const ProjectsCountCircle = ({
 }) => {
   const ref = useRef();
   const radius = useRadius(relativePosition);
-  const color = useColor(relativePosition, isSelected, isHover);
+  const [color, textColor] = useColor(relativePosition, isSelected, isHover);
   const { x, y } = getCoordinates(ref.current, region);
   return (
     <g
@@ -63,15 +63,14 @@ const ProjectsCountCircle = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <circle cx={x} cy={y} r={radius} fill={color}>
-        {projectsCount}
-      </circle>
+      <circle cx={x} cy={y} r={radius} fill={color} />
       <text
         x={x}
         y={y}
         textAnchor="middle"
         alignmentBaseline="middle"
         fontSize="10px"
+        fill={textColor}
       >
         {projectsCount}
       </text>
@@ -110,14 +109,14 @@ function useRadius(relativePosition) {
 
 function useColor(relativePosition, isSelected, isHover) {
   if (isSelected) {
-    return "var(--region-pill-selected-color)";
+    return ["var(--selected-country-color)", "white"];
   }
   if (isHover) {
-    return "var(--region-pill-hover-color)";
+    return ["var(--hovered-country-color)", "white"];
   }
   const colors = ["#F6AAAA", "#9EFAFB", "#BF93FF", "#F3D882"];
   const index = Math.ceil(relativePosition * colors.length) - 1;
-  return colors[index];
+  return [colors[index], "#452E66"];
 }
 
 function getProjectsCountCircles() {

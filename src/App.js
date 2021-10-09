@@ -62,7 +62,6 @@ function App() {
               }
             }}
             selectedCountries={selectedCountries}
-            selectedColor={window.dotsMapConfig.selectedColor || "#DB4437"}
           />
         </div>
         {isMediumScreen && <DragIndicator />}
