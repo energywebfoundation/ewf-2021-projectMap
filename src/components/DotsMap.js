@@ -33,7 +33,11 @@ const DotsMap = ({ map, selectedCountries = [], onCountrySelected }) => {
           <Country
             key={country.id}
             country={country}
-            onCountrySelected={onCountrySelected}
+            onClick={onCountrySelected}
+            onMouseEnter={() =>
+              setHoveredCountry(isEuropean(country.id) ? "europe" : country.id)
+            }
+            onMouseLeave={() => setHoveredCountry(null)}
             isSelected={selectedCountries.includes(country.id)}
             isHover={
               hoveredCountry === country.id ||
@@ -57,7 +61,14 @@ const DotsMap = ({ map, selectedCountries = [], onCountrySelected }) => {
 
 export default DotsMap;
 
-const Country = ({ country, onCountrySelected, isSelected, isHover }) => (
+const Country = ({
+  country,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  isSelected,
+  isHover,
+}) => (
   <g>
     {country.dots.map((dot) => (
       <Dot
@@ -71,13 +82,15 @@ const Country = ({ country, onCountrySelected, isSelected, isHover }) => (
             : dot.color || country.color,
         }}
         country={country}
-        onCountrySelected={onCountrySelected}
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       />
     ))}
   </g>
 );
 
-const Dot = ({ dot, country, onCountrySelected, onHover }) => {
+const Dot = ({ dot, country, onClick, onMouseEnter, onMouseLeave }) => {
   const ref = useRef();
   const svgElement = ref.current
     ? ref.current.closest("svg")
@@ -101,8 +114,13 @@ const Dot = ({ dot, country, onCountrySelected, onHover }) => {
         y={
           scale(dot.y, svgElement.clientHeight, dot.radius * 3) - dot.radius * 3
         }
-        onClick={isHighlighted ? () => onCountrySelected(country.id) : () => {}}
-        onMouseEnter={isHighlighted && !isMobile().any ? onHover : () => {}}
+        onClick={isHighlighted ? () => onClick(country.id) : () => {}}
+        onMouseEnter={
+          isHighlighted && !isMobile().any ? onMouseEnter : () => {}
+        }
+        onMouseLeave={
+          isHighlighted && !isMobile().any ? onMouseLeave : () => {}
+        }
       />
       <circle
         className="dots-map__canvas__dot"
