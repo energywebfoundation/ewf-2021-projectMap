@@ -6,6 +6,9 @@
   --text-secondary-color: #9b9b9b;
   --light-background: #f9f9f9;
   --border-color: #ebebeb;
+  --region-pill-color: #a466ff;
+  --region-pill-hover-color: #7907fe;
+  --region-pill-selected-color: #fd51a1;
   font-size: 10px;
 }
 

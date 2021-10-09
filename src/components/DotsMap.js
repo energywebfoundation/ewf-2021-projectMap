@@ -12,6 +12,7 @@ const DotsMap = ({
   selectedColor,
 }) => {
   const [key, setKey] = useState(1);
+  const [hoveredCountry, setHoveredCountry] = useState(null);
   const ref = useRef();
   useEffect(() => {
     if (isMobile().any) {
@@ -41,7 +42,13 @@ const DotsMap = ({
             selectedColor={selectedColor}
           />
         ))}
-        <ProjectsCountCircles onClick={onCountrySelected} />
+        <ProjectsCountCircles
+          onClick={onCountrySelected}
+          selected={selectedCountries}
+          hovered={hoveredCountry}
+          onMouseEnter={setHoveredCountry}
+          onMouseLeave={() => setHoveredCountry(null)}
+        />
       </svg>
     </>
   );

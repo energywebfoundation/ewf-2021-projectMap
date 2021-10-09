@@ -4,11 +4,21 @@ import {
   getProjectsByCountry,
   getProjectsByRegion,
 } from "../services/datasetUtils";
-import { getCountriesByRegion, getMapEntry } from "../services/mapUtils";
+import {
+  getCountriesByRegion,
+  getMapEntry,
+  isEuropean,
+} from "../services/mapUtils";
 import scale from "../services/scale";
 import "./ProjectsCountCircles.css";
 
-const ProjectsCountCircles = ({ onClick }) => {
+const ProjectsCountCircles = ({
+  onClick,
+  selected,
+  hovered,
+  onMouseEnter,
+  onMouseLeave,
+}) => {
   const [projectsCountCircles] = useState(getProjectsCountCircles());
   return (
     <>
@@ -19,6 +29,10 @@ const ProjectsCountCircles = ({ onClick }) => {
           onClick={() =>
             onClick(projectsCountCircle.region || projectsCountCircle.country)
           }
+          isSelected={isSelected(projectsCountCircle.region, selected)}
+          isHover={hovered === projectsCountCircle.region}
+          onMouseEnter={() => onMouseEnter(projectsCountCircle.region)}
+          onMouseLeave={() => onMouseLeave(projectsCountCircle.region)}
         />
       ))}
     </>
@@ -32,13 +46,23 @@ const ProjectsCountCircle = ({
   projectsCount,
   relativePosition,
   onClick,
+  onMouseEnter,
+  onMouseLeave,
+  isSelected,
+  isHover,
 }) => {
   const ref = useRef();
   const radius = useRadius(relativePosition);
   const color = useColor(relativePosition);
   const { x, y } = getCoordinates(ref.current, region);
   return (
-    <g className="dots-map__projects-count-circle" onClick={onClick} ref={ref}>
+    <g
+      className="dots-map__projects-count-circle"
+      onClick={onClick}
+      ref={ref}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <circle cx={x} cy={y} r={radius} fill={color}>
         {projectsCount}
       </circle>
@@ -51,7 +75,28 @@ const ProjectsCountCircle = ({
       >
         {projectsCount}
       </text>
+      <RegionPill
+        region={region}
+        state={isSelected ? "selected" : isHover ? "hover" : "hidden"}
+        x={x}
+        y={y - radius - 15}
+      />
     </g>
+  );
+};
+
+const RegionPill = ({ region, state, ...props }) => {
+  const regionWidth = 40 + region.length * 5;
+  return (
+    <foreignObject {...props} width={regionWidth} height={30}>
+      <div className={"dots-map__region-pill dots-map__region-pill--" + state}>
+        <img
+          src={`${process.env.PUBLIC_URL}/icons/${region}.png`}
+          alt={region}
+        />
+        <span>{region}</span>
+      </div>
+    </foreignObject>
   );
 };
 
@@ -153,4 +198,11 @@ function getCenterCoordinates(width, height, allDots) {
     x: scale(relativeMiddlePoint.x, width, 0),
     y: scale(relativeMiddlePoint.y, height, 0),
   };
+}
+
+function isSelected(region, selectedCountries) {
+  return (
+    selectedCountries.includes(region) ||
+    (region === "europe" && selectedCountries.some(isEuropean))
+  );
 }

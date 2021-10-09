@@ -25,4 +25,9 @@ export function getCountriesByRegion(region) {
     .map(({ id }) => id);
 }
 
-window.getHemisphere = getHemisphere;
+export function isEuropean(country) {
+  const sanitize = (c) => c.trim().toLowerCase().replace(/_/g, " ");
+  const isSameCountry = (original) => (candidate) =>
+    sanitize(original) === sanitize(candidate);
+  return getCountriesByRegion("europe").some(isSameCountry(country));
+}

@@ -12,6 +12,7 @@ export function getCountries() {
       .flatMap(({ location }) => location.split(","))
       .map((country) => country.trim())
       .map((country) => country.toLowerCase())
+      .filter((x) => !!x)
       .sort((a, b) => a.localeCompare(b))
   );
 }

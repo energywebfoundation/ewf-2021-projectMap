@@ -9,7 +9,7 @@ import {
 import "./App.css";
 import useMediumScreen from "./hooks/useMediumScreen";
 import Sidebar from "./components/Sidebar";
-import { getCountriesByRegion } from "./services/mapUtils";
+import { getCountriesByRegion, isEuropean } from "./services/mapUtils";
 import unique from "./services/unique";
 import isMobile from "ismobilejs";
 
@@ -136,13 +136,6 @@ function useSelectedCountries(result) {
     }
   }, [result]);
   return selectedCountries;
-}
-
-function isEuropean(country) {
-  const sanitize = (c) => c.trim().toLowerCase().replace(/_/g, " ");
-  const isSameCountry = (original) => (candidate) =>
-    sanitize(original) === sanitize(candidate);
-  return getCountriesByRegion("europe").some(isSameCountry(country));
 }
 
 async function scrollToMiddle(element) {
