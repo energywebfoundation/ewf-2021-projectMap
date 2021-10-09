@@ -103,20 +103,32 @@ function getAllPossibleProjectsResults() {
 }
 
 function getAllPossibleCountriesResults() {
-  return getCountries().map((country) => {
-    const mapEntry = getMapEntry(country);
-    if (mapEntry) {
-      return {
-        category: "country",
-        value: country,
-      };
-    } else {
-      return {
-        category: "region",
-        value: country,
-      };
-    }
-  });
+  return getCountries()
+    .map((country) => {
+      const mapEntry = getMapEntry(country);
+      if (mapEntry) {
+        return {
+          category: "country",
+          value: country,
+        };
+      } else {
+        return {
+          category: "region",
+          value: country,
+        };
+      }
+    })
+    .sort(sortCountries);
+}
+
+function sortCountries(countryA, countryB) {
+  if (countryA.value === "global") {
+    return -1;
+  } else if (countryB.value === "global") {
+    return 1;
+  } else {
+    return countryA.value.localeCompare(countryB.value);
+  }
 }
 
 function getAllPossibleOrganizationsResults() {
