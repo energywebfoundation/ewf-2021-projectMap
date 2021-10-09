@@ -6,7 +6,7 @@ import {
 } from "../services/datasetUtils";
 import "./Categories.css";
 
-const Categories = ({ selectedCategories, onToggleCategory }) => {
+const Categories = ({ selectedCategory, onCategoryClick }) => {
   const [projects] = useState(getProjects().length);
   const [countries] = useState(getCountries().length);
   const [partners] = useState(getOrganizations().length);
@@ -14,31 +14,39 @@ const Categories = ({ selectedCategories, onToggleCategory }) => {
     <div className="dots-map__categories">
       <button
         className={
-          selectedCategories.includes("project")
-            ? "dots-map__categories--selected"
-            : ""
+          selectedCategory === "project" ? "dots-map__categories--selected" : ""
         }
-        onClick={() => onToggleCategory("project")}
+        onClick={
+          selectedCategory === "project"
+            ? () => {}
+            : () => onCategoryClick("project")
+        }
       >
         Projects ({projects})
       </button>
       <button
         className={
-          selectedCategories.includes("country")
-            ? "dots-map__categories--selected"
-            : ""
+          selectedCategory === "country" ? "dots-map__categories--selected" : ""
         }
-        onClick={() => onToggleCategory("country")}
+        onClick={
+          selectedCategory === "country"
+            ? () => {}
+            : () => onCategoryClick("country")
+        }
       >
         Countries ({countries})
       </button>
       <button
         className={
-          selectedCategories.includes("organization")
+          selectedCategory === "organization"
             ? "dots-map__categories--selected"
             : ""
         }
-        onClick={() => onToggleCategory("organization")}
+        onClick={
+          selectedCategory === "organization"
+            ? () => {}
+            : () => onCategoryClick("organization")
+        }
       >
         Partners ({partners})
       </button>

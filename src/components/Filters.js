@@ -7,8 +7,8 @@ import "./Filters.css";
 const Filters = ({
   query,
   setQuery,
-  selectedCategories,
-  onToggleCategory,
+  selectedCategory,
+  onCategoryClick,
   projectTypeSelection,
   toggleProjectTypeSelection,
   onEnter,
@@ -24,8 +24,8 @@ const Filters = ({
       onBackClick={onBackClick}
     />
     <Categories
-      selectedCategories={selectedCategories}
-      onToggleCategory={onToggleCategory}
+      selectedCategory={selectedCategory}
+      onCategoryClick={onCategoryClick}
     />
     <div
       style={{

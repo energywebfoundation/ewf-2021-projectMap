@@ -20,18 +20,9 @@ const Sidebar = ({ result, openResult, closeResult }) => {
   const [projectTypeSelection, setProjectTypeSelection] = useState(
     getProjectTypeInitialSelection()
   );
-  const [selectedCategories, setSelectedCategory] = useState(
-    isMobile() ? [] : ["project"]
-  );
+  const [selectedCategory, setSelectedCategory] = useState("project");
   const [query, setQuery] = useState("");
-  const results = useResults(selectedCategories, query, projectTypeSelection);
-  const toggleCategory = (category) => {
-    if (selectedCategories.includes(category)) {
-      setSelectedCategory(selectedCategories.filter((c) => c !== category));
-    } else {
-      setSelectedCategory([...selectedCategories, category]);
-    }
-  };
+  const results = useResults(selectedCategory, query, projectTypeSelection);
   const toggleProjectTypeSelection = (projectType) =>
     setProjectTypeSelection({
       ...projectTypeSelection,
@@ -46,8 +37,8 @@ const Sidebar = ({ result, openResult, closeResult }) => {
           setShowResults(!isMobile());
           closeResult();
         }}
-        selectedCategories={selectedCategories}
-        onToggleCategory={toggleCategory}
+        selectedCategory={selectedCategory}
+        onCategoryClick={setSelectedCategory}
         projectTypeSelection={projectTypeSelection}
         toggleProjectTypeSelection={toggleProjectTypeSelection}
         onEnter={() => setShowResults(true)}
@@ -83,16 +74,16 @@ const Sidebar = ({ result, openResult, closeResult }) => {
 
 export default Sidebar;
 
-function useResults(categories, query, projectTypeSelection) {
+function useResults(category, query, projectTypeSelection) {
   const [allPossibleResults] = useState(getAllPossibleResults());
   const [results, setResults] = useState(
-    getResults(allPossibleResults, categories, query, projectTypeSelection)
+    getResults(allPossibleResults, category, query, projectTypeSelection)
   );
   useEffect(() => {
     setResults(
-      getResults(allPossibleResults, categories, query, projectTypeSelection)
+      getResults(allPossibleResults, category, query, projectTypeSelection)
     );
-  }, [allPossibleResults, categories, query, projectTypeSelection]);
+  }, [allPossibleResults, category, query, projectTypeSelection]);
   return results;
 }
 
@@ -135,24 +126,19 @@ function getAllPossibleOrganizationsResults() {
   }));
 }
 
-function getResults(
-  allPossibleResults,
-  categories,
-  query,
-  projectTypeSelection
-) {
+function getResults(allPossibleResults, category, query, projectTypeSelection) {
   return allPossibleResults
-    .filter(isCategory(categories))
+    .filter(isCategory(category))
     .filter(matchesQuery(query))
     .filter(isProjectTypeSelection(projectTypeSelection));
 }
 
-function isCategory(categories) {
-  return !categories.length
+function isCategory(category) {
+  return !category
     ? () => true
     : (result) =>
-        categories.includes(result.category) ||
-        (categories.includes("country") && result.category === "region");
+        result.category === category ||
+        (category === "country" && result.category === "region");
 }
 
 function matchesQuery(query) {
