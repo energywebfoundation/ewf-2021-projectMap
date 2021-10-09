@@ -53,7 +53,7 @@ const ProjectsCountCircle = ({
 }) => {
   const ref = useRef();
   const radius = useRadius(relativePosition);
-  const color = useColor(relativePosition);
+  const color = useColor(relativePosition, isSelected, isHover);
   const { x, y } = getCoordinates(ref.current, region);
   return (
     <g
@@ -108,7 +108,13 @@ function useRadius(relativePosition) {
   return radius;
 }
 
-function useColor(relativePosition) {
+function useColor(relativePosition, isSelected, isHover) {
+  if (isSelected) {
+    return "var(--region-pill-selected-color)";
+  }
+  if (isHover) {
+    return "var(--region-pill-hover-color)";
+  }
   const colors = ["#F6AAAA", "#9EFAFB", "#BF93FF", "#F3D882"];
   const index = Math.ceil(relativePosition * colors.length) - 1;
   return colors[index];
