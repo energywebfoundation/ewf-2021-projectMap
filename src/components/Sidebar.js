@@ -56,7 +56,11 @@ const Sidebar = ({ result, openResult, closeResult }) => {
           )}
           {!!result && <Backdrop onClick={closeResult} />}
           {!!result && (
-            <div className="dots-map__sidebar__card-container dots-map--slideIn">
+            <div
+              className={`dots-map__sidebar__card-container ${
+                isMobile() ? "dots-map--slideIn" : "dots-map--slideInFromBottom"
+              }`}
+            >
               <OpenResult
                 result={result}
                 onClose={closeResult}
