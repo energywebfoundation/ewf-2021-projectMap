@@ -12,6 +12,23 @@ npm run build
 
 The resulting JS + HTML + CSS will be generated in the `build` folder.
 
+## Styling
+
+This app uses base styles from [Tailwind](https://tailwindcss.com/) and some custom CSS with a BEM-like notation, where all classes start with the `dots-map` prefix.
+
+For some colors, we've used CSS variables.
+
+```
+  --main-color: #9963f7;
+  --text-main-color: #060606;
+  --text-secondary-color: #9b9b9b;
+  --light-background: #f9f9f9;
+  --border-color: #ebebeb;
+  --standard-country-color: #a466ff;
+  --hovered-country-color: #7907fe;
+  --selected-country-color: #fd51a1;
+```
+
 ## Configuration
 
 The app is externally configurable via a `dotsMapConfig` object on `windows` that must exist before the application starts.
