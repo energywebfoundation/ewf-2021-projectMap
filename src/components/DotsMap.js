@@ -4,6 +4,7 @@ import "./DotsMap.css";
 import isMobile from "ismobilejs";
 import scale from "../services/scale";
 import ProjectsCountCircles from "./ProjectsCountCircles";
+import { isEuropean } from "../services/mapUtils";
 
 const DotsMap = ({ map, selectedCountries = [], onCountrySelected }) => {
   const [key, setKey] = useState(1);
@@ -34,6 +35,12 @@ const DotsMap = ({ map, selectedCountries = [], onCountrySelected }) => {
             country={country}
             onCountrySelected={onCountrySelected}
             isSelected={selectedCountries.includes(country.id)}
+            isHover={
+              hoveredCountry === country.id ||
+              (isCountryInProjects(country.id) &&
+                hoveredCountry === "europe" &&
+                isEuropean(country.id))
+            }
           />
         ))}
         <ProjectsCountCircles
@@ -50,7 +57,7 @@ const DotsMap = ({ map, selectedCountries = [], onCountrySelected }) => {
 
 export default DotsMap;
 
-const Country = ({ country, onCountrySelected, isSelected }) => (
+const Country = ({ country, onCountrySelected, isSelected, isHover }) => (
   <g>
     {country.dots.map((dot) => (
       <Dot
@@ -59,6 +66,8 @@ const Country = ({ country, onCountrySelected, isSelected }) => (
           ...dot,
           color: isSelected
             ? "var(--selected-country-color)"
+            : isHover
+            ? "var(--hovered-country-color)"
             : dot.color || country.color,
         }}
         country={country}

@@ -1,6 +1,7 @@
 import getDataset from "../data/dataset";
 import unique from "./unique";
 import { getCountriesByRegion } from "./mapUtils";
+import buildMemo from "./memo";
 
 export function getProjects() {
   return getDataset().sort(sortProjects);
@@ -83,7 +84,7 @@ export function getProjectTypes() {
   ).filter((x) => !!x);
 }
 
-export function getProjectsByRegion(region) {
+export const getProjectsByRegion = buildMemo((region) => {
   return [
     ...getCountriesByRegion(region).flatMap(getProjectsByCountry),
     ...getProjects().filter(({ location }) =>
@@ -93,4 +94,4 @@ export function getProjectsByRegion(region) {
         .includes(region)
     ),
   ];
-}
+});

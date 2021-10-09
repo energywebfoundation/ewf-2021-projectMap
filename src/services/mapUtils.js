@@ -1,4 +1,5 @@
 import getMap from "../data/map";
+import buildMemo from "./memo";
 
 export function getHemisphere(country) {
   return getDots(country).reduce(averageX, 0) > 0.5 ? "east" : "west";
@@ -25,9 +26,9 @@ export function getCountriesByRegion(region) {
     .map(({ id }) => id);
 }
 
-export function isEuropean(country) {
+export const isEuropean = buildMemo((country) => {
   const sanitize = (c) => c.trim().toLowerCase().replace(/_/g, " ");
   const isSameCountry = (original) => (candidate) =>
     sanitize(original) === sanitize(candidate);
   return getCountriesByRegion("europe").some(isSameCountry(country));
-}
+});
