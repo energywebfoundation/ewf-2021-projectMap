@@ -51,3 +51,9 @@
 .dots-map__region-pill--hidden {
   transform: scale(0);
 }
+
+@media (max-width: 800px) {
+  .dots-map__region-pill {
+    display: none;
+  }
+}
