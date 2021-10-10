@@ -27,6 +27,9 @@ export function getCountriesByRegion(region) {
 }
 
 export const isEuropean = buildMemo((country) => {
+  if (country === "europe") {
+    return true;
+  }
   const sanitize = (c) => c.trim().toLowerCase().replace(/_/g, " ");
   const isSameCountry = (original) => (candidate) =>
     sanitize(original) === sanitize(candidate);
