@@ -44,6 +44,12 @@ const Sidebar = ({ result, openResult, closeResult }) => {
   }, [result]);
   const cardContainerClassName = useCardContainerClassName(displayedResult);
   const backdropClassName = useBackdropClassName(displayedResult);
+  const onCategoryClick = (category) => {
+    setSelectedCategory(category);
+    if (isMobile()) {
+      setShowResults(true);
+    }
+  };
   return (
     <div className="dots-map__sidebar">
       <Filters
@@ -54,7 +60,7 @@ const Sidebar = ({ result, openResult, closeResult }) => {
           closeResult();
         }}
         selectedCategory={selectedCategory}
-        onCategoryClick={setSelectedCategory}
+        onCategoryClick={onCategoryClick}
         projectTypeSelection={projectTypeSelection}
         toggleProjectTypeSelection={toggleProjectTypeSelection}
         onProjectTypeFilterClear={() =>
