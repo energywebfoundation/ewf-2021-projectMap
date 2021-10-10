@@ -77,7 +77,7 @@ const ProjectsCountCircle = ({
       <RegionPill
         region={region}
         state={isSelected ? "selected" : isHover ? "hover" : "hidden"}
-        x={x}
+        x={x - 50}
         y={y - radius - 15}
       />
     </g>
@@ -85,7 +85,7 @@ const ProjectsCountCircle = ({
 };
 
 const RegionPill = ({ region, state, ...props }) => {
-  const regionWidth = 40 + region.length * 5;
+  const regionWidth = 90 + region.length * 5;
   return (
     <foreignObject {...props} width={regionWidth} height={30}>
       <div className={"dots-map__region-pill dots-map__region-pill--" + state}>
