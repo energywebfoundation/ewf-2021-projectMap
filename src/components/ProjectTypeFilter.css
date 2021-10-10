@@ -89,3 +89,16 @@
 .dots-map__project-type-filter__checkbox--selected img {
   width: 9px;
 }
+
+.dots-map__rounded-button.dots-map__project-type-filter__clear-all {
+  text-transform: uppercase;
+  padding: 8px;
+}
+
+.dots-map__project-type-filter__clear-all:after {
+  display: none;
+}
+
+.dots-map__project-type-filter__clear-all span {
+  text-align: center;
+}

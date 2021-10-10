@@ -14,6 +14,7 @@ const Filters = ({
   onEnter,
   enableBackButton,
   onBackClick,
+  onProjectTypeFilterClear,
 }) => (
   <div className="dots-map__filters">
     <SearchBar
@@ -29,12 +30,13 @@ const Filters = ({
     />
     <div
       style={{
-        display: "none",
+        visibility: selectedCategory === "project" ? "visible" : "hidden",
       }}
     >
       <ProjectTypeFilter
         projectTypeSelection={projectTypeSelection}
         toggleProjectTypeSelection={toggleProjectTypeSelection}
+        onClearAll={onProjectTypeFilterClear}
       />
     </div>
   </div>

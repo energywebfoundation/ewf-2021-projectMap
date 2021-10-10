@@ -57,6 +57,9 @@ const Sidebar = ({ result, openResult, closeResult }) => {
         onCategoryClick={setSelectedCategory}
         projectTypeSelection={projectTypeSelection}
         toggleProjectTypeSelection={toggleProjectTypeSelection}
+        onProjectTypeFilterClear={() =>
+          setProjectTypeSelection(getProjectTypeInitialSelection())
+        }
         onEnter={() => setShowResults(true)}
         enableBackButton={showResults && isMobile()}
         onBackClick={() => setShowResults(false)}

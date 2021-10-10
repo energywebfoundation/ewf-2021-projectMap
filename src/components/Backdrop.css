@@ -11,7 +11,7 @@
 
 @media (max-width: 800px) {
   .dots-map__backdrop {
-    top: -118px;
-    height: calc(100% + 118px);
+    top: -158px;
+    height: 100vh;
   }
 }

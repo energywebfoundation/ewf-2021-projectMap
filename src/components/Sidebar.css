@@ -5,7 +5,7 @@
 
 .dots-map__sidebar__main-area {
   position: relative;
-  height: calc(100vh - 118px);
+  height: calc(100vh - 158px);
   overflow: hidden;
 }
 
@@ -24,7 +24,7 @@
 @media (max-width: 800px) {
   .dots-map__sidebar__main-area {
     z-index: 10;
-    overflow: auto;
+    overflow: visible;
   }
 
   .dots-map__sidebar__card-container {

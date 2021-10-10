@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { getProjectTypes } from "../services/datasetUtils";
+import { RoundedButton } from "./RoundedButton";
 import "./ProjectTypeFilter.css";
 
 const ProjectTypeFilter = ({
   projectTypeSelection,
   toggleProjectTypeSelection,
+  onClearAll,
 }) => {
   const [projectTypes] = useState(getProjectTypes());
   const [open, setOpen] = useState(false);
@@ -23,6 +25,9 @@ const ProjectTypeFilter = ({
               />
             </li>
           ))}
+          <li>
+            <ClearAll onClick={onClearAll} />
+          </li>
         </ul>
       )}
     </div>
@@ -52,4 +57,13 @@ const FakeCheckbox = ({ checked }) => (
       )}
     </div>
   </div>
+);
+
+const ClearAll = ({ onClick }) => (
+  <RoundedButton
+    className="dots-map__project-type-filter__clear-all"
+    onClick={onClick}
+  >
+    Clear all
+  </RoundedButton>
 );
