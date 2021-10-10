@@ -49,12 +49,15 @@ function App() {
           <DotsMap
             map={map}
             onCountrySelected={(country) => {
-              if (isEuropean(country) || country === "europe") {
+              if (
+                (isEuropean(country) || country === "europe") &&
+                (!result || result.value !== "europe")
+              ) {
                 openResult({
                   category: "region",
                   value: "europe",
                 });
-              } else {
+              } else if (!result || country !== result.value) {
                 openResult({
                   category: "country",
                   value: country,
