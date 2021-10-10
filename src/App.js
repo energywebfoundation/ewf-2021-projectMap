@@ -67,7 +67,7 @@ function App() {
             selectedCountries={selectedCountries}
           />
         </div>
-        {isMediumScreen && <DragIndicator />}
+        <DragIndicator isVisible={isMediumScreen} />
       </div>
     </div>
   );
