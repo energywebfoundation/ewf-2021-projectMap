@@ -108,11 +108,11 @@ function useCardContainerClassName(displayedResult) {
   }
   if (displayedResult.leave) {
     className += isMobile()
-      ? "dots-map--slideOut"
+      ? "dots-map--slideOutToRight"
       : "dots-map--slideOutToBottom";
   } else {
     className += isMobile()
-      ? "dots-map--slideIn"
+      ? "dots-map--slideInFromLeft"
       : "dots-map--slideInFromBottom";
   }
   return className;

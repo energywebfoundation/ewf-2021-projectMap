@@ -52,6 +52,11 @@ body::-webkit-scrollbar-thumb {
   border: 1px solid #9963f7;
 }
 
+.dots-map--slideIn {
+  animation-duration: 0.5s;
+  animation-name: slideIn;
+}
+
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -62,11 +67,6 @@ body::-webkit-scrollbar-thumb {
     opacity: 1;
     transform: translate(0, 0);
   }
-}
-
-.dots-map--slideIn {
-  animation-duration: 0.5s;
-  animation-name: slideIn;
 }
 
 @keyframes scaleIn {
@@ -128,4 +128,38 @@ body::-webkit-scrollbar-thumb {
 .dots-map--fadeOut {
   transition: opacity 0.5s;
   opacity: 0 !important;
+}
+
+.dots-map--slideInFromLeft {
+  animation-duration: 0.5s;
+  animation-name: slideInFromLeft;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+.dots-map--slideOutToRight {
+  animation-duration: 0.5s;
+  animation-name: slideOutToRight;
+}
+
+@keyframes slideOutToRight {
+  from {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(100%, 0);
+  }
 }
