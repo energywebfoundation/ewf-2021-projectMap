@@ -23,7 +23,8 @@ It's important that the JSON file is well formed directly in the spreadsheet so 
 {"key": "value", } // this is wrong because it has a trailing coma
 {"key": "value"}   // this is RIGHT because it has no trailing coma
 ```
-- use a [CSV to JSON converter](https://www.convertcsv.com/csv-to-json.htm)
+- use a CSV to JSON converter like like [csvjson](https://csvjson.com/csv2json) (important: use the "Parse Json" option)
+beware of other solutions like [convertcsv](https://www.convertcsv.com/csv-to-json.htm) that don't parse the json
 - test to see if it is well formed or not
 
 ```js
