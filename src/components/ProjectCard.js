@@ -35,9 +35,7 @@ const ProjectCardFooter = ({ project }) => (
   <div className="dots-map__project-card__footer">
     <ProjectDescription projectDescription={project.description} />
     <Filler />
-    {/* <ProjectUrls projectUrls={project.urls} />  v1 David - urls don't need to be parsed*/}
-    {/* escape both \n newline and optional , comas at the end of an object */}
-    <ProjectUrls projectUrls={JSON.parse(project.urls.replace(/\n/g, '').replace(/,\ }/g, '}'))} /> {/* doesn't work */}
+    <ProjectUrls projectUrls={project.urls} />
   </div>
 );
 
