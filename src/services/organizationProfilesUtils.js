@@ -1,10 +1,13 @@
 import getOrganizationProfiles from "../data/organizationProfiles";
 
 export function getOrganizationProfile(organization) {
+  const isSame = (a = "", b = "") =>
+    a.toLocaleLowerCase().trim() === b.toLowerCase().trim();
   return getOrganizationProfiles().find(
     ({ acronym, name }) =>
-      `(${acronym}) ${name}`.toLowerCase().trim() ===
-      organization.toLowerCase().trim()
+      isSame(`(${acronym}) ${name}`, organization) ||
+      isSame(acronym, organization) ||
+      isSame(name, organization)
   );
 }
 
