@@ -204,7 +204,7 @@ const getDataset = () =>
         urls: '[{\n"linkText": "microsite",\n "url": "https://www.riddleandcode.com/smart-energy"\n },\n{ \n "linkText": "Project announcement",\n "url": "https://www.ledgerinsights.com/wien-energie-riddlecode-tokenize-renewable-energy-installations-blockchain" \n}]',
       },
       {
-        organization: "Ripple & XRP Foundation",
+        organization: "Ripple,XRP Foundation",
         projectName: "Blockchain Decarbonization",
         location: "Global",
         projectType: "Traceability",
