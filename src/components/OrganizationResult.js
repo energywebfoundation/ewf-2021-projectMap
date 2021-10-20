@@ -13,19 +13,21 @@ const OrganizationResult = ({ organization, onClick }) => {
   return (
     <div className="dots-map__result dots-map__organization-result">
       <header>
-        <div>
-          <Icon
-            name={organizationProfile.logo}
-            alt={organizationProfile.name}
+        <div className="dots-map__organization-name-and-logo">
+          <div>
+            <Icon
+              name={organizationProfile.logo}
+              alt={organizationProfile.name}
+            />
+          </div>
+          <OrganizationName
+            organizationName={
+              organizationProfile.acronym
+                ? `(${organizationProfile.acronym}) ${organizationProfile.name}`
+                : organizationProfile.name || organization
+            }
           />
-        </div>
-        <OrganizationName
-          organizationName={
-            organizationProfile.acronym
-              ? `(${organizationProfile.acronym}) ${organizationProfile.name}`
-              : organizationProfile.name || organization
-          }
-        />
+        </div>  
         <OrganizationCountries
           countries={getOrganizationCountries(organization)}
         />
