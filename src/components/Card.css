@@ -87,4 +87,8 @@
   .dots-map__card__header {
     background-color: white;
   }
+
+  .dots-map__card__scrollable {
+    max-height: 100%;
+  }
 }
