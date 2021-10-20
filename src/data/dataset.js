@@ -359,7 +359,7 @@ const getDataset = () =>
         ]
       },
       {
-        "organization": "Ripple & XRP Foundation",
+        "organization": "Ripple, XRP Foundation",
         "projectName": "Blockchain Decarbonization",
         "location": "Global",
         "projectType": "Traceability",
