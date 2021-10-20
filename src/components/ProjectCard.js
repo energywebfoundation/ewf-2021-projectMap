@@ -35,6 +35,7 @@ const ProjectCardFooter = ({ project }) => (
   <div className="dots-map__project-card__footer">
     <ProjectDescription projectDescription={project.description} />
     <Filler />
+    <ProjectBuiltWith projectBuiltWith={project.builtWith} />
     <ProjectUrls projectUrls={project.urls} />
   </div>
 );
@@ -114,3 +115,26 @@ const ProjectCaseStudy = ({ projectCaseStudy }) => (
     <span>Read case study→</span>
   </div>
 );
+
+const ProjectBuiltWith = ({ projectBuiltWith = [] }) => {
+  if (!projectBuiltWith.length) {
+    return <React.Fragment />;
+  }
+  return (
+    <section className="dots-map__project-card__built-with">
+      <SectionTitle title="built with" />
+      <ul>
+        {projectBuiltWith.map(({ linkText, url }) => (
+          <li key={linkText}>
+            {url && (
+              <a href={url} target="_blank" rel="noreferrer">
+                {linkText}
+              </a>
+            )}
+            {!url && <span>{linkText}</span>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+};

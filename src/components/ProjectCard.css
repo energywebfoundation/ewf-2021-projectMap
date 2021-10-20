@@ -118,3 +118,23 @@
   position: relative;
   font-size: 23px;
 }
+
+.dots-map__project-card__built-with {
+  margin-bottom: 27px;
+}
+
+.dots-map__project-card__built-with ul {
+  list-style: disc;
+  padding-left: 15px;
+}
+
+.dots-map__project-card__built-with li {
+  padding: 5px 0;
+  color: #838383;
+}
+
+.dots-map__project-card__built-with a:hover,
+.dots-map__project-card__built-with a:active {
+  color: var(--main-color);
+  text-decoration: underline;
+}
