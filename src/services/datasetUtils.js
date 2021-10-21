@@ -38,11 +38,10 @@ export function getProjectCountries(project) {
 
 export const getProjectsByCountry = buildMemo((country) => {
   return getDataset()
-    .filter(
-      ({ location }) =>
-        location
-          .toLowerCase()
-          .indexOf(country.toLowerCase().trim().replace(/_/g, " ")) >= 0
+    .filter((project) =>
+      getProjectCountries(project).includes(
+        country.toLowerCase().trim().replace(/_/g, " ")
+      )
     )
     .sort(sortProjects);
 });
