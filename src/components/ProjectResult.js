@@ -6,7 +6,7 @@ const ProjectResult = ({ project, onClick }) => (
     <ProjectTypes
       projectTypes={(project.projectType || "")
         .split(",")
-        .map((projectType) => projectType.toLowerCase().trim())}
+        .map((projectType) => projectType.trim())}
     />
     <ProjectName projectName={project.projectName} />
     <ProjectOrganizations projectOrganizations={project.organization} />

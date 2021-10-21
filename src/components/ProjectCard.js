@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card";
 import Icon from "./Icon";
 import { RoundedLink } from "./RoundedButton";
+import { getProjectTypeName } from "../services/datasetUtils";
 import "./ProjectCard.css";
 
 const ProjectCard = ({ project, onClose, className = "" }) => (
@@ -44,7 +45,7 @@ const ProjectType = ({ projectType }) => (
   <section className="dots-map__project-card__project-type">
     <SectionTitle title="project type" />
     <span className="dots-map__project-card__project-type-badge">
-      {projectType}
+      {getProjectTypeName(projectType)}
     </span>
   </section>
 );

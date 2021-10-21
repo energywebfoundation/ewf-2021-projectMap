@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getProjectTypes } from "../services/datasetUtils";
+import { getProjectTypes, getProjectTypeName } from "../services/datasetUtils";
 import { RoundedButton } from "./RoundedButton";
 import "./ProjectTypeFilter.css";
 
@@ -40,7 +40,7 @@ const ProjectTypeCheckbox = ({ projectType, isSelected, onToggle }) => (
   <div className="dots-map__project-type-filter__option">
     <button onClick={onToggle}>
       <FakeCheckbox checked={isSelected} />
-      <span>{projectType}</span>
+      <span>{getProjectTypeName(projectType)}</span>
     </button>
   </div>
 );

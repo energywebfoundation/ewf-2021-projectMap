@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card";
 import { List, ListItem } from "./List";
 import GoToButton from "./GoToButton";
+import { getProjectTypeName } from "../services/datasetUtils";
 import "./ProjectListCard.css";
 
 const ProjectListCard = ({
@@ -51,7 +52,9 @@ const ProjectListEntry = ({ project }) => (
 );
 
 const ProjectType = ({ projectType }) => (
-  <span className="dots-map__project-list__project-type">{projectType}</span>
+  <span className="dots-map__project-list__project-type">
+    {getProjectTypeName(projectType)}
+  </span>
 );
 
 const ProjectName = ({ projectName }) => (

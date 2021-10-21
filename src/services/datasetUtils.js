@@ -84,6 +84,15 @@ export function getProjectTypes() {
   ).filter((x) => !!x);
 }
 
+export function getProjectTypeName(projectType = "") {
+  return getProjects()
+    .map(({ projectType = "" }) => projectType.trim())
+    .find(
+      (candidate) =>
+        projectType.toLowerCase().trim() === candidate.toLowerCase().trim()
+    );
+}
+
 export const getProjectsByRegion = buildMemo((region) => {
   return [
     ...getCountriesByRegion(region).flatMap(getProjectsByCountry),
