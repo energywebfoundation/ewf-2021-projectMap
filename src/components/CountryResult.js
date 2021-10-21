@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Icon from "./Icon";
 import "./CountryResult.css";
-import { getProjectsByCountry } from "../services/datasetUtils";
+import { getProjectsByCountry, getCountryName } from "../services/datasetUtils";
 
 const Country = ({ country, onClick }) => {
   const [projects] = useState(getProjectsByCountry(country).length);
@@ -10,8 +10,8 @@ const Country = ({ country, onClick }) => {
       className="dots-map__result dots-map__project-country"
       onClick={onClick}
     >
-      <Icon name={`${country}.png`} alt={country} />
-      <span>{`${country} (${projects})`}</span>
+      <Icon name={`${country}.png`} alt={getCountryName(country)} />
+      <span>{`${getCountryName(country)} (${projects})`}</span>
     </button>
   );
 };

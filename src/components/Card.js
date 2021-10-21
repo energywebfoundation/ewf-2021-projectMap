@@ -1,6 +1,7 @@
 import React from "react";
 import Icon from "./Icon";
 import "./Card.css";
+import { getCountryName } from "../services/datasetUtils";
 
 const Card = ({
   className = "",
@@ -32,7 +33,7 @@ const Card = ({
 export default Card;
 
 const Country = ({ country }) => {
-  const countryName = useCountryName(country);
+  const countryName = getCountryName(country);
   return (
     <div className="dots-map__card__country">
       <Icon name={`${country}.png`} alt={countryName} noStyle={true} />
@@ -50,14 +51,3 @@ const CloseCard = ({ onClose }) => (
     <Icon name="../close.png" alt="close" />
   </button>
 );
-
-function useCountryName(country) {
-  switch (country.toLowerCase()) {
-    case "us": {
-      return "united states";
-    }
-    default: {
-      return country;
-    }
-  }
-}

@@ -3,6 +3,7 @@ import {
   getCountries,
   getProjectsByCountry,
   getProjectsByRegion,
+  getCountryName,
 } from "../services/datasetUtils";
 import {
   getCountriesByRegion,
@@ -85,15 +86,16 @@ const ProjectsCountCircle = ({
 };
 
 const RegionPill = ({ region, state, ...props }) => {
-  const regionWidth = 90 + region.length * 5;
+  const regionName = getCountryName(region);
+  const regionWidth = 90 + regionName.length * 5;
   return (
     <foreignObject {...props} width={regionWidth} height={30}>
       <div className={"dots-map__region-pill dots-map__region-pill--" + state}>
         <img
           src={`${process.env.PUBLIC_URL}/icons/${region}.png`}
-          alt={region}
+          alt={regionName}
         />
-        <span>{region}</span>
+        <span>{regionName}</span>
       </div>
     </foreignObject>
   );

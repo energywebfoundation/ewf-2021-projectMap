@@ -96,3 +96,14 @@ export const getProjectsByRegion = buildMemo((region) => {
     ),
   ];
 });
+
+export function getCountryName(country) {
+  switch (country.toLowerCase()) {
+    case "us": {
+      return "united states";
+    }
+    default: {
+      return country;
+    }
+  }
+}
