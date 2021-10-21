@@ -12,7 +12,7 @@ export function getCountries() {
     getDataset()
       .flatMap(({ location }) => location.split(","))
       .map((country) => country.trim())
-      .map((country) => country.toLowerCase())  // BB mod to put US in capital letter
+      .map((country) => country.toLowerCase())
       .filter((x) => !!x)
       .sort((a, b) => a.localeCompare(b))
   );
@@ -79,8 +79,7 @@ export function getProjectByName(name) {
 export function getProjectTypes() {
   return unique(
     getProjects().map(({ projectType = "" }) =>
-      //projectType.toLowerCase().trim()
-      projectType.trim()
+      projectType.toLowerCase().trim()
     )
   ).filter((x) => !!x);
 }
