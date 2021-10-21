@@ -26,15 +26,17 @@ export function getCountriesByRegion(region) {
     .map(({ id }) => id);
 }
 
-export const isEuropean = buildMemo((country) => {
-  if (country === "europe") {
+export const isInRegion = buildMemo((region) => (country) => {
+  if (region === country) {
     return true;
   }
-  if (typeof country !== "string") {
+  if (typeof region !== "string" || typeof country !== "string") {
     return false;
   }
   const sanitize = (c) => c.trim().toLowerCase().replace(/_/g, " ");
   const isSameCountry = (original) => (candidate) =>
     sanitize(original) === sanitize(candidate);
-  return getCountriesByRegion("europe").some(isSameCountry(country));
+  return getCountriesByRegion(region).some(isSameCountry(country));
 });
+
+export const isEuropean = isInRegion("europe");

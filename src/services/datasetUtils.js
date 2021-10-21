@@ -1,6 +1,6 @@
 import getDataset from "../data/dataset";
-import unique from "./unique";
-import { getCountriesByRegion } from "./mapUtils";
+import unique, { uniqueByField } from "./unique";
+import { getCountriesByRegion, isInRegion } from "./mapUtils";
 import buildMemo from "./memo";
 
 export function getProjects() {
@@ -38,10 +38,11 @@ export function getProjectCountries(project) {
 
 export const getProjectsByCountry = buildMemo((country) => {
   return getDataset()
-    .filter((project) =>
-      getProjectCountries(project).includes(
-        country.toLowerCase().trim().replace(/_/g, " ")
-      )
+    .filter(
+      (project) =>
+        getProjectCountries(project).includes(
+          country.toLowerCase().trim().replace(/_/g, " ")
+        ) || getProjectCountries(project).some(isInRegion(country))
     )
     .sort(sortProjects);
 });
@@ -94,15 +95,18 @@ export function getProjectTypeName(projectType = "") {
 }
 
 export const getProjectsByRegion = buildMemo((region) => {
-  return [
-    ...getCountriesByRegion(region).flatMap(getProjectsByCountry),
-    ...getProjects().filter(({ location }) =>
-      location
-        .split(",")
-        .map((location) => location.toLowerCase().trim())
-        .includes(region)
-    ),
-  ];
+  return uniqueByField(
+    [
+      ...getCountriesByRegion(region).flatMap(getProjectsByCountry),
+      ...getProjects().filter(({ location }) =>
+        location
+          .split(",")
+          .map((location) => location.toLowerCase().trim())
+          .includes(region)
+      ),
+    ],
+    "projectName"
+  );
 });
 
 export function getCountryName(country) {

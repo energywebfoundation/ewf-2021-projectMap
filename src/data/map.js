@@ -8336,7 +8336,7 @@ const getMap = () =>
       region: "asia",
     },
     {
-      id: "netherlands",
+      id: "the_netherlands",
       dots: [
         {
           id: "0",
