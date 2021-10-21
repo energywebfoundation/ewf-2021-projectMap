@@ -406,7 +406,7 @@ const getDataset = () =>
       {
         "organization": "Stedin",
         "projectName": "Stedin Layered Energy System",
-        "location": "The Netherlands",
+        "location": "Netherlands",
         "projectType": "DER Management",
         "description": "",
         "builtWith": [
