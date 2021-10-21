@@ -30,6 +30,9 @@ export const isEuropean = buildMemo((country) => {
   if (country === "europe") {
     return true;
   }
+  if (typeof country !== "string") {
+    return false;
+  }
   const sanitize = (c) => c.trim().toLowerCase().replace(/_/g, " ");
   const isSameCountry = (original) => (candidate) =>
     sanitize(original) === sanitize(candidate);
