@@ -1,3 +1,7 @@
+foreignObject {
+  overflow: unset;
+}
+
 .dots-map__projects-count-circle {
   cursor: pointer;
 }
