@@ -1,5 +1,6 @@
 import getMap from "../data/map";
 import buildMemo from "./memo";
+import unique from "./unique";
 
 export function getHemisphere(country) {
   return getDots(country).reduce(averageX, 0) > 0.5 ? "east" : "west";
@@ -39,5 +40,15 @@ export const isInRegion = buildMemo((region) => (country) => {
   return getCountriesByRegion(region).some(isSameCountry(country));
 });
 
-export const isEuropean = isInRegion("europe");
-export const isAPAC = isInRegion("APAC");
+export function isRegion(region) {
+  return getRegions().includes(region.toLowerCase());
+}
+
+export const getRegions = buildMemo(() => {
+  const isDefined = (x) => !!x;
+  return unique(
+    getMap()
+      .map(({ region }) => region)
+      .filter(isDefined)
+  ).map((region) => region.toLowerCase().trim());
+});

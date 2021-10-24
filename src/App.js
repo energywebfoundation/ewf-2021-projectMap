@@ -9,8 +9,7 @@ import {
 import "./App.css";
 import useMediumScreen from "./hooks/useMediumScreen";
 import Sidebar from "./components/Sidebar";
-import { getCountriesByRegion, isEuropean } from "./services/mapUtils";
-import unique from "./services/unique";
+import { getMapEntry, isRegion } from "./services/mapUtils";
 import isMobile from "ismobilejs";
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
   const isMediumScreen = useMediumScreen();
   const [map] = useState(prepare(getMapData()));
   const [result, openResult] = useState(undefined);
-  const selectedCountries = useSelectedCountries(result);
+  const selectedRegion = useSelectedRegion(result);
   const mapContainerRef = useRef();
   useEffect(() => {
     if (isMobile().any) {
@@ -48,24 +47,15 @@ function App() {
         <div className="dots-map__map-container" ref={mapContainerRef}>
           <DotsMap
             map={map}
-            onCountrySelected={(country) => {
-              if (isEuropean(country)) {
-                if (!result || !isEuropean(result.value)) {
-                  openResult({
-                    category: "region",
-                    value: "europe",
-                  });
-                }
-              } else {
-                if (!result || country !== result.value) {
-                  openResult({
-                    category: "country",
-                    value: country,
-                  });
-                }
+            onRegionClick={(region) => {
+              if (!result || result.value !== region) {
+                openResult({
+                  category: isRegion(region) ? "region" : "country",
+                  value: region,
+                });
               }
             }}
-            selectedCountries={selectedCountries}
+            selectedRegion={selectedRegion}
           />
         </div>
         <DragIndicator isVisible={isMediumScreen} />
@@ -100,45 +90,34 @@ function getDotRadius() {
   return 2;
 }
 
-function useSelectedCountries(result) {
-  const [selectedCountries, setSelectedCountries] = useState([]);
+function useSelectedRegion(result) {
+  const isDefined = (x) => !!x;
+  const [selectedRegion, setSelectedRegion] = useState(null);
   useEffect(() => {
-    const getEuropeanCountries = () =>
-      getCountriesByRegion("europe").filter(isCountryInProjects);
-
     if (!result) {
-      setSelectedCountries([]);
+      setSelectedRegion(null);
       return;
     }
     switch (result.category) {
       case "project": {
-        setSelectedCountries(
-          unique(
-            getProjectCountries(result.value).flatMap((country) =>
-              isEuropean(country) ? getEuropeanCountries() : country
-            )
-          )
-        );
-        break;
-      }
-      case "country": {
-        setSelectedCountries(
-          isEuropean(result.value) ? getEuropeanCountries() : [result.value]
+        setSelectedRegion(
+          getProjectCountries(result.value)
+            .flatMap(getMapEntry)
+            .filter(isDefined)
+            .map(({ region }) => region)[0]
         );
         break;
       }
       case "region": {
-        setSelectedCountries(
-          getCountriesByRegion(result.value).filter(isCountryInProjects)
-        );
+        setSelectedRegion(result.value);
         break;
       }
       default: {
-        setSelectedCountries([]);
+        setSelectedRegion(null);
       }
     }
   }, [result]);
-  return selectedCountries;
+  return selectedRegion;
 }
 
 async function scrollToMiddle(element) {

@@ -466,7 +466,7 @@ const getMap = () =>
     },
     {
       id: "australia",
-      region: "APAC",
+      region: "apac",
       dots: [
         {
           id: "72",
@@ -4571,6 +4571,7 @@ const getMap = () =>
           y: 0.5932258081436972,
         },
       ],
+      region: "africa",
     },
     {
       id: "croatia",
@@ -4845,6 +4846,7 @@ const getMap = () =>
     },
     {
       id: "el_salvador",
+      region: "el_salvador",
       dots: [
         {
           id: "0",
@@ -4852,7 +4854,6 @@ const getMap = () =>
           y: 0.5762740844935532,
         },
       ],
-      region: "south_america",
     },
     {
       id: "equatorial_guinea",
@@ -4970,7 +4971,6 @@ const getMap = () =>
           y: 0.7627126717317518,
         },
       ],
-      region: "australia",
     },
     {
       id: "finland",
@@ -6979,7 +6979,7 @@ const getMap = () =>
           y: 0.38983109783614567,
         },
       ],
-      region: "APAC",
+      region: "apac",
     },
     {
       id: "jordan",
@@ -8355,7 +8355,6 @@ const getMap = () =>
           y: 0.7796665950915004,
         },
       ],
-      region: "australia",
     },
     {
       id: "new_zealand",
@@ -8427,7 +8426,6 @@ const getMap = () =>
           y: 0.8644099845834199,
         },
       ],
-      region: "australia",
     },
     {
       id: "nicaragua",
@@ -8807,7 +8805,6 @@ const getMap = () =>
           y: 0.6949144913653784,
         },
       ],
-      region: "australia",
     },
     {
       id: "paraguay",
@@ -12012,7 +12009,6 @@ const getMap = () =>
           radius: 2.8497000560873627,
         },
       ],
-      region: "australia",
     },
     {
       id: "sao_tome_and_principe",
@@ -12204,7 +12200,6 @@ const getMap = () =>
           color: "#F4B400",
         },
       ],
-      region: "australia",
     },
     {
       id: "somalia",
@@ -12763,7 +12758,7 @@ const getMap = () =>
           y: 0.5593288753680071,
         },
       ],
-      region: "APAC",
+      region: "apac",
     },
     {
       id: "timor_leste",
@@ -12796,7 +12791,6 @@ const getMap = () =>
           y: 0.7796665950915004,
         },
       ],
-      region: "australia",
     },
     {
       id: "tunisia",
@@ -14115,6 +14109,7 @@ const getMap = () =>
           y: 0.2372851074075898,
         },
       ],
+      region: "us",
     },
     {
       id: "uruguay",
@@ -14187,7 +14182,6 @@ const getMap = () =>
           y: 0.7622712915391893,
         },
       ],
-      region: "australia",
     },
     {
       id: "venezuela",

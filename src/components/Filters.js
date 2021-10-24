@@ -15,6 +15,7 @@ const Filters = ({
   enableBackButton,
   onBackClick,
   onProjectTypeFilterClear,
+  resultsCountPerCategory,
 }) => (
   <div className="dots-map__filters">
     <SearchBar
@@ -27,6 +28,7 @@ const Filters = ({
     <Categories
       selectedCategory={selectedCategory}
       onCategoryClick={onCategoryClick}
+      resultsCountPerCategory={resultsCountPerCategory}
     />
     <div
       style={{

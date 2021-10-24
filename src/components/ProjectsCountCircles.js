@@ -1,14 +1,9 @@
 import React, { useState, useRef } from "react";
-import {
-  getCountries,
-  getProjectsByCountry,
-  getProjectsByRegion,
-  getCountryName,
-} from "../services/datasetUtils";
+import { getProjectsByRegion, getCountryName } from "../services/datasetUtils";
 import {
   getCountriesByRegion,
   getMapEntry,
-  isEuropean,
+  getRegions,
 } from "../services/mapUtils";
 import scale from "../services/scale";
 import "./ProjectsCountCircles.css";
@@ -30,7 +25,7 @@ const ProjectsCountCircles = ({
           onClick={() =>
             onClick(projectsCountCircle.region || projectsCountCircle.country)
           }
-          isSelected={isSelected(projectsCountCircle.region, selected)}
+          isSelected={projectsCountCircle.region === selected}
           isHover={hovered === projectsCountCircle.region}
           onMouseEnter={() => onMouseEnter(projectsCountCircle.region)}
           onMouseLeave={() => onMouseLeave(projectsCountCircle.region)}
@@ -122,37 +117,18 @@ function useColor(relativePosition, isSelected, isHover) {
 }
 
 function getProjectsCountCircles() {
-  const isEuropean = (country) => country.region === "europe";
-  const isDefined = (x) => !!x;
-  const not =
-    (fn) =>
-    (...args) =>
-      !fn(...args);
   const getMax = (max, entry) =>
     entry.projectsCount > max ? entry.projectsCount : max;
-
-  const projectsCountCircles = getCountries()
-    .map(getMapEntry)
-    .filter(isDefined)
-    .filter(not(isEuropean))
-    .map((country) => ({
-      region: country.id,
-      projectsCount: getProjectsByCountry(country.id).length,
-    }));
-  projectsCountCircles.push({
-    region: "europe",
-    projectsCount: getProjectsByRegion("europe").length,
-  });
+  const projectsCountCircles = getRegions()
+    .map((region) => ({
+      region,
+      projectsCount: getProjectsByRegion(region).length,
+    }))
+    .filter(({ projectsCount }) => projectsCount > 0);
   projectsCountCircles.push({
     region: "global",
     projectsCount: getProjectsByRegion("global").length,
   });
-  /* crashes everything
-  projectsCountCircles.push({
-    region: "APAC",
-    projectsCount: getProjectsByRegion("APAC").length,
-  });
-  //*/
   const maxProjects = projectsCountCircles.reduce(getMax, 0);
   return projectsCountCircles.map((projectCountsCircle) => ({
     ...projectCountsCircle,
@@ -165,16 +141,10 @@ function getCoordinates(element, region) {
     return { x: -100, y: -100 };
   }
   const svg = element.closest("svg");
-  switch (region) {
-    case "global": {
-      return getGlobalCoordinates(svg);
-    }
-    case "europe": {
-      return getEuropeCoordinates(svg);
-    }
-    default: {
-      return getRegionCoordinates(svg, region);
-    }
+  if (region === "global") {
+    return getGlobalCoordinates(svg);
+  } else {
+    return getRegionCoordinates(svg, region);
   }
 }
 
@@ -185,17 +155,17 @@ function getGlobalCoordinates(svg) {
   };
 }
 
-function getEuropeCoordinates(svg) {
-  const collectDots = (allDots, country) => [...allDots, ...country.dots];
-  const europeDots = getCountriesByRegion("europe")
-    .map(getMapEntry)
-    .reduce(collectDots, []);
-  return getCenterCoordinates(svg.clientWidth, svg.clientHeight, europeDots);
-}
-
 function getRegionCoordinates(svg, region) {
-  const mapEntry = getMapEntry(region);
-  return getCenterCoordinates(svg.clientWidth, svg.clientHeight, mapEntry.dots);
+  const averageCoordinates = ({ x, y }, nextCoordinate, i, allCoordinates) => ({
+    x: x + nextCoordinate.x / allCoordinates.length,
+    y: y + nextCoordinate.y / allCoordinates.length,
+  });
+  return getCountriesByRegion(region)
+    .map(getMapEntry)
+    .map((country) =>
+      getCenterCoordinates(svg.clientWidth, svg.clientHeight, country.dots)
+    )
+    .reduce(averageCoordinates, { x: 0, y: 0 });
 }
 
 function getCenterCoordinates(width, height, allDots) {
@@ -211,11 +181,4 @@ function getCenterCoordinates(width, height, allDots) {
     x: scale(relativeMiddlePoint.x, width, 0),
     y: scale(relativeMiddlePoint.y, height, 0),
   };
-}
-
-function isSelected(region, selectedCountries) {
-  return (
-    selectedCountries.includes(region) ||
-    (region === "europe" && selectedCountries.some(isEuropean))
-  );
 }

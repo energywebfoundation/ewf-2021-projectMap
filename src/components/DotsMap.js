@@ -4,12 +4,10 @@ import "./DotsMap.css";
 import isMobile from "ismobilejs";
 import scale from "../services/scale";
 import ProjectsCountCircles from "./ProjectsCountCircles";
-import { isEuropean } from "../services/mapUtils";
 
-const DotsMap = ({ map, selectedCountries = [], onCountrySelected }) => {
+const DotsMap = ({ map, selectedRegion, onRegionClick }) => {
   const [key, setKey] = useState(1);
-  const [hoveredCountry, setHoveredCountry] = useState(null);
-  const ref = useRef();
+  const [hoveredRegion, setHoveredRegion] = useState(null);
   useEffect(() => {
     if (isMobile().any) {
       return;
@@ -20,39 +18,33 @@ const DotsMap = ({ map, selectedCountries = [], onCountrySelected }) => {
     };
     window.addEventListener("resize", updateKey);
   }, [key]);
+  const ref = useRef();
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(!!ref.current), [ref]);
   return (
     <>
       <svg
         key={key}
-        className={`dots-map__canvas ${
-          ref.current ? "dots-map__canvas--ready" : ""
-        }`}
+        className={`dots-map__canvas ${ready ? "dots-map__canvas--ready" : ""}`}
         ref={ref}
       >
         {map.map((country) => (
           <Country
             key={country.id}
             country={country}
-            onClick={onCountrySelected}
-            onMouseEnter={() =>
-              setHoveredCountry(isEuropean(country.id) ? "europe" : country.id)
-            }
-            onMouseLeave={() => setHoveredCountry(null)}
-            isSelected={selectedCountries.includes(country.id)}
-            isHover={
-              hoveredCountry === country.id ||
-              (isCountryInProjects(country.id) &&
-                hoveredCountry === "europe" &&
-                isEuropean(country.id))
-            }
+            onClick={() => onRegionClick(country.region)}
+            onMouseEnter={() => setHoveredRegion(country.region)}
+            onMouseLeave={() => setHoveredRegion(null)}
+            isSelected={selectedRegion === country.region}
+            isHover={hoveredRegion === country.region}
           />
         ))}
         <ProjectsCountCircles
-          onClick={onCountrySelected}
-          selected={selectedCountries}
-          hovered={hoveredCountry}
-          onMouseEnter={setHoveredCountry}
-          onMouseLeave={() => setHoveredCountry(null)}
+          onClick={onRegionClick}
+          selected={selectedRegion}
+          hovered={hoveredRegion}
+          onMouseEnter={setHoveredRegion}
+          onMouseLeave={() => setHoveredRegion(null)}
         />
       </svg>
     </>
@@ -112,7 +104,7 @@ const Dot = ({ dot, country, onClick, onMouseEnter, onMouseLeave }) => {
         height={15}
         x={scale(dot.x, svgElement.clientWidth, 6) - 6}
         y={scale(dot.y, svgElement.clientHeight, 6) - 6}
-        onClick={isHighlighted ? () => onClick(country.id) : () => {}}
+        onClick={isHighlighted ? onClick : () => {}}
         onMouseEnter={
           isHighlighted && !isMobile().any ? onMouseEnter : () => {}
         }

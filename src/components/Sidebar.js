@@ -4,8 +4,13 @@ import {
   getOrganizations,
   getProjects,
   getProjectTypes,
+  getProjectsByRegion,
 } from "../services/datasetUtils";
-import { getMapEntry } from "../services/mapUtils";
+import {
+  getCountriesByRegion,
+  getMapEntry,
+  getRegions,
+} from "../services/mapUtils";
 import Filters from "./Filters";
 import ResultsList from "./ResultsList";
 import OpenResult from "./OpenResult";
@@ -23,7 +28,13 @@ const Sidebar = ({ result, openResult, closeResult }) => {
   );
   const [selectedCategory, setSelectedCategory] = useState("project");
   const [query, setQuery] = useState("");
-  const results = useResults(selectedCategory, query, projectTypeSelection);
+  const [allPossibleResults] = useState(getAllPossibleResults());
+  const results = useResults(
+    selectedCategory,
+    query,
+    projectTypeSelection,
+    allPossibleResults
+  );
   const toggleProjectTypeSelection = (projectType) =>
     setProjectTypeSelection({
       ...projectTypeSelection,
@@ -50,9 +61,12 @@ const Sidebar = ({ result, openResult, closeResult }) => {
       setShowResults(true);
     }
   };
+  const resultsCountPerCategory =
+    useResultsCountPerCategory(allPossibleResults);
   return (
     <div className="dots-map__sidebar">
       <Filters
+        resultsCountPerCategory={resultsCountPerCategory}
         query={query}
         setQuery={(query) => {
           setQuery(query);
@@ -125,8 +139,7 @@ function useBackdropClassName(displayedResult) {
   return displayedResult.leave ? "dots-map--fadeOut" : "dots-map--fadeIn";
 }
 
-function useResults(category, query, projectTypeSelection) {
-  const [allPossibleResults] = useState(getAllPossibleResults());
+function useResults(category, query, projectTypeSelection, allPossibleResults) {
   const [results, setResults] = useState(
     getResults(allPossibleResults, category, query, projectTypeSelection)
   );
@@ -141,6 +154,7 @@ function useResults(category, query, projectTypeSelection) {
 function getAllPossibleResults() {
   return [
     ...getAllPossibleProjectsResults(),
+    ...getAllPossibleRegionResults(),
     ...getAllPossibleCountriesResults(),
     ...getAllPossibleOrganizationsResults(),
   ];
@@ -153,33 +167,37 @@ function getAllPossibleProjectsResults() {
   }));
 }
 
-function getAllPossibleCountriesResults() {
-  return getCountries()
-    .map((country) => {
-      const mapEntry = getMapEntry(country);
-      if (mapEntry) {
-        return {
-          category: "country",
-          value: country,
-        };
-      } else {
-        return {
-          category: "region",
-          value: country,
-        };
-      }
-    })
-    .sort(sortCountries);
+function getAllPossibleRegionResults() {
+  return [
+    {
+      category: "region",
+      value: "global",
+    },
+    ...getRegions()
+      .filter((region) => getCountriesByRegion(region).length > 1)
+      .filter((region) => getProjectsByRegion(region).length > 0)
+      .map((region) => ({
+        category: "region",
+        value: region,
+      }))
+      .sort(sortByValue),
+  ];
 }
 
-function sortCountries(countryA, countryB) {
-  if (countryA.value === "global") {
-    return -1;
-  } else if (countryB.value === "global") {
-    return 1;
-  } else {
-    return countryA.value.localeCompare(countryB.value);
-  }
+function getAllPossibleCountriesResults() {
+  const isDefined = (x) => !!x;
+  return getCountries()
+    .map(getMapEntry)
+    .filter(isDefined)
+    .map((country) => ({
+      category: "country",
+      value: country.id,
+    }))
+    .sort(sortByValue);
+}
+
+function sortByValue({ value: valueA }, { value: valueB }) {
+  return valueA.localeCompare(valueB);
 }
 
 function getAllPossibleOrganizationsResults() {
@@ -226,4 +244,17 @@ function isProjectTypeSelection(projectTypeSelection) {
     projectTypeSelection[(result.value.projectType || "").toLowerCase().trim()];
   return (result) =>
     !isCategory("project")(result) || isProjectTypeSelected(result);
+}
+
+function useResultsCountPerCategory(allPossibleResults) {
+  const [resultsCountPerCategory] = useState(
+    allPossibleResults.reduce(
+      (resultsCountPerCategory, result) => ({
+        ...resultsCountPerCategory,
+        [result.category]: (resultsCountPerCategory[result.category] || 0) + 1,
+      }),
+      {}
+    )
+  );
+  return resultsCountPerCategory;
 }
