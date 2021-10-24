@@ -147,7 +147,7 @@ const getDataset = () =>
       {
         "organization": "ENGIE Energy Access",
         "projectName": "DeFi Crowdfunding for Energy Access",
-        "location": "Sub-Saharan Africa",
+        "location": "Africa", //changed from Sub-Saharan Africa
         "projectType": "Other",
         "description": "ENGIE Energy Access — one of the leading off-grid, Pay-As-You-Go (PAYG) solar and mini-grid solutions providers in Africa, has partnered with Energy Web to accelerate energy access in sub-Saharan Africa through a decentralized finance (DeFi) crowdfunding platform. The DeFi application will be built on the open-source Energy Web tech stack and enable investors to provide microloans that support clean energy deployment",
         "builtWith": [

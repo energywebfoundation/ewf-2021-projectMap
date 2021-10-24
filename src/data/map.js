@@ -466,7 +466,7 @@ const getMap = () =>
     },
     {
       id: "australia",
-      region: "australia",
+      region: "APAC",
       dots: [
         {
           id: "72",
@@ -6979,7 +6979,7 @@ const getMap = () =>
           y: 0.38983109783614567,
         },
       ],
-      region: "asia",
+      region: "APAC",
     },
     {
       id: "jordan",
@@ -12763,7 +12763,7 @@ const getMap = () =>
           y: 0.5593288753680071,
         },
       ],
-      region: "asia",
+      region: "APAC",
     },
     {
       id: "timor_leste",

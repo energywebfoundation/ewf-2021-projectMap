@@ -147,6 +147,12 @@ function getProjectsCountCircles() {
     region: "global",
     projectsCount: getProjectsByRegion("global").length,
   });
+  /* crashes everything
+  projectsCountCircles.push({
+    region: "APAC",
+    projectsCount: getProjectsByRegion("APAC").length,
+  });
+  //*/
   const maxProjects = projectsCountCircles.reduce(getMax, 0);
   return projectsCountCircles.map((projectCountsCircle) => ({
     ...projectCountsCircle,

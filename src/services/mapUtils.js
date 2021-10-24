@@ -40,3 +40,4 @@ export const isInRegion = buildMemo((region) => (country) => {
 });
 
 export const isEuropean = isInRegion("europe");
+export const isAPAC = isInRegion("APAC");
