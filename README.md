@@ -3,10 +3,12 @@
 An interactive map made out of dots where we plot project information of the [EWF](https://www.energyweb.org/).
 
 ## DATA SOURCES
+
 - [Project List](https://docs.google.com/spreadsheets/d/1xFa9h8hoI8dXxrx6I_9XPfoEk-QUOKJ6C-uELhDJEnk/edit#gid=281767465)
 - [Company List](https://docs.google.com/spreadsheets/d/1xbzTPciBTE7KnfW4VEB1o7ILuVcdV52TuZCJQxFRKlg/edit#gid=581177707)
 
 ## Preparing the DATA for correct JSON conversion
+
 It's important that the JSON file is well formed directly in the spreadsheet so follow this format, especially for the url
 
 - double quotations marks around each key and value
@@ -17,14 +19,16 @@ It's important that the JSON file is well formed directly in the spreadsheet so 
  "url": "httpURL1"
  }]
 ```
-- avoid trailing comas  ,  after the last value inside an object
+
+- avoid trailing comas , after the last value inside an object
 
 ```
 {"key": "value", } // this is wrong because it has a trailing coma
 {"key": "value"}   // this is RIGHT because it has no trailing coma
 ```
+
 - use a CSV to JSON converter like like [csvjson](https://csvjson.com/csv2json) (important: use the "Parse Json" option)
-beware of other solutions like [convertcsv](https://www.convertcsv.com/csv-to-json.htm) that don't parse the json
+  beware of other solutions like [convertcsv](https://www.convertcsv.com/csv-to-json.htm) that don't parse the json
 - test to see if it is well formed or not
 
 ```js
@@ -32,17 +36,23 @@ beware of other solutions like [convertcsv](https://www.convertcsv.com/csv-to-js
 // 1 - convert the CSV  with https://www.convertcsv.com/csv-to-json.htm
 // 2 - copy the output to the clipboard
 // 3 - open a js console in a browser window or anywhere else and create an object
-//      var project = >>>PASTE HERE THE ARRAY <<< 
+//      var project = >>>PASTE HERE THE ARRAY <<<
 //var projects = [{...},{...}]
 // then run this code to see which project has problems
-projects.forEach(p => { 
-    try {
-        console.log(JSON.parse(p.urls))
-    } catch (e) {
-        console.log("project " + p.projectName + " by " + p.organization + "  - has problems e: " + e) 
-    }
-   }  
-  )
+projects.forEach((p) => {
+  try {
+    console.log(JSON.parse(p.urls));
+  } catch (e) {
+    console.log(
+      "project " +
+        p.projectName +
+        " by " +
+        p.organization +
+        "  - has problems e: " +
+        e
+    );
+  }
+});
 ```
 
 ## Build
@@ -72,7 +82,32 @@ For some colors, we've used CSS variables.
   --selected-country-color: #fd51a1;
 ```
 
-## Configuration
+## Regions Configuration
+
+Regions have their own dataset, `data/regions.js`. Here's an explanation on what each field of each region mean:
+
+```js
+{
+    // ID of the region. Must be unique.
+    id: "us",
+    // Name of the region as it will be displayed.
+    readableName: "United States",
+    // IDs of the countries that compose that region according to the map dataset. Each country in the list will be highlighted in the map.
+    countries: ["us"],
+    // (optional) Relative position of the circle with the projects count as it will be rendered in the map. If not provided, the app attempts to compute it
+    // by averaging the positions of the countries.
+    relativePosition: {
+        // 0 means extreme left and 1, extreme right
+        x: 0.2,
+        // 0 means top and 1, bottom
+        y: 0.4
+    }
+}
+```
+
+This configuration allows you to define regions such as Europe, but as seen in the example, you can also define individual countries as regions. Using countries as regions will render their floating-clickable circles on the map.
+
+## Global Configuration
 
 The app is externally configurable via a `dotsMapConfig` object on `windows` that must exist before the application starts.
 
@@ -133,6 +168,19 @@ window.dotsMapConfig = {
             description: "Lorem ipsum dolor sit amet",
         },
         ...
+    ],
+    // regions configuration
+    regions: [
+      {
+        id: "europe",
+        readableName: "Europe",
+        countries: ['spain'],
+        relativePosition: {
+          x: 0.54,
+          y: 0.65,
+        },
+      },
+      ...
     ]
 }
 ```
