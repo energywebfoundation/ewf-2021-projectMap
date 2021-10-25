@@ -100,11 +100,7 @@ function useSelectedRegion(result) {
     switch (result.category) {
       case "project": {
         setSelectedRegion(
-          (
-            getRegionByCountry(getProjectCountries(result.value)) || {
-              id: "global",
-            }
-          ).id
+          getRegionByCountry(getProjectCountries(result.value)[0])
         );
         break;
       }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Icon.css";
+import { toId } from "../services/sanitize";
 
 const Icon = ({ name, alt, noStyle }) => {
   const [error, setError] = useState(false);
@@ -11,7 +12,7 @@ const Icon = ({ name, alt, noStyle }) => {
       className={`dots-map__icon ${noStyle ? "dots-map__icon--no-style" : ""}`}
     >
       <img
-        src={`${process.env.PUBLIC_URL}/icons/${sanitize(name)}`}
+        src={`${process.env.PUBLIC_URL}/icons/${toId(name)}`}
         alt={alt}
         onError={() => setError(true)}
       />
@@ -20,7 +21,3 @@ const Icon = ({ name, alt, noStyle }) => {
 };
 
 export default Icon;
-
-function sanitize(name) {
-  return name.toLowerCase().replace(/ /g, "_");
-}

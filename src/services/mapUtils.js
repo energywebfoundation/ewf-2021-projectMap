@@ -1,13 +1,12 @@
 import getMap from "../data/map";
+import { toId } from "./sanitize";
 
 export function getHemisphere(country) {
   return getDots(country).reduce(averageX, 0) > 0.5 ? "east" : "west";
 }
 
 function getDots(country) {
-  const mapCountry = getMap().find(
-    ({ id }) => id.toLowerCase().trim() === country.toLowerCase().trim()
-  );
+  const mapCountry = getMap().find(({ id }) => toId(id) === toId(country));
   return mapCountry ? mapCountry.dots : [];
 }
 
@@ -16,5 +15,5 @@ function averageX(currentAverage, dot, _, allDots) {
 }
 
 export function getMapEntry(country) {
-  return getMap().find(({ id }) => id === country.replace(/ /g, "_"));
+  return getMap().find(({ id }) => toId(id) === toId(country));
 }

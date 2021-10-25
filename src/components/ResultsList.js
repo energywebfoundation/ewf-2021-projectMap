@@ -1,5 +1,6 @@
 import React from "react";
 import CountryResult from "./CountryResult";
+import RegionResult from "./RegionResult";
 import { List, ListItem } from "./List";
 import OrganizationResult from "./OrganizationResult";
 import ProjectResult from "./ProjectResult";
@@ -60,9 +61,11 @@ const NoResults = () => (
 
 const Result = ({ result, onClick }) => {
   switch (result.category) {
-    case "country":
-    case "region": {
+    case "country": {
       return <CountryResult country={result.value} onClick={onClick} />;
+    }
+    case "region": {
+      return <RegionResult region={result.value} onClick={onClick} />;
     }
     case "organization": {
       return (

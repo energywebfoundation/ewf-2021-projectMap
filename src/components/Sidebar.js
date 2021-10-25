@@ -13,6 +13,7 @@ import OpenResult from "./OpenResult";
 import Backdrop from "./Backdrop";
 import originalIsMobile from "ismobilejs";
 import "./Sidebar.css";
+import { toId } from "../services/sanitize";
 
 const isMobile = () => originalIsMobile().any;
 
@@ -216,8 +217,7 @@ function isCategory(category) {
 
 function matchesQuery(query) {
   return (result) =>
-    JSON.stringify(result).toLowerCase().indexOf(query.toLowerCase().trim()) >=
-    0;
+    JSON.stringify(result).toLowerCase().indexOf(toId(query)) >= 0;
 }
 
 function getProjectTypeInitialSelection() {
@@ -233,7 +233,7 @@ function getProjectTypeInitialSelection() {
 function isProjectTypeSelection(projectTypeSelection) {
   const isProjectTypeSelected = (result) =>
     !result.value.projectType ||
-    projectTypeSelection[(result.value.projectType || "").toLowerCase().trim()];
+    projectTypeSelection[toId(result.value.projectType || "")];
   return (result) =>
     !isCategory("project")(result) || isProjectTypeSelected(result);
 }

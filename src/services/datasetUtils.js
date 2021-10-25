@@ -2,6 +2,7 @@ import getDataset from "../data/dataset";
 import unique, { uniqueByField } from "./unique";
 import buildMemo from "./memo";
 import { getRegionByName } from "./regionsUtils";
+import { toId, toName } from "./sanitize";
 
 export function getProjects() {
   return getDataset().sort(sortProjects);
@@ -11,8 +12,7 @@ export function getCountries() {
   return unique(
     getDataset()
       .flatMap(({ location }) => location.split(","))
-      .map((country) => country.trim())
-      .map((country) => country.toLowerCase())
+      .map(toId)
       .filter((x) => !!x)
       .sort((a, b) => a.localeCompare(b))
   );
@@ -22,8 +22,7 @@ export function getOrganizations() {
   return unique(
     getDataset()
       .flatMap(({ organization }) => organization.split(","))
-      .map((country) => country.trim())
-      .map((country) => country.toLowerCase())
+      .map(toId)
       .sort((a, b) => a.localeCompare(b))
   );
 }
@@ -31,27 +30,19 @@ export function getOrganizations() {
 export function getProjectCountries(project) {
   return project.location
     .split(",")
-    .map((country) => country.trim())
-    .map((country) => country.toLowerCase())
+    .map(toId)
     .sort((a, b) => a.localeCompare(b));
 }
 
 export const getProjectsByCountry = buildMemo((country) => {
   return getDataset()
-    .filter((project) =>
-      getProjectCountries(project).includes(
-        country.toLowerCase().trim().replace(/_/g, " ")
-      )
-    )
+    .filter((project) => getProjectCountries(project).includes(toId(country)))
     .sort(sortProjects);
 });
 
 export function getProjectsByOrganization(org) {
   return getDataset()
-    .filter(
-      ({ organization }) =>
-        organization.toLowerCase().indexOf(org.toLowerCase()) >= 0
-    )
+    .filter(({ organization }) => toId(organization).includes(toId(org)))
     .sort(sortProjects);
 }
 
@@ -67,8 +58,7 @@ export function getOrganizationCountries(organization) {
   return getProjectsByOrganization(organization)
     .map((project) => project.location)
     .flatMap((location) => location.split(","))
-    .map((location) => location.trim())
-    .map((location) => location.toLowerCase());
+    .map(toId);
 }
 
 export function getProjectByName(name) {
@@ -77,19 +67,14 @@ export function getProjectByName(name) {
 
 export function getProjectTypes() {
   return unique(
-    getProjects().map(({ projectType = "" }) =>
-      projectType.toLowerCase().trim()
-    )
+    getProjects().map(({ projectType = "" }) => toId(projectType))
   ).filter((x) => !!x);
 }
 
 export function getProjectTypeName(projectType = "") {
   return getProjects()
     .map(({ projectType = "" }) => projectType.trim())
-    .find(
-      (candidate) =>
-        projectType.toLowerCase().trim() === candidate.toLowerCase().trim()
-    );
+    .find((candidate) => toId(projectType) === toId(candidate));
 }
 
 export const getProjectsByRegion = buildMemo((region) => {
@@ -97,10 +82,7 @@ export const getProjectsByRegion = buildMemo((region) => {
     [
       ...getRegionByName(region).countries.flatMap(getProjectsByCountry),
       ...getProjects().filter(({ location }) =>
-        location
-          .split(",")
-          .map((location) => location.toLowerCase().trim())
-          .includes(region)
+        location.split(",").map(toId).includes(region)
       ),
     ],
     "projectName"
@@ -113,7 +95,7 @@ export function getCountryName(country) {
       return "united states";
     }
     default: {
-      return country;
+      return toName(country);
     }
   }
 }
