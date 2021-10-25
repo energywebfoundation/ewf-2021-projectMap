@@ -27,11 +27,19 @@ export default function getRegions() {
         id: "sub-saharan_africa",
         readableName: "Sub-Saharan Africa",
         countries: [],
+        relativePosition: {
+          x: 0.54,
+          y: 0.65,
+        },
       },
       {
         id: "us",
         readableName: "United States",
         countries: ["us"],
+        relativePosition: {
+          x: 0.2,
+          y: 0.4,
+        },
       },
       {
         id: "el_salvador",

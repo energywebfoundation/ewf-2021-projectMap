@@ -139,16 +139,18 @@ function getCoordinates(element, region) {
   }
   const svg = element.closest("svg");
   if (region === "global") {
-    return getGlobalCoordinates(svg);
+    return getConfiguredPosition(svg, { x: 0.35, y: 0.5 });
+  } else if (getRegionByName(region).relativePosition) {
+    return getConfiguredPosition(svg, getRegionByName(region).relativePosition);
   } else {
     return getRegionCoordinates(svg, region);
   }
 }
 
-function getGlobalCoordinates(svg) {
+function getConfiguredPosition(svg, relativePosition) {
   return {
-    x: scale(0.35, svg.clientWidth, 0),
-    y: scale(0.5, svg.clientHeight, 0),
+    x: scale(relativePosition.x, svg.clientWidth, 0),
+    y: scale(relativePosition.y, svg.clientHeight, 0),
   };
 }
 
