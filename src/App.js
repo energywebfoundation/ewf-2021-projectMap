@@ -119,6 +119,9 @@ function useSelectedRegion(result) {
 async function scrollToMiddle(element) {
   // XXX: Possibly the least elegant solution to the problem, I know
   const interval = setInterval(() => {
+    if (!element.parentElement) {
+      return;
+    }
     element.parentElement.scrollTo({
       left: (element.clientWidth - window.innerWidth) / 2,
       top: 0,
