@@ -4,6 +4,7 @@ import "./DotsMap.css";
 import isMobile from "ismobilejs";
 import scale from "../services/scale";
 import ProjectsCountCircles from "./ProjectsCountCircles";
+import { getRegionByCountry } from "../services/regionsUtils";
 
 const DotsMap = ({ map, selectedRegion, onRegionClick }) => {
   const [key, setKey] = useState(1);
@@ -32,11 +33,13 @@ const DotsMap = ({ map, selectedRegion, onRegionClick }) => {
           <Country
             key={country.id}
             country={country}
-            onClick={() => onRegionClick(country.region)}
-            onMouseEnter={() => setHoveredRegion(country.region)}
+            onClick={() => onRegionClick(getRegionByCountry(country.id))}
+            onMouseEnter={() =>
+              setHoveredRegion(getRegionByCountry(country.id))
+            }
             onMouseLeave={() => setHoveredRegion(null)}
-            isSelected={selectedRegion === country.region}
-            isHover={hoveredRegion === country.region}
+            isSelected={selectedRegion === getRegionByCountry(country.id)}
+            isHover={hoveredRegion === getRegionByCountry(country.id)}
           />
         ))}
         <ProjectsCountCircles

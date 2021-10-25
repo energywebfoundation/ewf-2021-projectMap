@@ -1,10 +1,7 @@
 import React, { useState, useRef } from "react";
 import { getProjectsByRegion, getCountryName } from "../services/datasetUtils";
-import {
-  getCountriesByRegion,
-  getMapEntry,
-  getRegions,
-} from "../services/mapUtils";
+import { getMapEntry } from "../services/mapUtils";
+import { getRegionByName, getRegions } from "../services/regionsUtils";
 import scale from "../services/scale";
 import "./ProjectsCountCircles.css";
 
@@ -160,8 +157,8 @@ function getRegionCoordinates(svg, region) {
     x: x + nextCoordinate.x / allCoordinates.length,
     y: y + nextCoordinate.y / allCoordinates.length,
   });
-  return getCountriesByRegion(region)
-    .map(getMapEntry)
+  return getRegionByName(region)
+    .countries.map(getMapEntry)
     .map((country) =>
       getCenterCoordinates(svg.clientWidth, svg.clientHeight, country.dots)
     )

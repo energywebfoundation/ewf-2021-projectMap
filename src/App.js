@@ -9,8 +9,8 @@ import {
 import "./App.css";
 import useMediumScreen from "./hooks/useMediumScreen";
 import Sidebar from "./components/Sidebar";
-import { getMapEntry, isRegion } from "./services/mapUtils";
 import isMobile from "ismobilejs";
+import { getRegionByCountry, isRegion } from "./services/regionsUtils";
 
 function App() {
   const [isProcessingResize, setProcessingResize] = useState(false);
@@ -91,7 +91,6 @@ function getDotRadius() {
 }
 
 function useSelectedRegion(result) {
-  const isDefined = (x) => !!x;
   const [selectedRegion, setSelectedRegion] = useState(null);
   useEffect(() => {
     if (!result) {
@@ -101,10 +100,11 @@ function useSelectedRegion(result) {
     switch (result.category) {
       case "project": {
         setSelectedRegion(
-          getProjectCountries(result.value)
-            .flatMap(getMapEntry)
-            .filter(isDefined)
-            .map(({ region }) => region)[0]
+          (
+            getRegionByCountry(getProjectCountries(result.value)) || {
+              id: "global",
+            }
+          ).id
         );
         break;
       }

@@ -4,13 +4,9 @@ import {
   getOrganizations,
   getProjects,
   getProjectTypes,
-  getProjectsByRegion,
 } from "../services/datasetUtils";
-import {
-  getCountriesByRegion,
-  getMapEntry,
-  getRegions,
-} from "../services/mapUtils";
+import { getMapEntry } from "../services/mapUtils";
+import { getRegions, getRegionByName } from "../services/regionsUtils";
 import Filters from "./Filters";
 import ResultsList from "./ResultsList";
 import OpenResult from "./OpenResult";
@@ -168,20 +164,16 @@ function getAllPossibleProjectsResults() {
 }
 
 function getAllPossibleRegionResults() {
-  return [
-    {
+  return getRegions()
+    .filter(
+      (region) =>
+        getRegionByName(region).countries.length > 1 ||
+        getRegionByName(region).countries.length === 0
+    )
+    .map((region) => ({
       category: "region",
-      value: "global",
-    },
-    ...getRegions()
-      .filter((region) => getCountriesByRegion(region).length > 1)
-      .filter((region) => getProjectsByRegion(region).length > 0)
-      .map((region) => ({
-        category: "region",
-        value: region,
-      }))
-      .sort(sortByValue),
-  ];
+      value: region,
+    }));
 }
 
 function getAllPossibleCountriesResults() {

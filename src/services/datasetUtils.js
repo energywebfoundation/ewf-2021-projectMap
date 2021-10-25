@@ -1,7 +1,7 @@
 import getDataset from "../data/dataset";
 import unique, { uniqueByField } from "./unique";
-import { getCountriesByRegion, isInRegion } from "./mapUtils";
 import buildMemo from "./memo";
+import { getRegionByName } from "./regionsUtils";
 
 export function getProjects() {
   return getDataset().sort(sortProjects);
@@ -38,11 +38,10 @@ export function getProjectCountries(project) {
 
 export const getProjectsByCountry = buildMemo((country) => {
   return getDataset()
-    .filter(
-      (project) =>
-        getProjectCountries(project).includes(
-          country.toLowerCase().trim().replace(/_/g, " ")
-        ) || getProjectCountries(project).some(isInRegion(country))
+    .filter((project) =>
+      getProjectCountries(project).includes(
+        country.toLowerCase().trim().replace(/_/g, " ")
+      )
     )
     .sort(sortProjects);
 });
@@ -96,7 +95,7 @@ export function getProjectTypeName(projectType = "") {
 export const getProjectsByRegion = buildMemo((region) => {
   return uniqueByField(
     [
-      ...getCountriesByRegion(region).flatMap(getProjectsByCountry),
+      ...getRegionByName(region).countries.flatMap(getProjectsByCountry),
       ...getProjects().filter(({ location }) =>
         location
           .split(",")
