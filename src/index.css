@@ -21,8 +21,8 @@ body {
 }
 
 * {
-  scrollbar-color: var(--main-color) grey;
-  scrollbar-width: 2px;
+  scrollbar-color: var(--main-color) #e3e3e3;
+  scrollbar-width: thin;
 }
 
 body::-webkit-scrollbar {
