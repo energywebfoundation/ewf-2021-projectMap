@@ -1,4 +1,4 @@
-.dots-map__project-region {
+.dots-map__region-result {
   font-size: 14px;
   text-transform: capitalize;
   text-align: left;
@@ -9,14 +9,14 @@
   margin: 11px 0 14px 0;
 }
 
-.dots-map__project-region span {
+.dots-map__region-result span {
   opacity: 0.5;
 }
 
-.dots-map__project-region .dots-map__icon {
+.dots-map__region-result .dots-map__icon {
   margin-right: 7px;
 }
 
-.dots-map__project-region img {
+.dots-map__region-result img {
   width: 11px;
 }

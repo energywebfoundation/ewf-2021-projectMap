@@ -9,7 +9,7 @@ const RegionResult = ({ region, onClick }) => {
   const [projects] = useState(getProjectsByRegion(region).length);
   return (
     <button
-      className="dots-map__result dots-map__project-region"
+      className="dots-map__result dots-map__region-result"
       onClick={onClick}
     >
       <Icon name={`${region}.png`} alt={getRegionName(region)} />
