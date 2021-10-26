@@ -13,7 +13,7 @@ import OpenResult from "./OpenResult";
 import Backdrop from "./Backdrop";
 import originalIsMobile from "ismobilejs";
 import "./Sidebar.css";
-import { toId } from "../services/sanitize";
+import { toId, toName } from "../services/sanitize";
 
 const isMobile = () => originalIsMobile().any;
 
@@ -217,7 +217,8 @@ function isCategory(category) {
 
 function matchesQuery(query) {
   return (result) =>
-    JSON.stringify(result).toLowerCase().indexOf(toId(query)) >= 0;
+    toName(JSON.stringify(result)).toLowerCase().indexOf(query.toLowerCase()) >=
+    0;
 }
 
 function getProjectTypeInitialSelection() {
