@@ -10,7 +10,11 @@ import "./App.css";
 import useMediumScreen from "./hooks/useMediumScreen";
 import Sidebar from "./components/Sidebar";
 import isMobile from "ismobilejs";
-import { getRegionByCountry, isRegion } from "./services/regionsUtils";
+import {
+  getRegionByCountry,
+  getRegionByName,
+  isRegion,
+} from "./services/regionsUtils";
 
 function App() {
   const [isProcessingResize, setProcessingResize] = useState(false);
@@ -109,6 +113,10 @@ function useSelectedRegion(result) {
       }
       case "region": {
         setSelectedRegion(result.value);
+        break;
+      }
+      case "country": {
+        setSelectedRegion(getRegionByCountry(result.value));
         break;
       }
       default: {
