@@ -5,16 +5,14 @@ import getMapData from "./data/map";
 import {
   getProjectCountries,
   isCountryInProjects,
+  getOrganizationCountries,
+  getProjectsByOrganization,
 } from "./services/datasetUtils";
 import "./App.css";
 import useMediumScreen from "./hooks/useMediumScreen";
 import Sidebar from "./components/Sidebar";
 import isMobile from "ismobilejs";
-import {
-  getRegionByCountry,
-  getRegionByName,
-  isRegion,
-} from "./services/regionsUtils";
+import { getRegionByCountry, isRegion } from "./services/regionsUtils";
 
 function App() {
   const [isProcessingResize, setProcessingResize] = useState(false);
@@ -97,6 +95,7 @@ function getDotRadius() {
 function useSelectedRegion(result) {
   const [selectedRegion, setSelectedRegion] = useState(null);
   useEffect(() => {
+    console.log("useSelectedRegion", result);
     if (!result) {
       setSelectedRegion(null);
       return;
@@ -117,6 +116,21 @@ function useSelectedRegion(result) {
       }
       case "country": {
         setSelectedRegion(getRegionByCountry(result.value));
+        break;
+      }
+      case "organization": {
+        // TODO: Use context for results and just select a different type of result in case an organization
+        // has a single project.
+        const projects = getProjectsByOrganization(result.value);
+        const firstLocation = getProjectCountries(projects[0])[0];
+        const projectRegion = isRegion(firstLocation)
+          ? firstLocation
+          : getRegionByCountry(firstLocation);
+        setSelectedRegion(
+          projects.length > 1
+            ? getRegionByCountry(getOrganizationCountries(result.value)[0])
+            : projectRegion
+        );
         break;
       }
       default: {

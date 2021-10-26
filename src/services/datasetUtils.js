@@ -40,11 +40,11 @@ export const getProjectsByCountry = buildMemo((country) => {
     .sort(sortProjects);
 });
 
-export function getProjectsByOrganization(org) {
-  return getDataset()
+export const getProjectsByOrganization = buildMemo((org) =>
+  getDataset()
     .filter(({ organization }) => toId(organization).includes(toId(org)))
-    .sort(sortProjects);
-}
+    .sort(sortProjects)
+);
 
 function sortProjects(a, b) {
   return a.projectName.localeCompare(b.projectName);
