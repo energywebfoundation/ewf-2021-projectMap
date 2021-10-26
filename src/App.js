@@ -99,8 +99,11 @@ function useSelectedRegion(result) {
     }
     switch (result.category) {
       case "project": {
+        const firstLocation = getProjectCountries(result.value)[0];
         setSelectedRegion(
-          getRegionByCountry(getProjectCountries(result.value)[0])
+          isRegion(firstLocation)
+            ? firstLocation
+            : getRegionByCountry(firstLocation)
         );
         break;
       }
