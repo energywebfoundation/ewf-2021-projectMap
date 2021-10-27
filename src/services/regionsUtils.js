@@ -8,13 +8,11 @@ export const getRegions = buildMemo(() =>
     .sort(sortRegions)
 );
 
-export const getRegionByCountry = buildMemo(
+export const getRegionsByCountry = buildMemo(
   (country) =>
-    (
-      _getRegions().find(({ countries }) =>
-        countries.includes(toId(country))
-      ) || {}
-    ).id
+    _getRegions()
+      .filter(({ countries }) => countries.includes(toId(country)))
+      .map(({ id }) => toId(id)) || []
 );
 
 export const getRegionByName = buildMemo((region = "") =>

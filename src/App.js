@@ -12,7 +12,7 @@ import useMediumScreen from "./hooks/useMediumScreen";
 import Sidebar from "./components/Sidebar";
 import isMobile from "ismobilejs";
 import {
-  getRegionByCountry,
+  getRegionsByCountry,
   isRegion,
   isCountryInRegions,
 } from "./services/regionsUtils";
@@ -108,7 +108,7 @@ function useSelectedRegion(result) {
         setSelectedRegion(
           isRegion(firstLocation)
             ? firstLocation
-            : getRegionByCountry(firstLocation)
+            : getRegionsByCountry(firstLocation)[0]
         );
         break;
       }
@@ -117,7 +117,7 @@ function useSelectedRegion(result) {
         break;
       }
       case "country": {
-        setSelectedRegion(getRegionByCountry(result.value));
+        setSelectedRegion(getRegionsByCountry(result.value)[0]);
         break;
       }
       case "organization": {
@@ -127,10 +127,10 @@ function useSelectedRegion(result) {
         const firstLocation = getProjectCountries(projects[0])[0];
         const projectRegion = isRegion(firstLocation)
           ? firstLocation
-          : getRegionByCountry(firstLocation);
+          : getRegionsByCountry(firstLocation)[0];
         setSelectedRegion(
           projects.length > 1
-            ? getRegionByCountry(getOrganizationCountries(result.value)[0])
+            ? getRegionsByCountry(getOrganizationCountries(result.value)[0])[0]
             : projectRegion
         );
         break;
