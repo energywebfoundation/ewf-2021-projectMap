@@ -5,7 +5,6 @@ import { getRegionName } from "../services/regionsUtils";
 import "./RegionResult.css";
 
 const RegionResult = ({ region, onClick }) => {
-  console.log("RegionResult", region);
   const [projects] = useState(getProjectsByRegion(region).length);
   return (
     <button

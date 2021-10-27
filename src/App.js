@@ -4,7 +4,6 @@ import DotsMap from "./components/DotsMap";
 import getMapData from "./data/map";
 import {
   getProjectCountries,
-  isCountryInProjects,
   getOrganizationCountries,
   getProjectsByOrganization,
 } from "./services/datasetUtils";
@@ -12,7 +11,11 @@ import "./App.css";
 import useMediumScreen from "./hooks/useMediumScreen";
 import Sidebar from "./components/Sidebar";
 import isMobile from "ismobilejs";
-import { getRegionByCountry, isRegion } from "./services/regionsUtils";
+import {
+  getRegionByCountry,
+  isRegion,
+  isCountryInRegions,
+} from "./services/regionsUtils";
 
 function App() {
   const [isProcessingResize, setProcessingResize] = useState(false);
@@ -72,7 +75,7 @@ function prepare(map) {
   return map.map((country) => ({
     ...country,
     color:
-      country.color || isCountryInProjects(country.id)
+      country.color || isCountryInRegions(country.id)
         ? getRandomColor()
         : window.dotsMapConfig.dotColor || "#C8C8CA",
     dots: country.dots.map((dot) => ({
@@ -95,7 +98,6 @@ function getDotRadius() {
 function useSelectedRegion(result) {
   const [selectedRegion, setSelectedRegion] = useState(null);
   useEffect(() => {
-    console.log("useSelectedRegion", result);
     if (!result) {
       setSelectedRegion(null);
       return;

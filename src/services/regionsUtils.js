@@ -33,6 +33,14 @@ export function getRegionName(region) {
   return getRegionByName(region).readableName;
 }
 
+export const getCountriesInRegions = buildMemo(() =>
+  _getRegions().flatMap(({ countries }) => countries)
+);
+
+export function isCountryInRegions(country) {
+  return getCountriesInRegions().includes(toId(country));
+}
+
 function sortRegions(regionA, regionB) {
   if (regionA === "global") {
     return -1;

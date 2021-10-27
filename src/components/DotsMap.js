@@ -1,5 +1,5 @@
-import React, { useMemo, useRef, useEffect, useState } from "react";
-import { isCountryInProjects } from "../services/datasetUtils";
+import React, { useRef, useEffect, useState } from "react";
+import { isCountryInRegions } from "../services/regionsUtils";
 import "./DotsMap.css";
 import isMobile from "ismobilejs";
 import scale from "../services/scale";
@@ -74,7 +74,7 @@ const Country = ({
             ? "var(--selected-country-color)"
             : isHover
             ? "var(--hovered-country-color)"
-            : isCountryInProjects(country.id)
+            : isCountryInRegions(country.id)
             ? country.color
             : dot.color || country.color,
         }}
@@ -92,10 +92,7 @@ const Dot = ({ dot, country, onClick, onMouseEnter, onMouseLeave }) => {
   const svgElement = ref.current
     ? ref.current.closest("svg")
     : document.createElement("div");
-  const isHighlighted = useMemo(
-    () => isCountryInProjects(country.id),
-    [country]
-  );
+  const isHighlighted = isCountryInRegions(country.id);
   return (
     <g ref={ref} id={`dots-map__${country.id}__${dot.id}`}>
       <rect
