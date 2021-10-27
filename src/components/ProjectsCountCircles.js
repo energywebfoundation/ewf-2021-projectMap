@@ -15,19 +15,21 @@ const ProjectsCountCircles = ({
   const [projectsCountCircles] = useState(getProjectsCountCircles());
   return (
     <>
-      {projectsCountCircles.map((projectsCountCircle, index) => (
-        <ProjectsCountCircle
-          key={index}
-          {...projectsCountCircle}
-          onClick={() =>
-            onClick(projectsCountCircle.region || projectsCountCircle.country)
-          }
-          isSelected={projectsCountCircle.region === selected}
-          isHover={hovered === projectsCountCircle.region}
-          onMouseEnter={() => onMouseEnter(projectsCountCircle.region)}
-          onMouseLeave={() => onMouseLeave(projectsCountCircle.region)}
-        />
-      ))}
+      {projectsCountCircles
+        .sort(sortByInteractivity(selected, hovered))
+        .map((projectsCountCircle) => (
+          <ProjectsCountCircle
+            key={projectsCountCircle.region}
+            {...projectsCountCircle}
+            onClick={() =>
+              onClick(projectsCountCircle.region || projectsCountCircle.country)
+            }
+            isSelected={projectsCountCircle.region === selected}
+            isHover={hovered === projectsCountCircle.region}
+            onMouseEnter={() => onMouseEnter(projectsCountCircle.region)}
+            onMouseLeave={() => onMouseLeave(projectsCountCircle.region)}
+          />
+        ))}
     </>
   );
 };
@@ -122,10 +124,6 @@ function getProjectsCountCircles() {
       projectsCount: getProjectsByRegion(region).length,
     }))
     .filter(({ projectsCount }) => projectsCount > 0);
-  projectsCountCircles.push({
-    region: "global",
-    projectsCount: getProjectsByRegion("global").length,
-  });
   const maxProjects = projectsCountCircles.reduce(getMax, 0);
   return projectsCountCircles.map((projectCountsCircle) => ({
     ...projectCountsCircle,
@@ -179,5 +177,19 @@ function getCenterCoordinates(width, height, allDots) {
   return {
     x: scale(relativeMiddlePoint.x, width, 0),
     y: scale(relativeMiddlePoint.y, height, 0),
+  };
+}
+
+function sortByInteractivity(selected, hovered) {
+  const isSelected = (circle) => circle.region === selected;
+  const isHovered = (circle) => circle.region === hovered;
+  return (circleA, circleB) => {
+    if (isHovered(circleA) || isHovered(circleB)) {
+      return isHovered(circleA) ? 1 : -1;
+    }
+    if (isSelected(circleA) || isSelected(circleB)) {
+      return isSelected(circleA) ? 1 : -1;
+    }
+    return circleA.region.localeCompare(circleB.region);
   };
 }
