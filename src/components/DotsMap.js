@@ -6,6 +6,13 @@ import scale from "../services/scale";
 import ProjectsCountCircles from "./ProjectsCountCircles";
 import { getRegionsByCountry } from "../services/regionsUtils";
 
+function preserveAspectRatio(element) {
+  if (!element) return;
+  let multiplier = isMobile().any ? 1.3 : 0.46;
+  const height = element.clientWidth * multiplier + "px";
+  element.firstElementChild.style.height = height;
+}
+
 const DotsMap = ({ map, selectedRegion, onRegionClick }) => {
   const [key, setKey] = useState(1);
   const [hoveredRegion, setHoveredRegion] = useState(null);
@@ -22,6 +29,9 @@ const DotsMap = ({ map, selectedRegion, onRegionClick }) => {
   const ref = useRef();
   const [ready, setReady] = useState(false);
   useEffect(() => setReady(!!ref.current), [ref]);
+
+  preserveAspectRatio(ref.current?.parentElement, isMobile());
+
   return (
     <>
       <svg
