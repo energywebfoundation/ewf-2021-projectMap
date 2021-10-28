@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { getProjectsByRegion, getCountryName } from "../services/datasetUtils";
 import { getMapEntry } from "../services/mapUtils";
 import { getRegionByName, getRegions } from "../services/regionsUtils";
@@ -82,9 +82,17 @@ const ProjectsCountCircle = ({
 const RegionPill = ({ region, state, ...props }) => {
   const regionName = getCountryName(region);
   const regionWidth = 90 + regionName.length * 5;
+  const getClassName = (state) =>
+    "dots-map__region-pill dots-map__region-pill--" + state;
+  const [className, setClassName] = useState(getClassName(state));
+  useEffect(() => {
+    setTimeout(() => {
+      setClassName(getClassName(state));
+    }, 1);
+  }, [state]);
   return (
     <foreignObject {...props} width={regionWidth} height={30}>
-      <div className={"dots-map__region-pill dots-map__region-pill--" + state}>
+      <div className={className}>
         <img
           src={`${process.env.PUBLIC_URL}/icons/${region}.png`}
           alt={regionName}
