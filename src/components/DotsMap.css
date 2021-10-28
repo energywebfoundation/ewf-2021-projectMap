@@ -33,3 +33,14 @@
     width: auto;
   }
 }
+
+/* this is applied only to the browsers that don't support the aspect-ratio css attribute = Safari <15 */
+@supports not (aspect-ratio: 2) {
+  .dots-map__canvas {
+    height: auto;
+    /* (100vw - 437px) = the width of the screen - the 437px of the sidebar width */
+    /* 0.5 to maintain aspect ratio where the width is 2x the heigh =  the heigh is 0.5 of the width */
+    /* min-height: calc(70vw * 0.5); */
+    min-height: calc((100vw - 437px) * 0.5)
+  }
+}
