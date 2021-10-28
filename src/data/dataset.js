@@ -132,6 +132,10 @@ const getDataset = () =>
         ],
         urls: [
           {
+            linkText: "Case Study",
+            url: "https://www.energyweb.org/case-studies/e-mobility-elia/",
+          },
+          {
             linkText: "Learn more",
             url: "https://medium.com/energy-web-insights/elia-group-and-energy-web-launch-multi-year-strategic-partnership-be2c5d87395f",
           },
@@ -354,10 +358,6 @@ const getDataset = () =>
           "Share&Charge’s OCN is a decentralized e-roaming solution for seamless electric vehicle (EV) charging across different charge point networks. Since March 2020, the OCN has migrated onto the EnergyWeb Chain and is now a fully decentralized Applications on the EW network.",
         builtWith: "",
         urls: [
-          {
-            linkText: "Case Study",
-            url: "https://www.energyweb.org/case-studies/e-mobility-elia/",
-          },
           {
             linkText: "Learn more",
             url: "https://medium.com/energy-web-insights/share-charge-foundation-launches-open-charging-network-on-energy-web-chain-84af7f6f5b3c",
