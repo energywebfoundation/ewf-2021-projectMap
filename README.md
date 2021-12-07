@@ -7,53 +7,28 @@ An interactive map made out of dots where we plot project information of the [EW
 - [Project List](https://docs.google.com/spreadsheets/d/1xFa9h8hoI8dXxrx6I_9XPfoEk-QUOKJ6C-uELhDJEnk/edit#gid=281767465)
 - [Company List](https://docs.google.com/spreadsheets/d/1xbzTPciBTE7KnfW4VEB1o7ILuVcdV52TuZCJQxFRKlg/edit#gid=581177707)
 
-## Preparing the DATA for correct JSON conversion
 
-It's important that the JSON file is well formed directly in the spreadsheet so follow this format, especially for the url
+# HOW TOs
 
-- double quotations marks around each key and value
+### ////  Explainer of the parts
+The data set is made of 4 files inside of [/src/data/](./src/data/) folder.
 
-```
-[{
-"linkText": "Learn more",
- "url": "httpURL1"
- }]
-```
+2 files with info about the projects and companies
 
-- avoid trailing comas , after the last value inside an object
+- [dataset.js](./src/data/dataset.js) : contains the project details, and the links to the components pages in the [`builtWithUrls`](https://github.com/energywebfoundation/ewf-2021-projectMap/blob/5ac084f6d12612a7c56bac455db7f27f5d294e43/src/data/dataset.js#L481) object
+- [organizationProfiles.js](./src/data/organizationProfiles.js) that contains the descriptions of the companies that appear in the "partners" tab
 
-```
-{"key": "value", } // this is wrong because it has a trailing coma
-{"key": "value"}   // this is RIGHT because it has no trailing coma
-```
+and 2 files relating to the map
 
-- use a CSV to JSON converter like like [csvjson](https://csvjson.com/csv2json) (important: use the "Parse Json" option)
-  beware of other solutions like [convertcsv](https://www.convertcsv.com/csv-to-json.htm) that don't parse the json
-- test to see if it is well formed or not
+- [map.js](./src/data/map.js): contains the locations of the dots in the map and a reference to the country name they belong to
+- [regions.js](./src/data/regions.js): contains the regions or groups of countries (= the ids available in `map.js`)
 
-```js
-////////////////////  STEPS to Verify if the JSON has problems
-// 1 - convert the CSV  with https://www.convertcsv.com/csv-to-json.htm
-// 2 - copy the output to the clipboard
-// 3 - open a js console in a browser window or anywhere else and create an object
-//      var project = >>>PASTE HERE THE ARRAY <<<
-//var projects = [{...},{...}]
-// then run this code to see which project has problems
-projects.forEach((p) => {
-  try {
-    console.log(JSON.parse(p.urls));
-  } catch (e) {
-    console.log(
-      "project " +
-        p.projectName +
-        " by " +
-        p.organization +
-        "  - has problems e: " +
-        e
-    );
-  }
-});
-```
+
+### //// Tutorials
+- [How to add a new project](./HowTo/AddAProject.md)
+- [How to add a new Organization](./HowTo/AddAnOrganization.md)
+- [How to add or edit a Region](./HowTo/AddRegions.md)
+
 
 ## Build
 
@@ -82,30 +57,7 @@ For some colors, we've used CSS variables.
   --selected-country-color: #fd51a1;
 ```
 
-## Regions Configuration
 
-Regions have their own dataset, `data/regions.js`. Here's an explanation on what each field of each region mean:
-
-```js
-{
-    // ID of the region. Must be unique.
-    id: "us",
-    // Name of the region as it will be displayed.
-    readableName: "United States",
-    // IDs of the countries that compose that region according to the map dataset. Each country in the list will be highlighted in the map.
-    countries: ["us"],
-    // (optional) Relative position of the circle with the projects count as it will be rendered in the map. If not provided, the app attempts to compute it
-    // by averaging the positions of the countries.
-    relativePosition: {
-        // 0 means extreme left and 1, extreme right
-        x: 0.2,
-        // 0 means top and 1, bottom
-        y: 0.4
-    }
-}
-```
-
-This configuration allows you to define regions such as Europe, but as seen in the example, you can also define individual countries as regions. Using countries as regions will render their floating-clickable circles on the map.
 
 ## Global Configuration
 
