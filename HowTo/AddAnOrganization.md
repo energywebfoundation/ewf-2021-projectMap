@@ -11,6 +11,12 @@ Method 1 is suggested as it is faster.<br>
 
 Method 2 is fine if you want to keep track also on the google sheets. Method 2 follows a similar dynamic to ["How to add a new Project"](./AddAProject.md), so read the instructions there first, but use the [List_Companies](https://docs.google.com/spreadsheets/d/1xbzTPciBTE7KnfW4VEB1o7ILuVcdV52TuZCJQxFRKlg/edit?usp=sharing) spreadsheet
 
+## Video Tutorials
+[How To Add An Organization](./videos/EWF-ProjectMap_HowTo4_Add_Organization.mp4)
+
+
+
+
 ## 1 - editing organizationProfiles.js by hand
 
 - open [./src/data/organizationProfiles.js](./src/data/organizationProfiles.js)

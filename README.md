@@ -24,10 +24,16 @@ and 2 files relating to the map
 - [regions.js](./src/data/regions.js): contains the regions or groups of countries (= the ids available in `map.js`)
 
 
-### //// Tutorials
+### //// Tutorials - written
 - [How to add a new project](./HowTo/AddAProject.md)
 - [How to add a new Organization](./HowTo/AddAnOrganization.md)
 - [How to add or edit a Region](./HowTo/AddRegions.md)
+
+## Video Tutorials
+- [How to Add a Project - Method 1 - Simple](./videos/EWF-ProjectMap_HowTo1_Add_Project_1_simple.mp4)
+- [How to Add a Project - Method 2 - Longer](./videos/EWF-ProjectMap_HowTo2_Add_Project_2_longer.mp4)
+- [How to Add a Region](./videos/EWF-ProjectMap_HowTo3_Add_Region.mp4) (and troubleshootings)
+- [How To Add An Organization](./videos/EWF-ProjectMap_HowTo4_Add_Organization.mp4)
 
 
 ## Build

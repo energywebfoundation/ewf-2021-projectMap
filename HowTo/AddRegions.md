@@ -1,11 +1,16 @@
 # How to add or edit a Region
 
+
+
 Regions are configured in the [/src/data/regions.js](./src/data/regions.js): file
 
 you can
  
 1. add more countries to a region
 2. create new regions
+
+## Video Tutorial
+[How to add a Region](./videos/EWF-ProjectMap_HowTo3_Add_Region.mp4)
 
 
 ## Regions Configuration

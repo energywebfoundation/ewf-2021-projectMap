@@ -5,6 +5,10 @@ There are 2 ways to add a project to the list
 1. [Method 1](#method1) adding it to the [Project List](https://docs.google.com/spreadsheets/u/1/d/1xFa9h8hoI8dXxrx6I_9XPfoEk-QUOKJ6C-uELhDJEnk/htmlview?pru=AAABfbYNoWA*dF_yuDKDoZyMpZNmh5fSBw#) (tab `project_index_edits_for_main_site`) and exporting the data (longer but better)
 2. [Method 2](#method2) adding the project directly in the [/src/data/dataset.js](./src/data/dataset.js) file
 
+## Video Tutorials
+- [Add a Project - Method 1 - Simple](./videos/EWF-ProjectMap_HowTo1_Add_Project_1_simple.mp4)
+- [Add a Project - Method 2 - Longer](./videos/EWF-ProjectMap_HowTo2_Add_Project_2_longer.mp4)
+- Troubleshooting at the end of the [How to add a Region video](./videos/EWF-ProjectMap_HowTo3_Add_Region.mp4)
 
 
 ## <a name="method1">Method 1</a> - Editing and exporting the project list
