@@ -42,8 +42,8 @@ It's important that the JSON file is well formed directly in the spreadsheet so 
 - test to see if it is well formed or not
 
 ```js
-////////////////////  STEPS to Verify if the JSON has problems
-// 1 - convert the CSV  with https://www.convertcsv.com/csv-to-json.htm
+////////////////////  OPTIONAL STEPS to Verify if the JSON has problems
+// 1 - convert the CSV  with https://csvjson.com/csv2json
 // 2 - copy the output to the clipboard
 // 3 - open a js console in a browser window or anywhere else and create an object
 //      var project = >>>PASTE HERE THE ARRAY <<<
@@ -51,7 +51,7 @@ It's important that the JSON file is well formed directly in the spreadsheet so 
 // then run this code to see which project has problems
 projects.forEach((p) => {
   try {
-    console.log(JSON.parse(p.urls));
+    console.log(JSON.parse(JSON.stringify(p)));
   } catch (e) {
     console.log(
       "project " +
