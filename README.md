@@ -30,10 +30,15 @@ and 2 files relating to the map
 - [How to add or edit a Region](./HowTo/AddRegions.md)
 
 ## Video Tutorials
-- [How to Add a Project - Method 1 - Simple](./videos/EWF-ProjectMap_HowTo1_Add_Project_1_simple.mp4)
-- [How to Add a Project - Method 2 - Longer](./videos/EWF-ProjectMap_HowTo2_Add_Project_2_longer.mp4)
-- [How to Add a Region](./videos/EWF-ProjectMap_HowTo3_Add_Region.mp4) (and troubleshootings)
-- [How To Add An Organization](./videos/EWF-ProjectMap_HowTo4_Add_Organization.mp4)
+There are 4 video tutorial in the [HowTo/videos](./HowTo/videos) folder. you better download all the folder
+
+- [How to Add a Project - Method 1 - Simple](./HowTo/videos/EWF-ProjectMap_HowTo1_Add_Project_1_simple.mp4) - [loom video link](https://www.loom.com/share/052e2461073f4449b943291b17148b0a)
+
+- [How to Add a Project - Method 2 - Longer](./HowTo/videos/EWF-ProjectMap_HowTo2_Add_Project_2_longer.mp4) - [loom video link](https://www.loom.com/share/929d4454116c448fba5f4c4b5237121f)
+ 
+- [How to Add a Region](./HowTo/videos/EWF-ProjectMap_HowTo3_Add_Region.mp4) (and troubleshootings)  - [loom video link](https://www.loom.com/share/f13837cfc8fa49d484db652f59fd9b41)
+
+- [How To Add An Organization](./HowTo/videos/EWF-ProjectMap_HowTo4_Add_Organization.mp4)  - [loom video link](https://www.loom.com/share/c9034f3a73dc47ed87a125d126f6ab53)
 
 
 ## Build
